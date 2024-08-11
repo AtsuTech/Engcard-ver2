@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Str;//ランダム文字列を生成
 
 class RegisteredUserController extends Controller
 {
@@ -36,10 +37,22 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        /*personal_id生成*/
+        $personal_id = Str::random(15); 
+        $check = User::where('personal_id','=',$personal_id)->get();
+
+        /*personal_idが既に使われていないか確認既に同じものが使われている場合は被らなくなるまで再生成*/
+        while($check->count() != 0){
+            $personal_id = Str::random(15); 
+            $check = User::where('personal_id','=',$personal_id)->first();
+        }
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'personal_id' => $personal_id,//add
         ]);
 
         event(new Registered($user));

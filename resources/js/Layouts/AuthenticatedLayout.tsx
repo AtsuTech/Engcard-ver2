@@ -28,6 +28,19 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                             </div>
                         </div>
 
+
+                        {/* <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                Dashboard
+                            </NavLink>
+                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                Dashboard
+                            </NavLink>
+                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                Dashboard
+                            </NavLink>
+                        </div> */}
+
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
                                 <Dropdown>
@@ -38,6 +51,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
+                                                <img src={'/storage/images/profile/' + user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
 
                                                 <svg
                                                     className="ms-2 -me-0.5 h-4 w-4"

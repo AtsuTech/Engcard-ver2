@@ -6,6 +6,7 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { FormEventHandler } from 'react';
 import { PageProps } from '@/types';
+import { UpdatePhotoForm } from './UpdatePhotoForm';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }: { mustVerifyEmail: boolean, status?: string, className?: string }) {
     const user = usePage<PageProps>().props.auth.user;
@@ -30,6 +31,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     Update your account's profile information and email address.
                 </p>
             </header>
+
+            <div className='py-2'>
+               <UpdatePhotoForm /> 
+            </div>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
