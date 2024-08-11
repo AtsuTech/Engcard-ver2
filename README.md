@@ -1,3 +1,12 @@
+<h1 align="center">Engcard(ver.2)</h1>
+
+## About ver.2
+ver.2はver.1からlaravelプロジェクトの構成を変えて0から作り直してリプレイス。
+
+### 構成
+laravel+breeze+inertiaでプロジェクト作成
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
