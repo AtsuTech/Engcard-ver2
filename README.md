@@ -1,10 +1,14 @@
 <h1 align="center">Engcard(ver.2)</h1>
 
-## About ver.2
+## What is deferent from ver.1 to ver.2 ?
 ver.2はver.1からlaravelプロジェクトの構成を変えて0から作り直してリプレイス。
+Inertiaを用いてSPAにしている。
 
 ### 構成
 laravel+breeze+inertiaでプロジェクト作成
+
+
+## 使用ライブラリ
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
@@ -72,4 +76,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Engcard is web application service licensed under the Atsuhi Hitotsui.

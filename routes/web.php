@@ -25,4 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/photo', [ProfileController::class, 'photo_update'])->name('profile.photo_update');
 });
 
+Route::group(['middleware' => ['auth', 'can:admin']], function () {
+	Route::get('/admin/dashboard', function () {
+        return Inertia::render('Admin/Dashboard');
+    })->middleware(['auth', 'verified'])->name('admin.dashboard');
+});
+
 require __DIR__.'/auth.php';
