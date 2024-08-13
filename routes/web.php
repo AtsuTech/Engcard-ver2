@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/flashcard',FlashCardController::class)
         ->names([
             'index'=>'flashcard.index',
+            'show' => 'flashcard.show',
             'create'=>'flashcard.create',
             'store'=>'flashcard.store',
             'edit' => 'flashcard.edit',

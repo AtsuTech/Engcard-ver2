@@ -18,7 +18,6 @@ class FlashCardController extends Controller
     public function index() 
     {
         $flashcards = Flashcard::where('user_id', '=' , Auth::id())->get();
-        //$flashcards = Flashcard::all();
 
         return Inertia::render('Flashcard/Index', [
             'flashcards' => $flashcards,
@@ -26,10 +25,14 @@ class FlashCardController extends Controller
     }
 
 
-    //show
+    //詳細画面
     public function show(Request $request) 
     {
-
+        $flashcard = Flashcard::find($request->flashcard);
+        
+        return Inertia::render('Flashcard/Show', [
+            'flashcard' => $flashcard,
+        ]);
     }
 
 
@@ -94,7 +97,6 @@ class FlashCardController extends Controller
     //削除処理
     public function destroy(Request $request, Flashcard $flashcard)
     {
-        
         $flashcard->delete();
     }
 

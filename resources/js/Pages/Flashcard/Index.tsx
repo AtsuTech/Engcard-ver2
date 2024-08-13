@@ -63,8 +63,8 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
                                     
                                 </div>
 
-                                <Link href={`/flashcard/${flashcard.id}/edit`} className="block w-full">
-
+                                
+                                <Link href={route('flashcard.show',flashcard.id)} className="block w-full">
                                     <div className="p-2">
                                         <h5 className="text-xl pb-2 break-all">{flashcard.title}</h5>
                                         {flashcard.description != null &&
