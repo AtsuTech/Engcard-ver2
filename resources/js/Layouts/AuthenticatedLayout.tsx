@@ -11,7 +11,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+            <nav className="bg-amber-400 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
@@ -21,25 +21,25 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            {/* <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
-                            </div>
+                            </div> */}
                         </div>
 
 
-                        {/* <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                 Dashboard
                             </NavLink>
-                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                Dashboard
+                            <NavLink href={route('flashcard.create')} active={route().current('flashcard.create')}>
+                                つくる
                             </NavLink>
-                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                Dashboard
+                            <NavLink href={route('flashcard.index')} active={route().current('flashcard.index')}>
+                                単語帳
                             </NavLink>
-                        </div> */}
+                        </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
@@ -48,10 +48,15 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center /px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {user.name}
-                                                <img src={'/storage/images/profile/' + user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
+                                                {/* {user.name} */}
+                                                {user.profile_photo_path != null ?
+                                                    <img src={'/storage/images/profile/' + user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
+                                                :
+                                                    <div className="w-8 h-8 ml-1 rounded-full bg-slate-500"></div>
+                                                }
+                                                
 
                                                 <svg
                                                     className="ms-2 -me-0.5 h-4 w-4"
@@ -70,6 +75,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
+                                        <div className="px-4">{user.name}</div>
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FlashCardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/photo', [ProfileController::class, 'photo_update'])->name('profile.photo_update');
+
+    //単語帳CRUD処理
+    Route::resource('/flashcard',FlashCardController::class)
+        ->names([
+            'index'=>'flashcard.index',
+            'create'=>'flashcard.create',
+            'store'=>'flashcard.store',
+            'edit' => 'flashcard.edit',
+            'update'=>'flashcard.update',
+            'destroy'=>'flashcard.destroy',
+    ])->middleware(['auth']);
+
 });
 
 Route::group(['middleware' => ['auth', 'can:admin']], function () {
