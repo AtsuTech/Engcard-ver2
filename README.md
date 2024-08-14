@@ -9,10 +9,19 @@ laravel+breeze+inertiaでプロジェクト作成
 
 
 ## 使用ライブラリ
+<b>フロントエンド</b>
 <table>
     <tr>
         <td>HaedlessUI</td>
         <td>https://headlessui.com/</td>
+    </tr>
+</table>
+
+<b>バックエンド</b>
+<table>
+    <tr>
+        <td>Hashids</td>
+        <td>https://packagist.org/packages/hashids/hashids</td>
     </tr>
 </table>
 

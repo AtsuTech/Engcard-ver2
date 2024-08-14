@@ -11,7 +11,7 @@ use Inertia\Response;
 use App\Models\Access;//アクセスモデル
 use App\Models\Category;//カテゴリモデル
 use App\Models\Flashcard;//単語帳モデル
-
+use Hashids\Hashids;//idをランダムでユニークな文字列に変換
 
 class FlashCardController extends Controller
 {
@@ -29,7 +29,11 @@ class FlashCardController extends Controller
     //詳細画面
     public function show(Request $request) 
     {
-        $flashcard = Flashcard::find($request->flashcard);
+        //ハッシュ化されたuuidをデコード
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->decode($request->flashcard)[0];//※配列で帰ってくる
+
+        $flashcard = Flashcard::find($id);
         
         return Inertia::render('Flashcard/Show', [
             'flashcard' => $flashcard,
@@ -60,9 +64,9 @@ class FlashCardController extends Controller
             "updated_at" => \Carbon\Carbon::now(),  
         ]);
         
-        //idをハッシュ化
-        //$hashids = new Hashids('', 10); 
-        //$id = $hashids->encode($id);
+        //idハッシュ化
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->encode($id);
         
         return Redirect::route('flashcard.edit', ['flashcard' => $id]);
     }
@@ -77,7 +81,11 @@ class FlashCardController extends Controller
         //Reactのコンテキストで単語帳編集コンポーネントから孫コンポーネントにカテゴリのデータ渡す
         $categories = Category::where('user_id', -1)->orWhere('user_id', Auth::id())->get();
 
-        $flashcard = Flashcard::find($request->flashcard);
+        //ハッシュ化されたuuidをデコード
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->decode($request->flashcard)[0];//※配列で帰ってくる
+        
+        $flashcard = Flashcard::find($id);
 
         return Inertia::render('Flashcard/Edit', [
             'accesses' => $accesses,

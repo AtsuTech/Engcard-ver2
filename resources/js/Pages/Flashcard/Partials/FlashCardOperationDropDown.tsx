@@ -35,19 +35,17 @@ export const FlashCardOperationDropDown:FC<{id:any}> = ({id})=> {
                 </div>
             </MenuButton>
         
-            <MenuItems anchor="bottom end">
-                <div className="bg-white p-1 rounded-lg shadow-lg w-32">
-                    <MenuItem>
-                        <Link href={`/flashcard/${id}/edit`} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
-                            編集
-                        </Link>
-                    </MenuItem>
-                    <MenuItem>
-                        <button onClick={Destroy} className="block w-full data-[focus]:bg-rose-200 px-2 rounded-lg text-rose-600 text-left">
-                            削除
-                        </button>
-                    </MenuItem>
-                </div>    
+            <MenuItems anchor="bottom end"  className="bg-white p-1 rounded-lg shadow-lg w-32">
+                <MenuItem>
+                    <Link href={route('flashcard.edit',id)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
+                        編集
+                    </Link>
+                </MenuItem>
+                <MenuItem>
+                    <button onClick={Destroy} className="block w-full data-[focus]:bg-rose-200 px-2 rounded-lg text-rose-600 text-left">
+                        削除
+                    </button>
+                </MenuItem>
             </MenuItems>        
         
         </Menu>

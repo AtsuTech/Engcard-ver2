@@ -5,7 +5,7 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import React, { useEffect, useRef, FC, useState } from "react";
 import { title } from 'process';
 import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
-import { FlashCardOperationDropDown } from '@/Components/Special/FlashCardOperationDropDown';
+import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
 
 
 
@@ -15,6 +15,7 @@ type Flashcards = {
     title: string;
     access_id: number;
     description: string | null;
+    uuid: string;
 };
 
 
@@ -58,13 +59,13 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
 
                                     <OperateFlashCardMenu uuid={flashcard.uuid} id={flashcard.id} Update={Update} /> */}
                                     <div className="flex w-fit items-center ml-auto">
-                                        <FlashCardOperationDropDown id={flashcard.id} />
+                                        <FlashCardOperationDropDown id={flashcard.uuid} />
                                     </div>
                                     
                                 </div>
 
                                 
-                                <Link href={route('flashcard.show',flashcard.id)} className="block w-full">
+                                <Link href={route('flashcard.show',flashcard.uuid)} className="block w-full">
                                     <div className="p-2">
                                         <h5 className="text-xl pb-2 break-all">{flashcard.title}</h5>
                                         {flashcard.description != null &&

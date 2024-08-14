@@ -26,6 +26,7 @@ type Flashcard = {
     title: string;
     access_id: number;
     description: string | null;
+    uuid: any;
 };
 
 //孫コンポーネントにコンテキストでカテゴリのデータ渡す
@@ -38,6 +39,7 @@ export default function Edit({ auth, accesses, categories, flashcard }: PageProp
         title: flashcard.title,
         access_id: flashcard.access_id,
         description: flashcard.description,
+        uuid: flashcard.uuid,
         _method: "patch",
     });
 
@@ -51,7 +53,7 @@ export default function Edit({ auth, accesses, categories, flashcard }: PageProp
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">単語帳を編集</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">単語帳を編集{data.uuid}</h2>}
         >
             <Head title="単語帳を編集" />
 
