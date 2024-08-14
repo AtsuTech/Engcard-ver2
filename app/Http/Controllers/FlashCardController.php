@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Models\Access;//登録ユーザーのDBを使用
-use App\Models\Flashcard;
+use App\Models\Access;//アクセスモデル
+use App\Models\Category;//カテゴリモデル
+use App\Models\Flashcard;//単語帳モデル
 
 
 class FlashCardController extends Controller
@@ -73,10 +74,14 @@ class FlashCardController extends Controller
         //単語帳のアクセス権限管理データ取得
         $accesses = Access::all();
 
+        //Reactのコンテキストで単語帳編集コンポーネントから孫コンポーネントにカテゴリのデータ渡す
+        $categories = Category::where('user_id', -1)->orWhere('user_id', Auth::id())->get();
+
         $flashcard = Flashcard::find($request->flashcard);
 
         return Inertia::render('Flashcard/Edit', [
             'accesses' => $accesses,
+            'categories' => $categories,
             'flashcard' => $flashcard,
         ]);
     }

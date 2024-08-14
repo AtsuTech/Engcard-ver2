@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FlashCardController;
+use App\Http\Controllers\CardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +36,18 @@ Route::middleware('auth')->group(function () {
             'edit' => 'flashcard.edit',
             'update'=>'flashcard.update',
             'destroy'=>'flashcard.destroy',
+    ])->middleware(['auth']);
+
+    //単語カードCRUD処理
+    Route::resource('/card',CardController::class)
+        ->names([
+            'index'=>'card.index',
+            'show' => 'card.show',
+            'create'=>'card.create',
+            'store'=>'card.store',
+            'edit' => 'card.edit',
+            'update'=>'card.update',
+            'destroy'=>'card.destroy',
     ])->middleware(['auth']);
 
 });
