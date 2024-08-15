@@ -11,6 +11,7 @@ use Inertia\Response;
 use App\Models\Access;//アクセスモデル
 use App\Models\Category;//カテゴリモデル
 use App\Models\Flashcard;//単語帳モデル
+use App\Models\Card;//単語帳モデル
 use Hashids\Hashids;//idをランダムでユニークな文字列に変換
 
 class FlashCardController extends Controller
@@ -84,13 +85,15 @@ class FlashCardController extends Controller
         //ハッシュ化されたuuidをデコード
         $hashids = new Hashids('', 10); 
         $id = $hashids->decode($request->flashcard)[0];//※配列で帰ってくる
-        
+
         $flashcard = Flashcard::find($id);
+        $cards = Card::where('flashcard_id','=',$id)->get();
 
         return Inertia::render('Flashcard/Edit', [
             'accesses' => $accesses,
             'categories' => $categories,
             'flashcard' => $flashcard,
+            'cards' => $cards,
         ]);
     }
 
@@ -103,7 +106,7 @@ class FlashCardController extends Controller
         $flashcard->description = $request->description;
         $flashcard->save();
 
-        return Redirect::route('flashcard.edit', ['flashcard' => $flashcard->id]);
+        return Redirect::route('flashcard.edit', ['flashcard' => $flashcard->uuid]);
 
     }
 

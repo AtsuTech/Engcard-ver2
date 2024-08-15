@@ -6,7 +6,10 @@ import React, { useEffect, useRef, FC, useState } from "react";
 import { title } from 'process';
 import CreateCardForm from '../Card/Partials/CreateCardForm';
 import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
-import { createContext } from 'react';
+//import { createContext } from 'react';
+import { CardList } from '../Card/Partials/CardList';
+import { CardOperation } from '../Card/Partials/CardOperation';
+import { CategoryContext } from '../Category/Partials/CategoryContext';
 
 //データ型宣言
 type Access = {
@@ -29,12 +32,20 @@ type Flashcard = {
     uuid: any;
 };
 
+//データ型宣言
+type Card = {
+    id: number;
+    uuid: string;
+    word: string;
+    word_mean: string;
+};
+
 //孫コンポーネントにコンテキストでカテゴリのデータ渡す
-export const CategoryContext = createContext({});
+//export const CategoryContext = createContext({});
 
-export default function Edit({ auth, accesses, categories, flashcard }: PageProps<{ accesses:Access[], categories:Category[], flashcard: Flashcard }>) {
+export default function Edit({ auth, accesses, categories, flashcard, cards }: PageProps<{ accesses:Access[], categories:Category[], flashcard:Flashcard, cards:Card[] }>) {
 
-    const { data, setData, patch, put, post, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, patch, put, post, reset, errors, processing, recentlySuccessful } = useForm({
         id: flashcard.id,
         title: flashcard.title,
         access_id: flashcard.access_id,
@@ -58,7 +69,7 @@ export default function Edit({ auth, accesses, categories, flashcard }: PageProp
             <Head title="単語帳を編集" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 /space-y-6">
                     <form onSubmit={Submit} className="">
                         <div className="flex py-2">
 
@@ -110,6 +121,29 @@ export default function Edit({ auth, accesses, categories, flashcard }: PageProp
                         </div>
                                             
                     </form>  
+
+                    {cards.map( (card:any) =>(
+                        <div className="flex">
+                            <CardList 
+                                id ={card.id}
+                                uuid ={card.uuid}
+                                memory ={card.memory}
+                                word ={card.word}
+                                word_mean ={card.word_mean}
+                                category ={card.category}
+                                sub_word_mean={card.wordmeans}
+                                sentence={card.sentence}
+                                sentence_mean={card.sentence_mean}
+                                link={card.link}
+                                user_id ={card.user_id}
+                                flashcard_id ={card.flashcard_id}
+                                img_path ={card.img_path}
+                            />                             
+                            <CardOperation id={""} uuid={card.uuid} reload={""} />
+                        </div>
+
+                    )) }
+
                     <CategoryContext.Provider value={categories}>
                         <CreateCardForm id={data.id} />
                     </CategoryContext.Provider>                    

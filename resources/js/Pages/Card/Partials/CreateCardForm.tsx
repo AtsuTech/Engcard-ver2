@@ -14,8 +14,6 @@ export default function CreateCardForm({id}: { id: number }) {
     //フォームからの画像ファイル参照
     const fileInputRef= useRef<any>(null);
 
-
-    //React.ChangeEvent<HTMLInputElement>
     //fileの入力処理関数(サムネイルとformへのセットを行う)
     const handleInputFile =(e:any)=>{
         //画像をformにセット
@@ -55,8 +53,6 @@ export default function CreateCardForm({id}: { id: number }) {
         sentence_mean: '',
         memory: '',
         link: '',
-        //created_at: '',
-        //updated_at: '',
         sub_means: '',//サブの意味(配列をJSONに変換して送る)
     });
 
@@ -131,7 +127,7 @@ export default function CreateCardForm({id}: { id: number }) {
 
                     {/* 英単語の意味＋カテゴリ */}
                     <div className="flex w-full h-10 p-1 border border-gray-300 rounded-lg focus-within:border-amber-400">
-                        <CategorySelect setData={setData} />
+                        <CategorySelect selected={data.category_id} setData={setData} />
                         <input type="text" 
                             name="word_mean" 
                             className="block w-full h-full pl-2 ml-1 border-none rounded-md /outline-transparent" 

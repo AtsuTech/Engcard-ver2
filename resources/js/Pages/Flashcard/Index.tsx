@@ -59,7 +59,7 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
 
                                     <OperateFlashCardMenu uuid={flashcard.uuid} id={flashcard.id} Update={Update} /> */}
                                     <div className="flex w-fit items-center ml-auto">
-                                        <FlashCardOperationDropDown id={flashcard.uuid} />
+                                        <FlashCardOperationDropDown id={flashcard.id} uuid={flashcard.uuid} />
                                     </div>
                                     
                                 </div>

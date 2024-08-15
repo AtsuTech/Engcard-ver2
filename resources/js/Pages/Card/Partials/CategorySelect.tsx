@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, FC, useState } from "react";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
-import { CategoryContext } from "@/Pages/Flashcard/Edit"; //他ファイルで宣言されたコンテキストをインポート
+//import { CategoryContext } from "@/Pages/Flashcard/Edit"; //他ファイルで宣言されたコンテキストをインポート
+import { CategoryContext } from "@/Pages/Category/Partials/CategoryContext";
 import { useContext } from 'react';//コンテキストで渡されたデータを扱う
 
 
-export default function CategorySelect({setData}: { setData: any }) {
+export default function CategorySelect({selected, setData}: { selected: number, setData: any }) {
 
     //コンテキストからカテゴリのデータを使用
     const categories:any = useContext(CategoryContext);
     
-    const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+    const [selectedCategory, setSelectedCategory] = useState(categories[selected - 1]);
 
 
     const handleChange = (category: any) => {

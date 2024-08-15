@@ -10,8 +10,10 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Storage;//ストレージ操作
 use App\Models\Access;//登録ユーザーのDBを使用
+use App\Models\Category;//カテゴリモデル
 use App\Models\Card;//カードモデル
 use App\Models\WordMean;//サブの意味モデル
+use Hashids\Hashids;//idをランダムでユニークな文字列に変換
 
 class CardController extends Controller
 {
@@ -110,4 +112,94 @@ class CardController extends Controller
         }
 
     }
+
+    //編集画面
+    public function edit(Request $request)
+    {
+        //ハッシュ化されたuuidをデコード
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->decode($request->card)[0];//※配列で帰ってくる
+
+        //Reactのコンテキストで単語帳編集コンポーネントから孫コンポーネントにカテゴリのデータ渡す
+        $categories = Category::where('user_id', -1)->orWhere('user_id', Auth::id())->get();
+
+        $card = Card::find($id);
+        //$card = Card::with('wordmeans')->findOrFail($id);
+
+        $wordmeans = WordMean::where('card_id', $id)->get();
+
+        return Inertia::render('Card/Edit', [
+            'categories' => $categories,
+            'card' => $card,
+            'wordmeans' => $wordmeans,
+        ]);
+    }
+
+    //更新処理
+    public function update(Request $request, Card $card) 
+    {
+
+
+        $card->word = $request->word;
+        $card->word_mean = $request->word_mean;
+        // $card->img_path = $request->img_path;
+        //$card->category_id = $request->integer('category_id');
+        $card->category_id = $request->category_id;
+        $card->sentence = $request->sentence;
+        $card->sentence_mean = $request->sentence_mean;
+        $card->link = $request->link;
+        $card->save();
+
+        //return Redirect::route('card.edit', ['card' => $request->uuid]);
+
+    }
+
+    //削除処理
+    public function destroy(Request $request, Card $card)
+    {
+        //$flashcard->delete();
+    }
+
+    //画像更新
+    public function photo_update(Request $request)
+    {
+        $card = Card::find($request->id);
+
+        //カード画像保存先パス
+        $directory = 'public/images/card/' . Auth::id() . '/' . $card->flashcard_id;
+
+
+        $image = $request->file('img_path');
+        if($image != null){
+
+            //すでに画像がある場合は画像ファイル削除する
+            if($card->img_path != null || $card->img_path != ""){
+                $delete_target = '/images/card/' . Auth::id() . '/' . $card->flashcard_id . '/';
+                Storage::disk('public')->delete($delete_target . $card->img_path);
+            }
+            
+            $path = $image->store($directory);
+            $card->img_path = '/storage/images/card/' . Auth::id() . '/' . $card->flashcard_id . '/' . basename($path);
+        }elseif($image == null){
+            $card->img_path = null;
+        }
+
+        $card->save();
+    }
+
+    //画像削除
+    public function phote_delete(Request $request){
+
+        $card = Card::find($request->id);
+
+        $img_path = str_replace('/storage', '', $card->img_path);
+        Storage::disk('public')->delete($img_path);
+
+        //Storage::disk('public')->delete('/images/card/' . Auth::id() . '/' . $card->flashcard_id . '/' . $card->img_path);
+        $card->img_path = null;
+        $card->save();
+    }
+
+
+
 }

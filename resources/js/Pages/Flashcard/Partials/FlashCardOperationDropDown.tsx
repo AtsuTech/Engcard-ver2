@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 
-export const FlashCardOperationDropDown:FC<{id:any}> = ({id})=> {
+export const FlashCardOperationDropDown:FC<{id:any;uuid:string}> = ({id,uuid})=> {
 
     const {
         data,
@@ -37,7 +37,7 @@ export const FlashCardOperationDropDown:FC<{id:any}> = ({id})=> {
         
             <MenuItems anchor="bottom end"  className="bg-white p-1 rounded-lg shadow-lg w-32">
                 <MenuItem>
-                    <Link href={route('flashcard.edit',id)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
+                    <Link href={route('flashcard.edit',uuid)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
                         編集
                     </Link>
                 </MenuItem>

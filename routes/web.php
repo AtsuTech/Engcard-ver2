@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FlashCardController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\WordMeanController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,20 @@ Route::middleware('auth')->group(function () {
             'edit' => 'card.edit',
             'update'=>'card.update',
             'destroy'=>'card.destroy',
+    ])->middleware(['auth']);
+    Route::put('/card_photo_update', [CardController::class, 'photo_update'])->name('card.photo_update');
+    Route::put('/phote_photo_delete', [CardController::class, 'phote_delete'])->name('card.photo_delete');
+
+    //サブの意味CRUD処理
+    Route::resource('/wordmean',WordMeanController::class)
+        ->names([
+            'index'=>'wordmean.index',
+            'show' => 'wordmean.show',
+            'create'=>'wordmean.create',
+            'store'=>'wordmean.store',
+            'edit' => 'wordmean.edit',
+            'update'=>'wordmean.update',
+            'destroy'=>'wordmean.destroy',
     ])->middleware(['auth']);
 
 });
