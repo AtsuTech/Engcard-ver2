@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FlashCardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\WordMeanController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -63,6 +64,18 @@ Route::middleware('auth')->group(function () {
             'edit' => 'wordmean.edit',
             'update'=>'wordmean.update',
             'destroy'=>'wordmean.destroy',
+    ])->middleware(['auth']);
+
+    //カテゴリCRUD処理
+    Route::resource('/category',CategoryController::class)
+    ->names([
+            'index'=>'category.index',
+            'show' => 'category.show',
+            'create'=>'category.create',
+            'store'=>'category.store',
+            'edit' => 'category.edit',
+            'update'=>'category.update',
+            'destroy'=>'category.destroy',
     ])->middleware(['auth']);
 
 });

@@ -3,7 +3,7 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 //import { CategoryContext } from "@/Pages/Flashcard/Edit"; //他ファイルで宣言されたコンテキストをインポート
 import { CategoryContext } from "@/Pages/Category/Partials/CategoryContext";
 import { useContext } from 'react';//コンテキストで渡されたデータを扱う
-
+import CreateCategoryForm from "@/Pages/Category/Partials/CreateCategoryForm";
 
 export default function CategorySelect({selected, setData}: { selected: number, setData: any }) {
 
@@ -11,6 +11,13 @@ export default function CategorySelect({selected, setData}: { selected: number, 
     const categories:any = useContext(CategoryContext);
     
     const [selectedCategory, setSelectedCategory] = useState(categories[selected - 1]);
+
+    const PreventCloseOptionByEnterKey = (e:any) =>{
+        // エンターキーとスペースキーの両方をチェック
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault(); 
+        }
+    }
 
 
     const handleChange = (category: any) => {
@@ -28,12 +35,15 @@ export default function CategorySelect({selected, setData}: { selected: number, 
                 <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                 </svg>
             </ListboxButton>
-            <ListboxOptions anchor="bottom" className={"bg-white text-xs w-32 border border-slate-300 rounded-md"}>
+            <ListboxOptions anchor="bottom" className={"bg-white text-xs w-32 border border-slate-300 rounded-md"} onKeyDown={PreventCloseOptionByEnterKey}>
             {categories.map((category:any) => (
                 <ListboxOption key={category.id} value={category} className="data-[focus]:bg-blue-100 px-2 py-1">
                 {category.item}
                 </ListboxOption>
             ))}
+            <div className="p-2 border-t border-t-slate-300">
+                <CreateCategoryForm />
+            </div>
             </ListboxOptions>
         </Listbox>
     );
