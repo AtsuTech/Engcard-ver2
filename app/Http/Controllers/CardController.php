@@ -20,34 +20,18 @@ class CardController extends Controller
     //ユーザーごとのカードの一覧
     public function index() 
     {
-        // $flashcards = Flashcard::where('user_id', '=' , Auth::id())->get();
-
-        // return Inertia::render('Flashcard/Index', [
-        //     'flashcards' => $flashcards,
-        // ]);
     }
 
 
     //詳細画面
     public function show(Request $request) 
     {
-        // $flashcard = Flashcard::find($request->flashcard);
-        
-        // return Inertia::render('Flashcard/Show', [
-        //     'flashcard' => $flashcard,
-        // ]);
     }
 
 
     //新規作成画面
     public function create() 
     {
-        //単語帳のアクセス権限管理データ取得
-        //$accesses = Access::all();
-
-        // return Inertia::render('Flashcard/Create', [
-        //     'accesses' => $accesses,
-        // ]);
     }
 
     //新規保存処理
@@ -124,7 +108,6 @@ class CardController extends Controller
         $categories = Category::where('user_id', -1)->orWhere('user_id', Auth::id())->get();
 
         $card = Card::find($id);
-        //$card = Card::with('wordmeans')->findOrFail($id);
 
         $wordmeans = WordMean::where('card_id', $id)->get();
 
@@ -139,25 +122,25 @@ class CardController extends Controller
     public function update(Request $request, Card $card) 
     {
 
-
         $card->word = $request->word;
         $card->word_mean = $request->word_mean;
-        // $card->img_path = $request->img_path;
-        //$card->category_id = $request->integer('category_id');
         $card->category_id = $request->category_id;
         $card->sentence = $request->sentence;
         $card->sentence_mean = $request->sentence_mean;
         $card->link = $request->link;
         $card->save();
 
-        //return Redirect::route('card.edit', ['card' => $request->uuid]);
-
     }
 
     //削除処理
     public function destroy(Request $request, Card $card)
     {
-        //$flashcard->delete();
+        //カードに紐づく画像ファイルを削除
+        if($card->img_path){
+            $img_path = str_replace('/storage', '', $card->img_path);
+            Storage::disk('public')->delete($img_path);
+        }
+        $card->delete();
     }
 
     //画像更新

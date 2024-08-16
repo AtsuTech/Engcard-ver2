@@ -139,7 +139,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                 flashcard_id ={card.flashcard_id}
                                 img_path ={card.img_path}
                             />                             
-                            <CardOperation id={""} uuid={card.uuid} reload={""} />
+                            <CardOperation id={card.id} uuid={card.uuid} reload={""} />
                         </div>
 
                     )) }

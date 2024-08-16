@@ -7,25 +7,23 @@ import axios,{AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
 
 export const CardOperation:FC<{id:any,uuid:any,reload:any}> = ({id,uuid,reload}) => {
 
+    const { data, setData, patch, put, post, delete: destroy, reset, errors, processing, recentlySuccessful } = useForm({
+        id:id,
+    });
+
     const [toggle,setToggle] = useState(false);
 
     const display  = () => setToggle((prev) => !prev);
 
     //カード削除
-    function Delete(){
-        
-        const confirm = window.confirm("削除しますが本当によろしいですか？");
+    function Delete(e:any){
+        e.preventDefault();
 
-        if (confirm) {
-            axios.post('/api/card/delete',{card_id: id}).then((response:AxiosResponse) => { 
-                alert("削除しました。");
-                reload();
-                //setUpdate(true);
-            }).catch((error) => { 
-                alert("失敗しました。");
-                console.log(error);
-            });
-        };
+        destroy(route('card.destroy',id), {
+            preserveScroll: true,
+            onFinish: () => reset(),
+        });
+        display();
     }
 
     return(
@@ -40,14 +38,14 @@ export const CardOperation:FC<{id:any,uuid:any,reload:any}> = ({id,uuid,reload})
                 <ul className="flex absolute right-0 top-0 bg-slate-300 w-fit h-12 p-0 rounded-lg z-50">
                     <li>
                         {/* <Link className="/flex" to={`/card/update/${uuid}`}>
+                            
+                        </Link> */}
+                        <Link href={route('card.edit',uuid)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
                             <div className="w-fit px-4 ml-auto mr-auto h-4/5bg-green-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-12">
                                 <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
                                 </svg>
                             </div>
-                        </Link> */}
-                        <Link href={route('card.edit',uuid)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
-                            編集
                         </Link>
                     </li>
                     <li onClick={Delete}>
