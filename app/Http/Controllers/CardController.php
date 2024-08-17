@@ -13,6 +13,7 @@ use App\Models\Access;//登録ユーザーのDBを使用
 use App\Models\Category;//カテゴリモデル
 use App\Models\Card;//カードモデル
 use App\Models\WordMean;//サブの意味モデル
+use App\Models\Flashcard;//単語帳モデル
 use Hashids\Hashids;//idをランダムでユニークな文字列に変換
 
 class CardController extends Controller
@@ -183,6 +184,45 @@ class CardController extends Controller
         $card->save();
     }
 
+    //クイズ画面
+    public function quiz(Request $request)
+    {
 
+        //ハッシュ化されたuuidをデコード
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->decode($request->id)[0];//※配列で帰ってくる
+
+        //クイズ画面で渡すデータ
+        $cards = Card::where('flashcard_id', $id)->get();
+        $flashcard = Flashcard::find($id);
+
+        return Inertia::render('Quiz/Index', [
+            'flashcard_uuid' => $request->id,
+            'flashcard_user_id' => $flashcard->user_id,
+            'title' => $flashcard->title,
+            'cards' => $cards,
+        ]);
+    }
+
+    //クイズ結果記録
+    public function memory(Request $request){
+        
+        //$memory_array = json_decode($request->memorys, true);
+        $memory_array = $request->memorys;
+
+        //クイズ結果のDB反映は単語帳のオーナーだけが可能
+        if($request->flashcard_user_id == Auth::id()){
+            // 配列として適切にアクセスできることを確認した後に、ループを実行
+            foreach ($memory_array as $memory) {
+                //空の配列が来た時のエラー防止
+                if($memory['id']){
+                    $card = Card::find((int)$memory['id']);
+                    $card->memory = $memory['memory'];
+                    $card->save();
+                }
+            }
+        }
+
+    }
 
 }

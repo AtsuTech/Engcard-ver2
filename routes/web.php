@@ -18,6 +18,12 @@ Route::get('/', function () {
     ]);
 });
 
+//クイズ画面
+Route::get('/quiz/{id}',[CardController::class, 'quiz'])->name('quiz');
+
+//クイズ結果更新
+Route::post('/quiz/memory',[CardController::class, 'memory'])->name('quiz.memory');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -80,6 +86,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
+//管理権限ユーザーのみアクセス可能
 Route::group(['middleware' => ['auth', 'can:admin']], function () {
 	Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
