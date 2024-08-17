@@ -3,15 +3,17 @@ import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { PageBack } from '@/Components/PageBack';
-
+import { CardList } from '../Card/Partials/CardList';
 
 
 //データ型宣言
 type Flashcard = {
     id: number;
+    uuid: string;
     title: string;
     access_id: number;
     description: string | null;
+    cards:[];
 };
 
 
@@ -101,6 +103,41 @@ export default function Show({ auth, flashcard }: PageProps<{ flashcard:Flashcar
                             {flashcard.description}
                         </div>
                     }
+
+                    <section className="flex items-center w-full space-x-2 /bg-black">
+                        <Link href={route('quiz',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                            クイズ
+                        </Link>
+                        <Link href={route('quiz',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                            クイズ
+                        </Link>
+                        <Link href={route('quiz',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                            クイズ
+                        </Link>
+                    </section>
+
+                    <section className="space-y-2">
+                        {flashcard.cards.map( (card:any) => (
+                            <CardList 
+                                id ={card.id}
+                                uuid ={card.uuid}
+                                memory ={card.memory}
+                                word ={card.word}
+                                word_mean ={card.word_mean}
+                                category ={card.category}
+                                sub_word_mean={card.wordmeans}
+                                sentence={card.sentence}
+                                sentence_mean={card.sentence_mean}
+                                link={card.link}
+                                user_id ={card.user_id}
+                                flashcard_id ={card.flashcard_id}
+                                img_path ={card.img_path}
+                            /> 
+
+                        ))}
+                    </section>
+
+
 
                 </div>
             </div>
