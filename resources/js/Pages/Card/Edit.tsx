@@ -10,7 +10,7 @@ import CategorySelect from './Partials/CategorySelect';
 import UpdateSubMeanForm from './Partials/UpdateSubMeanForm';
 import UpdateAddSubMeanForm from './Partials/UpdateAddSubMeanForm';
 import UpdateImageForm from './Partials/UpdateImageForm';
-
+import { router } from '@inertiajs/react'
 //データ型宣言
 type Category = {
     id: number;
@@ -54,32 +54,47 @@ export default function Edit({ auth, categories, card, wordmeans }: PageProps<{ 
         sentence: card.sentence,
         sentence_mean: card.sentence_mean,
         link: card.link,
+        img_delete: false,
         _method: "post",
     });
 
+    const [imgPreview,setImgPreview] = useState<any>();
 
+    const imageClear = () =>{
+        setImgPreview(null); 
+        setData('img_path',null);
+    }
 
+    const hendleFile =(e:any)=>{
+        const file = e.target.files?.[0];
+        const previewUrl:any = URL.createObjectURL(file);
+        setImgPreview(previewUrl); 
+        setData('img_path',file);
+    }
 
     //データ送信
     const Submit = (e :any) =>{
         e.preventDefault();
-        patch(route("card.update",data.id));
+        console.log(data);
+        post(route("card.update_with_image"));
     }
 
 
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">カード編集{data.word}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">カード編集{data.word}{recentlySuccessful}</h2>}
         >
             <Head title="単語帳を編集" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 /space-y-6">
-
+                    <Link href={route('flashcard.show',data.flashcard_id)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
+                        戻る
+                    </Link>
 
                     <CategoryContext.Provider value={categories}>
-                        <form>
+                        <form onSubmit={Submit} encType="multipart/form-data">
 
                             <label className="block mt-3" htmlFor="word">単語</label>
                             <input type="text" 
@@ -111,26 +126,60 @@ export default function Edit({ auth, categories, card, wordmeans }: PageProps<{ 
 
                             {/* サブの意味 */}
                             <label className="block mt-3" htmlFor="">サブの意味</label>
-                            <div className="w-1/2 bg-white border border-gray-300 p-2 rounded-lg">
-
-                                {/* カテゴリのデータ、更新関数をコンテキストで渡す */}
-                                {wordmeans && wordmeans.length > 0 && 
-                                    wordmeans.map((wordmean: any, index: number) => (
-                                        <div key={wordmean.id} className="py-1">
-                                            <UpdateSubMeanForm wordmean={wordmean} />
-                                        </div>
-                                    ))
+                            <div className="flex items-center w-1/2 bg-white border border-gray-300 p-2 rounded-lg">
+                                {wordmeans.length == 0 &&
+                                    <div className="">
+                                        <p className="text-xs w-32">画像はありません</p>
+                                    </div>
                                 }
-
-                                {wordmeans.length <5 && <UpdateAddSubMeanForm card_id={data.id} /> }
-                                
+                                <div className="w-full">
+                                    {/* カテゴリのデータ、更新関数をコンテキストで渡す */}
+                                    {wordmeans && wordmeans.length > 0 && 
+                                        wordmeans.map((wordmean: any, index: number) => (
+                                            <div key={wordmean.id} className="py-1">
+                                                <UpdateSubMeanForm wordmean={wordmean} />
+                                            </div>
+                                        ))
+                                    }   
+                                    {wordmeans.length <5 && <UpdateAddSubMeanForm card_id={data.id} /> }                                     
+                                </div>
                             </div>
 
-
-                            <div className="mt-5 mb-5 w-1/2">
-                                <label htmlFor="">画像</label>
-                                <UpdateImageForm current={data.img_path} id={data.id} />
-                            </div>
+                            {/* 画像 */}
+                            <label htmlFor="img" className="block mt-3">画像</label>
+                            <div className="flex items-center w-fit border border-gray-300 rounded-lg bg-white p-3 space-x-2">
+                                {imgPreview != null ?
+                                    <img src={imgPreview} className="w-16 h-10" />
+                                :
+                                    <>
+                                    {data.img_path != null ?
+                                    <img src={data.img_path} alt="" className="w-16 h-10" />
+                                    :
+                                    <p className="text-sm">画像なし</p>
+                                    }
+                                    </>
+                                }
+                                <input
+                                    id="img"
+                                    type="file"
+                                    accept="image/*" multiple
+                                    onChange={hendleFile}
+                                />   
+                                {imgPreview  && <button onClick={imageClear} type="button" className="border border-slate-500 text-slate-500 rounded-md px-2">画像をクリア</button>}
+                                <div className="flex items-center">
+                                    <input 
+                                        type="checkbox" 
+                                        id="huey" 
+                                        name="drone" 
+                                        className="block border border-rose-500 rounded-sm"
+                                        value={1} 
+                                        onChange={(e:any)=>setData('img_delete',e.target.value)}
+                                    />
+                                    <label className="block ml-1 text-rose-600">画像を削除</label>   
+                                </div>
+                                       
+                                {/* <UpdateImageForm current={data.img_path} id={data.id} /> */}
+                            </div> 
 
                             <label htmlFor="sentence">例文</label>
                             <textarea 
@@ -168,8 +217,8 @@ export default function Edit({ auth, categories, card, wordmeans }: PageProps<{ 
 
                             <div className="mt-5">
                                 {/* <ButtonWithOnClick text="更新" color="yellow" onclick={UpdateSubmit} /> */}
-                                <button onClick={Submit}>更新</button>
-                                {/* <DesignedPrimaryButton>更新</DesignedPrimaryButton> */}
+                                {/* <button onClick={Submit}>更新</button> */}
+                                <DesignedPrimaryButton>更新</DesignedPrimaryButton>
                             </div>
 
                         </form>

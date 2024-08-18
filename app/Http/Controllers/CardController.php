@@ -49,7 +49,8 @@ class CardController extends Controller
             //画像ファイルがあれば、public下ディレクトにファイル保存
             $path = $image->store($directory);
             //DBにファイル名を保存
-            $img_path = basename($path);
+            //$img_path = basename($path);
+            $img_path = '/storage/images/card/' . Auth::id() . '/' . $request->flashcard_id . '/' . basename($path);
 
             //reactからアクセスできるように権限付与
             system('chmod -R 755 storage');
@@ -131,6 +132,50 @@ class CardController extends Controller
         $card->link = $request->link;
         $card->save();
 
+    }
+
+    //更新処理(resorceの"update"で画像送ることが不可だったためオリジナルで実装)
+    public function update_with_image(Request $request) 
+    {
+        $card = Card::find($request->id);
+        //カード画像保存先パス
+        $directory = 'public/images/card/' . Auth::id() . '/' . $request->flashcard_id;
+
+
+        $image = $request->file('img_path');
+
+        if($image){
+
+            //すでに画像がある場合は画像ファイル削除する
+            if($card->img_path != null || $card->img_path != ""){
+                $delete_target = '/images/card/' . Auth::id() . '/' . $request->flashcard_id . '/';
+                Storage::disk('public')->delete($delete_target . $request->img_path);
+            }
+            
+            $path = $image->store($directory);
+            $card->img_path = '/storage/images/card/' . Auth::id() . '/' . $request->flashcard_id . '/' . basename($path);
+        }
+
+        //画像を消すにチェックがあった場合は画像を削除
+        if($request->img_delete){
+            $delete_target = '/images/card/' . Auth::id() . '/' . $request->flashcard_id . '/';
+            Storage::disk('public')->delete($delete_target . $request->img_path);
+            $card->img_path = null;
+        }
+
+        $card->word = $request->word;
+        $card->word_mean = $request->word_mean;
+        $card->category_id = $request->category_id;
+        $card->sentence = $request->sentence;
+        $card->sentence_mean = $request->sentence_mean;
+        $card->link = $request->link;
+        $card->save();
+
+
+        $hashids = new Hashids('', 10); 
+        $uuid = $hashids->encode($card->flashcard_id);
+
+        return Redirect::route('flashcard.edit', ['flashcard' => $uuid]);
     }
 
     //削除処理

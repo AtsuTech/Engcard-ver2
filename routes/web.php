@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     ])->middleware(['auth']);
     Route::put('/card_photo_update', [CardController::class, 'photo_update'])->name('card.photo_update');
     Route::put('/phote_photo_delete', [CardController::class, 'phote_delete'])->name('card.photo_delete');
+    Route::post('/card/update', [CardController::class, 'update_with_image'])->name('card.update_with_image');
 
     //サブの意味CRUD処理
     Route::resource('/wordmean',WordMeanController::class)
