@@ -15,6 +15,10 @@ laravel+breeze+inertiaでプロジェクト作成
         <td>HaedlessUI</td>
         <td>https://headlessui.com/</td>
     </tr>
+    <tr>
+        <td>React Icons</td>
+        <td>https://www.npmjs.com/package/react-icons</td>
+    </tr>
 </table>
 
 <b>バックエンド</b>

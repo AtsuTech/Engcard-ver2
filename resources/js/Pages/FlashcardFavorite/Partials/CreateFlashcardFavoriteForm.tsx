@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, FC, useState } from "react";
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { MdFavoriteBorder } from "react-icons/md";
 
 export default function CreateFlashcardFavoriteForm({id}: { id: number }) {
 
@@ -17,7 +18,7 @@ export default function CreateFlashcardFavoriteForm({id}: { id: number }) {
     return (
         <div>
             <form action="">
-                <button onClick={submit}>Favorite</button>
+                <button onClick={submit} className="block"><MdFavoriteBorder size={18} color={'gray'} /></button>
             </form>
         </div>
     );

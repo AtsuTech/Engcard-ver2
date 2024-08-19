@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, FC, useState } from "react";
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { MdFavorite } from "react-icons/md";
 
 export default function DeleteFlashcardFavoriteForm({id}: { id: number }) {
 
@@ -11,8 +12,6 @@ export default function DeleteFlashcardFavoriteForm({id}: { id: number }) {
     //データ保存処理
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        // destroy(route('flashcardfavorite.destroy',id));
-
 
         post(route('flashcardfavorite.delete'), {
             preserveScroll: true,
@@ -23,7 +22,7 @@ export default function DeleteFlashcardFavoriteForm({id}: { id: number }) {
     return (
         <div>
             <form action="">
-                <button onClick={submit}>UnFavorite</button>
+                <button onClick={submit} className="block"><MdFavorite size={18} color={'orange'} /></button>
             </form>
         </div>
     );
