@@ -12,6 +12,7 @@ use App\Models\Access;//アクセスモデル
 use App\Models\Category;//カテゴリモデル
 use App\Models\Flashcard;//単語帳モデル
 use App\Models\Card;//単語帳モデル
+use App\Models\FlashcardFavorite;//お気に入りの総数のアクセサリに使用
 use Hashids\Hashids;//idをランダムでユニークな文字列に変換
 
 class FlashCardController extends Controller
@@ -36,9 +37,13 @@ class FlashCardController extends Controller
 
         //$flashcard = Flashcard::find($id)->with(['cards']);
         $flashcard = Flashcard::with(['cards.wordmeans'])->findOrFail($id);
+        $favorites = FlashcardFavorite::where('flashcard_id',$id)->get();
+        $has_favorite = FlashcardFavorite::where('flashcard_id',$id)->where('user_id', Auth::id())->get();
         
         return Inertia::render('Flashcard/Show', [
             'flashcard' => $flashcard,
+            'favorites' => $favorites,
+            'has_favorite' => $has_favorite,
         ]);
     }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\FlashCardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\WordMeanController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FlashcardFavoriteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -84,6 +85,20 @@ Route::middleware('auth')->group(function () {
             'update'=>'category.update',
             'destroy'=>'category.destroy',
     ])->middleware(['auth']);
+
+    //お気に入りCRUD処理
+    Route::resource('/flashcardfavorite',FlashcardFavoriteController::class)
+        ->names([
+            'index'=>'flashcardfavorite.index',
+            'show' => 'flashcardfavorite.show',
+            'create'=>'flashcardfavorite.create',
+            'store'=>'flashcardfavorite.store',
+            'edit' => 'flashcardfavorite.edit',
+            'update'=>'flashcardfavorite.update',
+            'destroy'=>'flashcardfavorite.destroy',
+    ])->middleware(['auth']);
+    Route::post('/flashcardfavorite/delete', [FlashcardFavoriteController::class, 'unfavorite'])->name('flashcardfavorite.delete');
+    
 
 });
 

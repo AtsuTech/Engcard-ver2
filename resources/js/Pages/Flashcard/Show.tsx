@@ -4,7 +4,8 @@ import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { PageBack } from '@/Components/PageBack';
 import { CardList } from '../Card/Partials/CardList';
-
+import CreateFlashcardFavoriteForm from '../FlashcardFavorite/Partials/CreateFlashcardFavoriteForm';
+import DeleteFlashcardFavoriteForm from '../FlashcardFavorite/Partials/DeleteFlashcardFavoriteForm';
 
 //データ型宣言
 type Flashcard = {
@@ -17,7 +18,7 @@ type Flashcard = {
 };
 
 
-export default function Show({ auth, flashcard }: PageProps<{ flashcard:Flashcard }>) {
+export default function Show({ auth, flashcard, favorites, has_favorite }: PageProps<{ flashcard:Flashcard, favorites:[], has_favorite:[] }>) {
     
 
     const { data, setData, patch, put, post, errors, processing, recentlySuccessful } = useForm({
@@ -82,6 +83,13 @@ export default function Show({ auth, flashcard }: PageProps<{ flashcard:Flashcar
 
                             <div className="absolute top-1.5 right-2">
                                 {/* <FlashcardFavorite id={flashcard_id} /> */}
+                                {/* {favorites.filter(fl)} */}
+                                {has_favorite.length == 0 ? 
+                                    <CreateFlashcardFavoriteForm id={flashcard.id} />
+                                :
+                                    <DeleteFlashcardFavoriteForm id={flashcard.id} />
+                                }
+                                {favorites.length}
                             </div>
 
                         </div>

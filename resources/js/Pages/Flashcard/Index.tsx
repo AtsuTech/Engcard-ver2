@@ -6,11 +6,11 @@ import React, { useEffect, useRef, FC, useState } from "react";
 import { title } from 'process';
 import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
 import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
-
+import CreateFlashcardFavoriteForm from '../FlashcardFavorite/Partials/CreateFlashcardFavoriteForm';
 
 
 //データ型宣言
-type Flashcards = {
+type Flashcard = {
     id: number;
     title: string;
     access_id: number;
@@ -19,14 +19,14 @@ type Flashcards = {
 };
 
 
-export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flashcards[] }>) {
+export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flashcard[] }>) {
     
 
     // const { data, setData, patch, put, post, errors, processing, recentlySuccessful } = useForm({
-    //     id: flashcard.id,
-    //     title: flashcard.title,
-    //     access_id: flashcard.access_id,
-    //     description: flashcard.description,
+    //     id: flashcards.id,
+    //     title: flashcards.title,
+    //     access_id: flashcards.access_id,
+    //     description: flashcards.description,
     //     _method: "patch",
     // });
 
@@ -55,9 +55,9 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
                                     {/* <div className="w-full">
                                         {flashcard.access.type == 0 && <PrivateIcon value={flashcard.access.item}/>}
                                         {flashcard.access.type == 1 && <PublicIcon value={flashcard.access.item} />}
-                                    </div>
-
+                                    </div>     
                                     <OperateFlashCardMenu uuid={flashcard.uuid} id={flashcard.id} Update={Update} /> */}
+                                    <CreateFlashcardFavoriteForm id={flashcard.id} />
                                     <div className="flex w-fit items-center ml-auto">
                                         <FlashCardOperationDropDown id={flashcard.id} uuid={flashcard.uuid} />
                                     </div>
