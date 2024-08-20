@@ -148,8 +148,8 @@ class CardController extends Controller
 
             //すでに画像がある場合は画像ファイル削除する
             if($card->img_path != null || $card->img_path != ""){
-                $delete_target = '/images/card/' . Auth::id() . '/' . $request->flashcard_id . '/';
-                Storage::disk('public')->delete($delete_target . $request->img_path);
+                $img_path = str_replace('/storage', '', $card->img_path);
+                Storage::disk('public')->delete($img_path);
             }
             
             $path = $image->store($directory);
@@ -158,8 +158,8 @@ class CardController extends Controller
 
         //画像を消すにチェックがあった場合は画像を削除
         if($request->img_delete){
-            $delete_target = '/images/card/' . Auth::id() . '/' . $request->flashcard_id . '/';
-            Storage::disk('public')->delete($delete_target . $request->img_path);
+            $img_path = str_replace('/storage', '', $card->img_path);
+            Storage::disk('public')->delete($img_path);
             $card->img_path = null;
         }
 
