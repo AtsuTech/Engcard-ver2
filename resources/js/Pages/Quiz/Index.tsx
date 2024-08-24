@@ -5,7 +5,7 @@ import React, { useEffect, useRef, FC, useState } from "react";
 import { title } from 'process';
 import FinishButton from './Partials/FinshButton';
 import Header from './Partials/Header';
-
+import CommonLayout from '@/Layouts/CommonLayout';
 
 //データ型宣言
 type Cards = {
@@ -218,7 +218,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     }
 
 
-    return(
+    return(<CommonLayout>
         <main className="h-screen text-gray-500 relative">
             <Head title="クイズ" />
 
@@ -316,6 +316,6 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                     }
                 </div>
             </div>
-        </main>
+        </main></CommonLayout>
     );
 }
