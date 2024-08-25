@@ -26,6 +26,11 @@ export default function Admin({ user, header, children }: PropsWithChildren<{ us
                                     Dashboard
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink href={route('advertise.index')} active={route().current('advertise.index')}>
+                                    アフィリエイト広告
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
                 </aside>
