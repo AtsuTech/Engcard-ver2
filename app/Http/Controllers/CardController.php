@@ -263,6 +263,52 @@ class CardController extends Controller
                 if($memory['id']){
                     $card = Card::find((int)$memory['id']);
                     $card->memory = $memory['memory'];
+                    if($memory['memory']){
+                        $card->correct_count = $card->correct_count + 1;
+                    }else{
+                        $card->incorrect_count = $card->incorrect_count + 1;
+                    }
+                    $card->save();
+                }
+            }
+        }
+
+    }
+
+    //暗記画面
+    public function memory_view(Request $request)
+    {
+
+        //ハッシュ化されたuuidをデコード
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->decode($request->id)[0];//※配列で帰ってくる
+
+        //クイズ画面で渡すデータ
+        $cards = Card::where('flashcard_id', $id)->get();
+        $flashcard = Flashcard::find($id);
+
+        return Inertia::render('Memory/Index', [
+            'flashcard_uuid' => $request->id,
+            'flashcard_user_id' => $flashcard->user_id,
+            'title' => $flashcard->title,
+            'cards' => $cards,
+        ]);
+    }
+
+    //閲覧回数を複数件まとめて記録
+    public function view_count(Request $request){
+    
+        //$memory_array = json_decode($request->memorys, true);
+        $views = $request->views;
+
+        //DB反映は単語帳のオーナーだけが可能
+        if($request->flashcard_user_id == Auth::id()){
+            // 配列として適切にアクセスできることを確認した後に、ループを実行
+            foreach ($views as $view) {
+                //空の配列が来た時のエラー防止
+                if($view['id']){
+                    $card = Card::find((int)$view['id']);
+                    $card->view_count = $card->view_count + 1;
                     $card->save();
                 }
             }

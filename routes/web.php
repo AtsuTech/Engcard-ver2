@@ -20,11 +20,17 @@ Route::get('/', function () {
     ]);
 });
 
+//暗記画面
+Route::get('/memory/{id}',[CardController::class, 'memory_view'])->name('memory');
+
 //クイズ画面
 Route::get('/quiz/{id}',[CardController::class, 'quiz'])->name('quiz');
 
 //クイズ結果更新
 Route::post('/quiz/memory',[CardController::class, 'memory'])->name('quiz.memory');
+
+//カード閲覧回数記録
+Route::post('/view_count',[CardController::class, 'view_count'])->name('view_count');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
