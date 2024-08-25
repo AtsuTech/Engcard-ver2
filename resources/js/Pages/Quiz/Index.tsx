@@ -5,7 +5,8 @@ import React, { useEffect, useRef, FC, useState } from "react";
 import { title } from 'process';
 import FinishButton from './Partials/FinshButton';
 import Header from './Partials/Header';
-import CommonLayout from '@/Layouts/CommonLayout';
+//import CommonLayout from '@/Layouts/CommonLayout';
+import { Result } from './Partials/Result';
 
 //データ型宣言
 type Cards = {
@@ -218,15 +219,9 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     }
 
 
-    return(<CommonLayout>
+    return(
         <main className="h-screen text-gray-500 relative">
             <Head title="クイズ" />
-
-            {/* <Header cards_length={cards.length} turn={turn} setMode={setMode} flashcard_uuid={flashcard_uuid} />
-
-            <div className="ml-3">
-                単語帳:{title}
-            </div> */}
 
             <div className="absolute w-full z-10">
                 <Header cards_length={cards.length} turn={turn} setMode={setMode} flashcard_uuid={flashcard_uuid} />
@@ -240,6 +235,19 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                     <div className="w-fit ml-auto mr-auto">
                         {card_view_turn.length == 0 &&
                             <>
+                            {turn == 0 &&
+                                <div className="w-full py-5 /bg-slate-100">
+                                    <div className="flex items-center ml-auto mr-auto w-fit my-0.5 bg-white border border-gray-300 px-2 rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 w-5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                                        </svg>
+                                        <select name="" id="" className="block /w-32 text-center border-none text-sm bg-white ml-auto mr-auto focus:outline-none cursor-pointer" onChange={(e:any) => setMode(e.target.value)}>
+                                            <option value={0}>カード順</option>
+                                            <option value={1}>ランダム</option>
+                                        </select>     
+                                    </div>
+                                </div>
+                            }    
                             <p className="mb-2 text-center">
                                 クイズをスタートします。<br/>
                                 全{cards.length}問
@@ -308,14 +316,15 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                             <div className="text-center mt-2">
                                 正解数:{count_correct} / {cards.length}問正解
                             </div>
-                            <button className='bg-green-700 p-4' onClick={UpdateMemory}>終了する</button>
+                            
                             <div className="ml-auto mr-auto">
-                                {/* <QuizResult total={cards.length} collect={count_correct} /> */}
+                                <Result total={cards.length} collect={count_correct} />
+                                <button className="block w-full md:w-64 ml-auto mr-auto bg-amber-400 p-3 rounded-full my-10" onClick={UpdateMemory}>終了する</button>
                             </div>
                         </div>
                     }
                 </div>
             </div>
-        </main></CommonLayout>
+        </main>
     );
 }

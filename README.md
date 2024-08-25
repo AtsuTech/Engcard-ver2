@@ -19,6 +19,10 @@ laravel+breeze+inertiaでプロジェクト作成
         <td>React Icons</td>
         <td>https://www.npmjs.com/package/react-icons</td>
     </tr>
+    <tr>
+        <td>react-chartjs-2</td>
+        <td>```npm install -D chart.js react-chartjs-2```</td>
+    </tr>
 </table>
 
 <b>バックエンド</b>
