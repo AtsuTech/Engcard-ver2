@@ -10,6 +10,7 @@ use App\Http\Controllers\AdvertisementController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;//ライブバリデーション
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/photo', [ProfileController::class, 'photo_update'])->name('profile.photo_update');
+    Route::post('/profile/update_personal_id', [ProfileController::class, 'update_personal_id'])->middleware([HandlePrecognitiveRequests::class])->name('profile.update_personal_id');
 
     //単語帳CRUD処理
     Route::resource('/flashcard',FlashCardController::class)

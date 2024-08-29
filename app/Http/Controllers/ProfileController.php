@@ -12,6 +12,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\User;//登録ユーザーのDBを使用
 use Illuminate\Support\Facades\Storage;//ストレージ操作
+use App\Http\Requests\UserIdPrecognitionFormRequest;//バリデーション
 
 
 class ProfileController extends Controller
@@ -70,6 +71,14 @@ class ProfileController extends Controller
     
         return Redirect::route('profile.edit');
         //return Inertia::render('Profile/Edit');
+    }
+
+    public function update_personal_id(UserIdPrecognitionFormRequest $request): RedirectResponse
+    {
+        $me = User::find(Auth::id());
+        $me->personal_id = $request->personal_id;
+        $me->save();
+        return Redirect::route('profile.edit');
     }
 
     /**

@@ -23,6 +23,13 @@ laravel+breeze+inertiaでプロジェクト作成
         <td>react-chartjs-2</td>
         <td>```npm install -D chart.js react-chartjs-2```</td>
     </tr>
+    <tr>
+        <td>laravel-precognition-react-inertia</td>
+        <td>
+            <p>npm install laravel-precognition-react-inertia</p>
+            <p>https://laravel.com/docs/11.x/precognition</p>
+        </td>
+    </tr>
 </table>
 
 <b>バックエンド</b>
