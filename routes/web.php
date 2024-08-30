@@ -6,7 +6,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\WordMeanController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FlashcardFavoriteController;
-use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\Admin\AdvertisementController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -123,6 +123,7 @@ Route::middleware('auth','can:admin','verified')->group(function () {
     //広告CRUD処理
     Route::get('/admin/advertise', [AdvertisementController::class, 'index'])->name('advertise.index');
     Route::get('/advertise/create', [AdvertisementController::class, 'create'])->name('advertise.create');
+    Route::post('/advertise/store', [AdvertisementController::class, 'store'])->name('advertise.store');
     Route::get('/advertise/{id}', [AdvertisementController::class, 'edit'])->name('advertise.edit');
     Route::patch('/advertise/{id}', [AdvertisementController::class, 'update'])->name('advertise.update');
     Route::delete('/advertise/{id}', [AdvertisementController::class, 'destroy'])->name('advertise.destroy');
