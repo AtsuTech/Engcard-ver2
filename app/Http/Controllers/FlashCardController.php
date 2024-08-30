@@ -17,6 +17,16 @@ use Hashids\Hashids;//idをランダムでユニークな文字列に変換
 
 class FlashCardController extends Controller
 {
+
+    public function library_index()
+    {
+        $flashcards = Flashcard::orderBy('id','desc')->take(5)->get();
+
+        return Inertia::render('Library/Index', [
+            'flashcards' => $flashcards,
+        ]);
+    }
+
     //ユーザーごとの単語帳一覧
     public function index() 
     {

@@ -11,7 +11,7 @@ export default function Guest({ children }: PropsWithChildren) {
     const { auth } :any= usePage().props;  
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     return (
-        <div className="">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav className="bg-amber-400 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 /bg-teal-800">
                     <div className="flex /justify-between justify-center h-16 relative items-center">
@@ -25,9 +25,15 @@ export default function Guest({ children }: PropsWithChildren) {
                         </div>
 
                         <div className="h-16 hidden space-x-10 sm:-my-px sm:ms-10 /bg-white sm:flex">
-                            <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                Dashboard
+                            {auth.user &&
+                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    ダッシュボード
+                                </NavLink>
+                            }
+                            <NavLink href={route('library')} active={route().current('library')}>
+                                ライブラリ
                             </NavLink>
+
                             <NavLink href={route('flashcard.create')} active={route().current('flashcard.create')}>
                                 つくる
                             </NavLink>
