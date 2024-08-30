@@ -1,4 +1,5 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+//import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import CommonLayout from '@/Layouts/CommonLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
@@ -29,10 +30,7 @@ export default function Show({ auth, flashcard, favorites, has_favorite }: PageP
 
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{data.title}</h2>}
-        >
+        <CommonLayout>
             <Head title="show" />
 
             <div className="py-12">
@@ -135,6 +133,6 @@ export default function Show({ auth, flashcard, favorites, has_favorite }: PageP
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </CommonLayout>
     );
 }

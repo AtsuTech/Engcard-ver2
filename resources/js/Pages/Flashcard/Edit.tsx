@@ -1,4 +1,5 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+//import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import CommonLayout from '@/Layouts/CommonLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
@@ -62,10 +63,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
 
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">単語帳を編集{data.uuid}</h2>}
-        >
+        <CommonLayout>
             <Head title="単語帳を編集" />
 
             <div className="py-12">
@@ -151,6 +149,6 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                 </div>
             </div>
             
-        </AuthenticatedLayout>
+        </CommonLayout>
     );
 }

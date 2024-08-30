@@ -18,7 +18,7 @@ export default function Index({ flashcards }: {flashcards:Flashcard[]}) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
-                        <div className="flex items-center w-full p-3 bg-amber-200 /bg-gradient-to-b /from-amber-400 /to-white text-slate-700 /shadow-sm">
+                        <div className="flex items-center w-full px-3 py-4 border-b-2 border-b-amber-300 text-slate-700">
                             <GiBookshelf size={26} />
                             <h5 className="text-xl /ml-1 font-bold">ライブラリ</h5>
                         </div> 
