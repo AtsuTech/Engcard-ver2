@@ -6,6 +6,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 //import { PropsWithChildren } from 'react';
 import { usePage } from '@inertiajs/react';
+import Footer from './Partials/Footer';
 
 export default function Guest({ children }: PropsWithChildren) {
     const { auth } :any= usePage().props;  
@@ -156,6 +157,7 @@ export default function Guest({ children }: PropsWithChildren) {
                     
                 </div> */}
             </div>
+            <Footer />
         </div>
     );
 }

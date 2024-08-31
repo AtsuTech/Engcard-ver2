@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use App\Models\Advertisement;//広告モデル
 
 class HandleInertiaRequests extends Middleware
 {
@@ -30,11 +31,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $advertisements = Advertisement::all();
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
             ],
+            'advertisements' => $advertisements,
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
