@@ -11,12 +11,26 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\User;//登録ユーザーのDBを使用
+use App\Models\Flashcard;//単語帳モデル
 use Illuminate\Support\Facades\Storage;//ストレージ操作
 use App\Http\Requests\UserIdPrecognitionFormRequest;//バリデーション
 
 
 class ProfileController extends Controller
 {
+    /**
+     * Display the user's profile.
+     */
+    public function show(Request $request): Response
+    {
+        $user = User::where('personal_id', '=' ,$request->personal_id)->first();
+        $flashcards = Flashcard::where('user_id', '=' , Auth::id())->get();
+        return Inertia::render('Profile/Show', [
+            'user' => $user,
+            'flashcards' => $flashcards,
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */

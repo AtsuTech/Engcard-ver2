@@ -70,7 +70,10 @@ export default function Guest({ children }: PropsWithChildren) {
 
                                     <Dropdown.Content>
                                         {/* <div className="px-4">{user.name}</div> */}
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        {/* <Dropdown.Link href={route('profile.edit')}>プロフィール</Dropdown.Link> */}
+                                        <Dropdown.Link href={route('profile.show',{personal_id:auth.user.personal_id})}>
+                                            プロフィール
+                                        </Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>

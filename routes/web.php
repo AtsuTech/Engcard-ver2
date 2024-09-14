@@ -41,6 +41,7 @@ Route::get('/dashboard', function () {
 Route::get('/library',[FlashCardController::class, 'library_index'])->name('library');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/user/profile/{personal_id}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
