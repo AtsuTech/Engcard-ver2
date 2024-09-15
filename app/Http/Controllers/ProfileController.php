@@ -87,6 +87,19 @@ class ProfileController extends Controller
         //return Inertia::render('Profile/Edit');
     }
 
+    /**
+     * Delete profile photo
+     */
+    public function photo_destroy(Request $request)
+    {
+        $me = User::find(Auth::id());
+        if ($me->profile_photo_path) {
+            Storage::disk('public')->delete('images/profile/' . $me->profile_photo_path);
+        }
+        $me->profile_photo_path = null;
+        $me->save();
+    }
+
     public function update_personal_id(UserIdPrecognitionFormRequest $request): RedirectResponse
     {
         $me = User::find(Auth::id());

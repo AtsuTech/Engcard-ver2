@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/photo', [ProfileController::class, 'photo_update'])->name('profile.photo_update');
+    Route::delete('/profile/photo', [ProfileController::class, 'photo_destroy'])->name('profile.photo_destroy');
     Route::post('/profile/update_personal_id', [ProfileController::class, 'update_personal_id'])->middleware([HandlePrecognitiveRequests::class])->name('profile.update_personal_id');
 
     //単語帳CRUD処理

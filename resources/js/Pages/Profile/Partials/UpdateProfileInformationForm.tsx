@@ -7,6 +7,7 @@ import { Transition } from '@headlessui/react';
 import { FormEventHandler } from 'react';
 import { PageProps } from '@/types';
 import { UpdatePhotoForm } from './UpdatePhotoForm';
+import DeletePhotoForm from './DeletePhotoForm';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }: { mustVerifyEmail: boolean, status?: string, className?: string }) {
     const user = usePage<PageProps>().props.auth.user;
@@ -32,8 +33,11 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </p>
             </header>
 
-            <div className='py-2'>
-               <UpdatePhotoForm /> 
+            <div className='py-2 flex space-x-3'>
+                <UpdatePhotoForm /> 
+                {user.profile_photo_path != null &&
+                    <DeletePhotoForm />
+                }
             </div>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
