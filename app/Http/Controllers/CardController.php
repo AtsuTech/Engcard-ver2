@@ -229,6 +229,25 @@ class CardController extends Controller
         $card->save();
     }
 
+    //読む画面
+    public function read_view(Request $request)
+    {
+        //ハッシュ化されたuuidをデコード
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->decode($request->id)[0];//※配列で帰ってくる
+
+        //クイズ画面で渡すデータ
+        $cards = Card::where('flashcard_id', $id)->with(['wordmeans'])->get();
+        $flashcard = Flashcard::find($id);
+
+        return Inertia::render('Read/Index', [
+            'flashcard_uuid' => $request->id,
+            'flashcard_user_id' => $flashcard->user_id,
+            'title' => $flashcard->title,
+            'cards' => $cards,
+        ]);
+    }
+
     //クイズ画面
     public function quiz(Request $request)
     {

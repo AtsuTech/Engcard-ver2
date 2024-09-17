@@ -18,9 +18,9 @@ type Flashcard = {
 };
 
 
-export default function Show({ auth, flashcard, favorites, has_favorite }: PageProps<{ flashcard:Flashcard, favorites:[], has_favorite:[] }>) {
+export default function Show({ flashcard, favorites, has_favorite }: PageProps<{ flashcard:Flashcard, favorites:[], has_favorite:[] }>) {
     
-
+    const { auth } :any= usePage().props;  
     const { data, setData, patch, put, post, errors, processing, recentlySuccessful } = useForm({
         id: flashcard.id,
         title: flashcard.title,
@@ -42,6 +42,11 @@ export default function Show({ auth, flashcard, favorites, has_favorite }: PageP
                                 <PageBack />
                             </div>
                             {/* <FlashcardBreadcrumbs current={flashcard.title} user={flashcard.user_id} /> */}
+                            {auth.user &&
+                                <Link href={route('flashcard.edit',flashcard.uuid)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
+                                    編集
+                                </Link>
+                            }
                         </div>
                         <div className="relative h-10 px-2 text-xs">
                             <div className="absolute flex right-2 mt-1">
@@ -101,8 +106,8 @@ export default function Show({ auth, flashcard, favorites, has_favorite }: PageP
                             </div>
                         }                        
                         <section className="flex items-center w-full space-x-2 my-5">
-                            <Link href={route('quiz',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
-                                クイズ
+                            <Link href={route('read',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                読む
                             </Link>
                             <Link href={route('memory',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
                                 暗記

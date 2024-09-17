@@ -21,6 +21,9 @@ Route::get('/', function () {
     ]);
 });
 
+//読む画面
+Route::get('/read/{id}',[CardController::class, 'read_view'])->name('read');
+
 //暗記画面
 Route::get('/memory/{id}',[CardController::class, 'memory_view'])->name('memory');
 
