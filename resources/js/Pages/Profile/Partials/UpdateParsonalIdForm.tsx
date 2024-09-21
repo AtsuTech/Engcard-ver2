@@ -13,7 +13,7 @@ type Form = {
     personal_id: string;
 };
 
-export default function UpdateUserIdForm({ className = '' }: { className?: string }) {
+export default function UpdateParsonalIdForm({ className = '' }: { className?: string }) {
     const user = usePage<PageProps>().props.auth.user;
 
     const form = useForm<Form>('post', route('profile.update_personal_id'), { 

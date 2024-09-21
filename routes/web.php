@@ -55,6 +55,21 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Setting/Index');
     })->name('setting');
 
+    //パスワード変更画面
+    Route::get('/setting/password/update', function(){
+        return Inertia::render('Setting/UpdatePassword');
+    })->name('update.password');
+
+    //ユーザーID変更画面
+    Route::get('/setting/personal-id/update', function(){
+        return Inertia::render('Setting/UpdatePersonalId');
+    })->name('update.personal_id');
+
+    //アカウント削除
+    Route::get('/setting/account/delete', function(){
+        return Inertia::render('Setting/DeleteUser');
+    })->name('delete.account');
+
     //単語帳CRUD処理
     Route::resource('/flashcard',FlashCardController::class)
         ->names([

@@ -25,17 +25,17 @@ export default function Index({auth}: PageProps<{}>) {
                             <div className="my-2">アカウント</div>
                             <ul className="border border-slate-300 rounded-md /space-y-2">
                                 <li className="">
-                                    <Link href="" className="flex items-center full p-5 border-b border-b-slate-300 /rounded-md">
+                                    <Link href={route('update.password')} className="flex items-center full p-5 border-b border-b-slate-300 /rounded-md">
                                         パスワード変更
                                     </Link>
                                 </li>
                                 <li className="">
-                                    <Link href="" className="flex items-center full p-5 border-b border-b-slate-300">
+                                    <Link href={route('update.personal_id')} className="flex items-center full p-5 border-b border-b-slate-300">
                                         ユーザーID変更
                                     </Link>
                                 </li>
                                 <li className="">
-                                    <Link href="" className="flex items-center full p-5">
+                                    <Link href={route('delete.account')} className="flex items-center full p-5 text-rose-500">
                                         アカウント削除
                                     </Link>
                                 </li>
