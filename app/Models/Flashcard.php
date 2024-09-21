@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+//use App\Models\Access;//表示のアクセサリに使用
 use App\Models\Card;//カードの総数のアクセサリに使用
 use App\Models\FlashcardFavorite;//お気に入りの総数のアクセサリに使用
 use Hashids\Hashids;//idをランダムでユニークな文字列に変換
@@ -21,9 +22,14 @@ class Flashcard extends Model
     }
 
     //User Modelリレーション
-    // public function user() {
-    //     return $this->belongsToMany('App\Models\User');
-    // }
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    //Access Modelリレーション
+    public function access() {
+        return $this->belongsTo('App\Models\Access');
+    }
 
     //日付の表示形式を変換
     protected $casts = [
@@ -52,6 +58,14 @@ class Flashcard extends Model
         $cards = FlashcardFavorite::where('flashcard_id','=',$this->id)->get();
         return $cards->count();
     }
+
+    //アクセサリを使いお気に入りの総数をカラムに追加する
+    // public function getAccessAttribute()
+    // {
+    //     $access = Access::where('type','=',$this->access_id)->first();
+    //     //return $access ? $access->name : null;
+    //     return $access;
+    // }
 
     //SPAでJSONでアクセサの値を返す時は$appendsメソッドで返す
     protected $appends = ['uuid','cardlength','favorite'];   

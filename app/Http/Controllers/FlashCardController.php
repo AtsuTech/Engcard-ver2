@@ -20,7 +20,7 @@ class FlashCardController extends Controller
 
     public function library_index()
     {
-        $flashcards = Flashcard::orderBy('id','desc')->take(5)->get();
+        $flashcards = Flashcard::orderBy('id','desc')->with(['user'])->with(['access'])->where('access_id',"=",2)->take(5)->get();
 
         return Inertia::render('Library/Index', [
             'flashcards' => $flashcards,
@@ -30,7 +30,7 @@ class FlashCardController extends Controller
     //ユーザーごとの単語帳一覧
     public function index() 
     {
-        $flashcards = Flashcard::where('user_id', '=' , Auth::id())->get();
+        $flashcards = Flashcard::where('user_id', '=' , Auth::id())->with(['user'])->with(['access'])->get();
 
         return Inertia::render('Flashcard/Index', [
             'flashcards' => $flashcards,
