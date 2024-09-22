@@ -105,10 +105,11 @@ export default function Guest({ children }: PropsWithChildren) {
                             </div>
                         </div>
 
-                        <div className="-me-2 flex items-center sm:hidden">
+                        {/* スマホ時メニューボタン */}
+                        <div className="/-me-2 /flex absolute right-0 items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-white dark:text-gray-500 dark:hover:text-gray-400 dark:hover:bg-gray-900 focus:outline-none dark:focus:bg-gray-900 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
                                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
@@ -128,32 +129,55 @@ export default function Guest({ children }: PropsWithChildren) {
                                 </svg>
                             </button>
                         </div>
+
                     </div>
                 </div>
 
+                {/* スマホ時メニュー */}
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800 dark:text-gray-200">
-                                {/* {user.name} */}
-                            </div>
-                            {/* <div className="font-medium text-sm text-gray-500">{user.email}</div> */}
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
+                    <div className="absolute top-18 right-0 z-50 w-1/2 h-screen bg-slate-700/95 transition duration-150 ease-in-out">
+                        <ul className="space-y-8 pl-4 py-3 text-white">
+                            {auth.user &&
+                            <li>
+                                <Link href={route('dashboard')}>
+                                    ダッシュボード
+                                </Link>
+                            </li>
+                            }
+                            <li>
+                                <Link href={route('library')}>
+                                    ライブラリ
+                                </Link>                                    
+                            </li>
+                            <li>
+                                <Link href={route('flashcard.create')}>
+                                    つくる
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route('flashcard.index')}>
+                                    単語帳
+                                </Link>                                    
+                            </li>
+                            <li>
+                                <Link href={route('profile.show',{personal_id:auth.user.personal_id})}>
+                                    プロフィール
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route('setting')}>
+                                    設定
+                                </Link>    
+                            </li>
+                            <li>
+                                <Link href={route('logout')}>
+                                    ログアウト
+                                </Link>                                    
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
             </nav>
 
             <div className="/flex /w-full">
