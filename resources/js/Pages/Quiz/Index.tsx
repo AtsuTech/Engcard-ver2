@@ -37,7 +37,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     //カードの表示順番を管理する関数。表示の際はturn変数をキーとする。
     const [card_view_turn,setRandomTurn] = useState<any>([]);
 
-    const { data, setData, patch, put, post, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, patch, put, post, get, errors, processing, recentlySuccessful } = useForm({
         flashcard_user_id: flashcard_user_id,
         memorys: [],
         _method: "post",
@@ -139,7 +139,9 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     //クイズの結果のデータを配列でバックエンドに送りカードの暗記状態を更新
     const UpdateMemory = () =>{
         setData('memorys', memory);
+        //データ保存
         post(route('quiz.memory'));
+        get(route('flashcard.show',flashcard_uuid));
     }
 
 
