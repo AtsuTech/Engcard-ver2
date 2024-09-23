@@ -11,6 +11,8 @@ import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
 import { CardList } from '../Card/Partials/CardList';
 import { CardOperation } from '../Card/Partials/CardOperation';
 import { CategoryContext } from '../Category/Partials/CategoryContext';
+import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import { MdEdit } from "react-icons/md";
 
 //データ型宣言
 type Access = {
@@ -31,6 +33,7 @@ type Flashcard = {
     access_id: number;
     description: string | null;
     uuid: any;
+    access: any;
 };
 
 //データ型宣言
@@ -52,13 +55,19 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
         access_id: flashcard.access_id,
         description: flashcard.description,
         uuid: flashcard.uuid,
+        //access: flashcard.access.name,
         _method: "patch",
     });
+
+    //console.log(data);
+
+    let [flashcardDialog, setFlashCardDialog] = useState(false)
 
     //データ送信
     const Submit = (e :any) =>{
         e.preventDefault();
         patch(route("flashcard.update",data.id));
+        setFlashCardDialog(false);
     }
 
 
@@ -67,85 +76,130 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
             <Head title="単語帳を編集" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 /space-y-6">
-                    <form onSubmit={Submit} className="">
-                        <div className="flex py-2">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
+                            <MdEdit size={26} />
+                            <h5 className="font-bold">単語帳編集</h5>
+                        </div> 
 
-                            <div className="w-fit">
-                                <ul className="flex w-fit h-8 text-sm text-gray-700 border border-gray-300 rounded-lg overflow-hidden" aria-labelledby="dropdownDefaultButton">
-                                    {accesses.map( (access:any) =>(
-                                        <li className="flex items-center w-fit" key={access.id}>
-                                            <input type="radio" name="access" value={access.id}
-                                                onChange={(e) => setData('access_id', Number(e.target.value))}
-                                                checked={data.access_id == access.id } 
-                                                required 
-                                                className="sr-only peer"
-                                                id={access.id}
-                                            />
-
-                                            <label htmlFor={access.id} className="w-20 h-10 text-xs text-center focus:outline-none peer-checked:bg-amber-400 peer-checked:text-white flex items-center justify-center">
-                                                {access.name}
-                                            </label>
-
-                                        </li>
-                                    )) }
-                                </ul> 
-                            </div>
-
-                        </div>
+                        <div className="/p-5 border border-slate-300 m-5 overflow-hidden rounded-lg">
                             
-                        <label htmlFor="" className="block mt-3 text-sm">タイトル</label>
-                        <input type="text" 
-                            className="w-full h-10 border border-gray-300 rounded-lg pl-2" 
-                            placeholder="タイトル" 
-                            value={data.title}
-                            name="title"
-                            onChange={(e) => setData('title', e.target.value)}
-                            required
-                        /> 
-
-                        <label htmlFor="" className="block mt-3 text-sm">概要</label>
-                        <textarea 
-                            name="description" 
-                            id="" 
-                            className="w-full h-32 border border-gray-300 rounded-lg pl-2 /mt-1"
-                            onChange={(e) => setData('description', e.target.value)}
-                            value={data.description==null ? "":data.description}
-                        >
-                        </textarea>
-
-                        <div className="mt-2">
-                            <DesignedPrimaryButton>保存</DesignedPrimaryButton>
-                        </div>
-                                            
-                    </form>  
-
-                    {cards.map( (card:any) =>(
-                        <div className="flex">
-                            <CardList 
-                                id ={card.id}
-                                uuid ={card.uuid}
-                                memory ={card.memory}
-                                word ={card.word}
-                                word_mean ={card.word_mean}
-                                category ={card.category}
-                                sub_word_mean={card.wordmeans}
-                                sentence={card.sentence}
-                                sentence_mean={card.sentence_mean}
-                                link={card.link}
-                                user_id ={card.user_id}
-                                flashcard_id ={card.flashcard_id}
-                                img_path ={card.img_path}
-                            />                             
-                            <CardOperation id={card.id} uuid={card.uuid} reload={""} />
+                            <div className="relative flex items-center bg-amber-200 p-2 /py-2 /border-b-2 border-b-amber-400">
+                                <h5 className="font-bold">{data.title}</h5>
+                                <button
+                                    className="absolute right-1 px-2 text-slate-500"
+                                    onClick={() => setFlashCardDialog(true)}>
+                                    <MdEdit size={20} />
+                                </button>
+                            </div>
+                            <div className="/bg-slate-200 /mt-2 p-3 /rounded-md text-sm">
+                                
+                                <div>概要</div>
+                                <p>{data.description}</p>
+                            </div>
                         </div>
 
-                    )) }
 
-                    <CategoryContext.Provider value={categories}>
-                        <CreateCardForm id={data.id} />
-                    </CategoryContext.Provider>                    
+                        <Dialog open={flashcardDialog} onClose={() => setFlashCardDialog(false)} className="relative z-50">
+                            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
+                            <DialogPanel className="max-w-lg space-y-4 border bg-white px-1 py-10 sm:px-10 rounded-lg shadow-md">
+                                <DialogTitle className="font-bold">単語帳編集</DialogTitle>
+                                <Description>This will permanently deactivate your account</Description>
+                                <form onSubmit={Submit} className="px-5">
+                                    <div className="flex py-2">
 
+                                        <div className="w-fit">
+                                            <ul className="flex w-fit h-8 text-sm text-gray-700 border border-gray-300 rounded-lg overflow-hidden" aria-labelledby="dropdownDefaultButton">
+                                                {accesses.map( (access:any) =>(
+                                                    <li className="flex items-center w-fit" key={access.id}>
+                                                        <input type="radio" name="access" value={access.id}
+                                                            onChange={(e) => setData('access_id', Number(e.target.value))}
+                                                            checked={data.access_id == access.id } 
+                                                            required 
+                                                            className="sr-only peer"
+                                                            id={access.id}
+                                                        />
+
+                                                        <label htmlFor={access.id} className="w-20 h-10 text-xs text-center focus:outline-none peer-checked:bg-amber-400 peer-checked:text-white flex items-center justify-center">
+                                                            {access.name}
+                                                        </label>
+
+                                                    </li>
+                                                )) }
+                                            </ul> 
+                                        </div>
+
+                                    </div>
+                                        
+                                    <label htmlFor="" className="block mt-3 text-sm">タイトル</label>
+                                    <input type="text" 
+                                        className="w-full h-10 border border-gray-300 rounded-lg pl-2" 
+                                        placeholder="タイトル" 
+                                        value={data.title}
+                                        name="title"
+                                        onChange={(e) => setData('title', e.target.value)}
+                                        required
+                                    /> 
+
+                                    <label htmlFor="" className="block mt-3 text-sm">概要</label>
+                                    <textarea 
+                                        name="description" 
+                                        id="" 
+                                        className="w-full h-32 border border-gray-300 rounded-lg pl-2 /mt-1"
+                                        onChange={(e) => setData('description', e.target.value)}
+                                        value={data.description==null ? "":data.description}
+                                    >
+                                    </textarea>
+
+                                    <div className="mt-2">
+                                        <DesignedPrimaryButton>保存</DesignedPrimaryButton>
+                                    </div>
+                                                        
+                                </form> 
+                            </DialogPanel>
+                            </div>
+                        </Dialog>     
+
+                        <div className="flex items-center justify-center px-5 py-2">
+                            単語カード
+                            <span className="bg-slate-200 ml-2 px-2 rounded-full">
+                                {cards.length}
+                            </span>
+                        </div>
+
+                        <div className="px-5">
+                            {cards.map( (card:any) =>(
+                                <div className="flex" key={card.id}>
+                                    <CardList 
+                                        id ={card.id}
+                                        uuid ={card.uuid}
+                                        memory ={card.memory}
+                                        word ={card.word}
+                                        word_mean ={card.word_mean}
+                                        category ={card.category}
+                                        sub_word_mean={card.wordmeans}
+                                        sentence={card.sentence}
+                                        sentence_mean={card.sentence_mean}
+                                        link={card.link}
+                                        user_id ={card.user_id}
+                                        flashcard_id ={card.flashcard_id}
+                                        img_path ={card.img_path}
+                                    />  
+                                    <div className="ml-1">
+                                        <CardOperation id={card.id} uuid={card.uuid} reload={""} />
+                                    </div>                           
+                                </div>
+
+                            )) }                            
+                        </div>
+
+
+
+                        <CategoryContext.Provider value={categories}>
+                            <CreateCardForm id={data.id} />
+                        </CategoryContext.Provider>                    
+                    </div>
                 </div>
             </div>
             

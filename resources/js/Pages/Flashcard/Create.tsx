@@ -4,7 +4,10 @@ import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import React, { useEffect, useRef, FC, useState } from "react";
-import { TfiWrite } from "react-icons/tfi";
+//import { TfiWrite } from "react-icons/tfi";
+import { BiSolidEditAlt } from "react-icons/bi";
+import { FaArrowRight } from "react-icons/fa";
+import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
 
 export default function Create({ auth, accesses }: PageProps<{ accesses: any }>) {
 
@@ -29,10 +32,10 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="flex items-center w-full px-3 py-4 border-b-2 border-b-amber-300 text-slate-700">
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
                             {/* <GiBookshelf size={26} /> */}
-                            <TfiWrite size={26} />
-                            <h5 className="text-xl ml-1 font-bold">単語帳作成</h5>
+                            <BiSolidEditAlt size={26} />
+                            <h5 className="font-bold">単語帳作成</h5>
                         </div> 
                         <form onSubmit={Submit} className="block w-full px-5 py-7 space-y-6 text-slate-700">
 
@@ -83,9 +86,14 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
                                 </textarea>                                
                             </div>
 
-                            <button className="inline-flex w-full items-center text-center mt-4 px-4 py-2 bg-amber-400 dark:bg-gray-200 border border-transparent rounded-full font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-amber-500 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                                作成
-                            </button>
+                            <DesignedPrimaryButton>
+                                <div className='relative flex items-center justify-center'>
+                                    <span>作成</span>
+                                    <div className='absolute right-0'>
+                                        <FaArrowRight />
+                                    </div>
+                                </div>
+                            </DesignedPrimaryButton>
 
                         </form>                        
                     </div>

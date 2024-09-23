@@ -17,7 +17,7 @@ export default function Guest({ children }: PropsWithChildren) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 /bg-teal-800">
                     <div className="flex /justify-between justify-center h-16 relative items-center">
 
-                        <div className="absolute left-0 flex">
+                        <div className="absolute sm:left-0 flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -105,6 +105,17 @@ export default function Guest({ children }: PropsWithChildren) {
                             </div>
                         </div>
 
+                        {/* スマホ時ユーザーアイコン */}
+                        <div className="absolute left-0 sm:hidden">
+                            {auth.user.profile_photo_path != null ?
+                                <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
+                            :
+                                <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
+                                    {auth.user.name.substr(0,1)}
+                                </div>
+                            } 
+                        </div>
+
                         {/* スマホ時メニューボタン */}
                         <div className="/-me-2 /flex absolute right-0 items-center sm:hidden">
                             <button
@@ -159,21 +170,25 @@ export default function Guest({ children }: PropsWithChildren) {
                                     単語帳
                                 </Link>                                    
                             </li>
-                            <li>
-                                <Link href={route('profile.show',{personal_id:auth.user.personal_id})}>
-                                    プロフィール
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('setting')}>
-                                    設定
-                                </Link>    
-                            </li>
-                            <li>
-                                <Link href={route('logout')}>
-                                    ログアウト
-                                </Link>                                    
-                            </li>
+                            {auth.user &&
+                                <>
+                                    <li>
+                                        <Link href={route('profile.show',{personal_id:auth.user.personal_id})}>
+                                            プロフィール
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href={route('setting')}>
+                                            設定
+                                        </Link>    
+                                    </li>
+                                    <li>
+                                        <Link href={route('logout')}>
+                                            ログアウト
+                                        </Link>                                    
+                                    </li>
+                                </>
+                            }
                         </ul>
                     </div>
                 </div>
