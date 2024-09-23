@@ -18,7 +18,7 @@ export default function Guest({ children }: PropsWithChildren) {
                     <div className="flex /justify-between justify-center h-16 relative items-center">
 
                         <div className="absolute sm:left-0 flex">
-                            <div className="shrink-0 flex items-center">
+                            <div className="shrink-0 flex items-center w-20">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
