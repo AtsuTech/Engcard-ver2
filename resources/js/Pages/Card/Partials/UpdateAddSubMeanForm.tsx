@@ -27,8 +27,8 @@ export default function UpdateAddSubMeanForm({card_id}:{card_id:number}){
     return(
         <>
             <div className="flex items-center w-full my-1">
-                <button type="button" className="block ml-auto w-48 h-10 bg-amber-400 text-white rounded-md" onClick={DialogOpen}>
-                    サブの意味を追加する
+                <button type="button" className="block ml-auto w-fit px-4 py-1 /h-10 bg-amber-300 text-slate-600 rounded-full" onClick={DialogOpen}>
+                    追加
                 </button>
             </div>
           

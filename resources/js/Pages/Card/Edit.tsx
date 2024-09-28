@@ -1,4 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import CommonLayout from '@/Layouts/CommonLayout';
 import React, { useEffect, useRef, FC, useState } from "react";
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
@@ -10,7 +11,13 @@ import CategorySelect from './Partials/CategorySelect';
 import UpdateSubMeanForm from './Partials/UpdateSubMeanForm';
 import UpdateAddSubMeanForm from './Partials/UpdateAddSubMeanForm';
 import UpdateImageForm from './Partials/UpdateImageForm';
-import { router } from '@inertiajs/react'
+import { router } from '@inertiajs/react';
+import { FaDeleteLeft } from "react-icons/fa6";
+import { CiImageOn } from "react-icons/ci";
+import { MdOutlineClear } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+import { IoArrowBack } from "react-icons/io5";
+
 //データ型宣言
 type Category = {
     id: number;
@@ -22,6 +29,7 @@ type WordMean = {
     id: number;
     card_id: number;
     category_id: number;
+    category: string;
     word_mean: string;
 }
 
@@ -41,7 +49,7 @@ type Card = {
 };
 
 //export default function Edit({ auth, categories, card }: PageProps<{ categories:Category[], card:Card }>) {
-export default function Edit({ auth, categories, card, wordmeans }: PageProps<{ categories:Category[], card:Card, wordmeans:WordMean[] }>) {
+export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans }: PageProps<{ flashcard_uuid:string, categories:Category[], card:Card, wordmeans:WordMean[] }>) {
 
     const { data, setData, patch, put, post, errors, processing, recentlySuccessful } = useForm({
         id: card.id,
@@ -79,153 +87,189 @@ export default function Edit({ auth, categories, card, wordmeans }: PageProps<{ 
         post(route("card.update_with_image"));
     }
 
+    console.log(card)
+
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">カード編集{data.word}{recentlySuccessful}</h2>}
-        >
+        // <AuthenticatedLayout
+        //     user={auth.user}
+        //     header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">カード編集{data.word}{recentlySuccessful}</h2>}
+        // >
+        <CommonLayout>
             <Head title="単語帳を編集" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 /space-y-6">
-                    <Link href={route('flashcard.show',data.flashcard_id)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
-                        戻る
-                    </Link>
+                    <div className="/p-4 /sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        {/*  */}
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
+                        <Link href={route('flashcard.show',flashcard_uuid)} className="block w-fit text-lg p-1 mr-2 bg-slate-200 rounded-full">
+                            <IoArrowBack />
+                        </Link>
+                            <MdEdit size={26} />
+                            <h5 className="font-bold">単語カード編集</h5>
+                        </div> 
 
-                    <CategoryContext.Provider value={categories}>
-                        <form onSubmit={Submit} encType="multipart/form-data">
+                        <CategoryContext.Provider value={categories}>
+                            <form onSubmit={Submit} encType="multipart/form-data" className="px-3">
 
-                            <label className="block mt-3" htmlFor="word">単語</label>
-                            <input type="text" 
-                                id="word"
-                                name="word" 
-                                className="w-full h-10 border border-gray-300 pl-2 rounded-lg outline-amber-400" 
-                                placeholder="単語 ex.)Apple" 
-                                value={data.word}
-                                onChange={(e) => setData('word',e.target.value)} 
-                                required
-                            />
-
-                            <label className="block mt-3" htmlFor="word_mean">意味</label>
-                            <div className="flex w-full h-10 bg-white border border-gray-300 rounded-lg p-1 focus-within:border-amber-400">
-
-                                {/* カテゴリのデータ、更新関数をコンテキストで渡す */}
-                                <CategorySelect selected={data.category_id} setData={setData} />
-                                
+                                <label className="block mt-3 text-xs" htmlFor="word">単語</label>
                                 <input type="text" 
-                                    id="word_mean"
-                                    name="word_mean" 
-                                    className="w-full ml-1 pl-2 bg-white rounded-md border-none /outline-transparent" 
-                                    placeholder="訳 ex.)りんご" 
-                                    value={data.word_mean}
-                                    onChange={(e) => setData('word_mean',e.target.value)} 
+                                    id="word"
+                                    name="word" 
+                                    className="w-full h-10 border border-gray-300 pl-2 rounded-lg outline-amber-400" 
+                                    placeholder="単語 ex.)Apple" 
+                                    value={data.word}
+                                    onChange={(e) => setData('word',e.target.value)} 
                                     required
                                 />
-                            </div>
 
-                            {/* サブの意味 */}
-                            <label className="block mt-3" htmlFor="">サブの意味</label>
-                            <div className="flex items-center w-1/2 bg-white border border-gray-300 p-2 rounded-lg">
-                                {wordmeans.length == 0 &&
-                                    <div className="">
-                                        <p className="text-xs w-32">画像はありません</p>
-                                    </div>
-                                }
-                                <div className="w-full">
+                                <label className="block mt-3 text-xs" htmlFor="word_mean">意味</label>
+                                <div className="flex w-full h-10 bg-white border border-gray-300 rounded-lg p-1 focus-within:border-amber-400">
+
                                     {/* カテゴリのデータ、更新関数をコンテキストで渡す */}
-                                    {wordmeans && wordmeans.length > 0 && 
-                                        wordmeans.map((wordmean: any, index: number) => (
-                                            <div key={wordmean.id} className="py-1">
-                                                <UpdateSubMeanForm wordmean={wordmean} />
-                                            </div>
-                                        ))
-                                    }   
-                                    {wordmeans.length <5 && <UpdateAddSubMeanForm card_id={data.id} /> }                                     
-                                </div>
-                            </div>
-
-                            {/* 画像 */}
-                            <label htmlFor="img" className="block mt-3">画像</label>
-                            <div className="flex items-center w-fit border border-gray-300 rounded-lg bg-white p-3 space-x-2">
-                                {imgPreview != null ?
-                                    <img src={imgPreview} className="w-16 h-10" />
-                                :
-                                    <>
-                                    {data.img_path != null ?
-                                    <img src={data.img_path} alt="" className="w-16 h-10" />
-                                    :
-                                    <p className="text-sm">画像なし</p>
-                                    }
-                                    </>
-                                }
-                                <input
-                                    id="img"
-                                    type="file"
-                                    accept="image/*" multiple
-                                    onChange={hendleFile}
-                                />   
-                                {imgPreview  && <button onClick={imageClear} type="button" className="border border-slate-500 text-slate-500 rounded-md px-2">画像をクリア</button>}
-                                <div className="flex items-center">
-                                    <input 
-                                        type="checkbox" 
-                                        id="huey" 
-                                        name="drone" 
-                                        className="block border border-rose-500 rounded-sm"
-                                        value={1} 
-                                        onChange={(e:any)=>setData('img_delete',e.target.value)}
+                                    <CategorySelect selected={data.category_id} setData={setData} />
+                                    
+                                    <input type="text" 
+                                        id="word_mean"
+                                        name="word_mean" 
+                                        className="w-full ml-1 pl-2 bg-white rounded-md border-none /outline-transparent" 
+                                        placeholder="訳 ex.)りんご" 
+                                        value={data.word_mean}
+                                        onChange={(e) => setData('word_mean',e.target.value)} 
+                                        required
                                     />
-                                    <label className="block ml-1 text-rose-600">画像を削除</label>   
                                 </div>
-                                       
-                                {/* <UpdateImageForm current={data.img_path} id={data.id} /> */}
-                            </div> 
 
-                            <label htmlFor="sentence">例文</label>
-                            <textarea 
-                                id="sentence"
-                                name="sentence" 
-                                rows={3} 
-                                className="w-full p-2 border border-gray-300 rounded-lg outline-amber-400" 
-                                value={data.sentence ==null ? "": data.sentence}
-                                onChange={(e) => setData('sentence',e.target.value)} 
-                                placeholder="例文:Apple is red and delicious fruits."
-                                >
-                            </textarea>
+                                {/* サブの意味 */}
+                                <label className="block mt-3 text-xs" htmlFor="">サブの意味</label>
+                                <div className="flex items-center w-full bg-white border border-gray-300 p-1 rounded-lg">
+                                    {wordmeans.length == 0 &&
+                                        <div className="w-full">
+                                            <p className="text-xs text-slate-500">登録されていません</p>
+                                        </div>
+                                    }
+                                    <div className="w-full">
+                                        {/* カテゴリのデータ、更新関数をコンテキストで渡す */}
+                                        {wordmeans && wordmeans.length > 0 && 
+                                            wordmeans.map((wordmean: any, index: number) => (
+                                                <div key={wordmean.id} className="py-1">
+                                                    <UpdateSubMeanForm wordmean={wordmean} />
+                                                </div>
+                                            ))
+                                        }   
+                                        {wordmeans.length <5 && <UpdateAddSubMeanForm card_id={data.id} /> }                                     
+                                    </div>
+                                </div>
 
-                            <label className="block mt-3" htmlFor="sentence_mean">例文の訳</label>
-                            <textarea 
-                                id="sentence_mean"
-                                name="sentence_mean" 
-                                rows={3} 
-                                className="w-full p-2 border border-gray-300 rounded-lg outline-amber-400" 
-                                value={data.sentence_mean ==null ? "": data.sentence_mean}
-                                onChange={(e) => setData('sentence_mean',e.target.value)} 
-                                placeholder="例文(訳):りんごは赤くて美味しい果物です。"
-                                >
-                            </textarea>
+                                {/* 画像 */}
+                                <label htmlFor="img" className="block mt-3 text-xs">画像</label>
+                                <div className="flex items-center w-full border border-gray-300 rounded-lg bg-white p-1 space-x-2">
+                                    {imgPreview != null ?
+                                        <img src={imgPreview} className="block w-8 h-8 border border-gray-300 rounded-md" />
+                                    :
+                                        <>
+                                        {data.img_path != null ?
+                                        <img src={data.img_path} alt="" className="block w-8 h-8 border border-gray-300 rounded-md" />
+                                        :
+                                        <p className="text-xs">画像なし</p>
+                                        }
+                                        </>
+                                    }
+                                    {/* <input
+                                        id="img"
+                                        type="file"
+                                        accept="image/*" multiple
+                                        onChange={hendleFile}
+                                    />    */}
+                                    <label
+                                        htmlFor="card-image-file"
+                                        className="flex flex-col items-center justify-center w-fit cursor-pointer"
+                                        >
+                                        <div className="flex items-center justify-center text-lg border p-2 bg-amber-300 text-slate-600 rounded-full">
+                                            <div className="block">
+                                                <CiImageOn />    
+                                            </div>
+                                            <span className="block text-xs">開く</span>
+                                        </div>
+                                        {/* <input id="card-image-file" type="file" className="hidden" /> */}
+                                        <input
+                                            id="card-image-file"
+                                            className="hidden"
+                                            type="file"
+                                            accept="image/*" multiple
+                                            onChange={hendleFile}
+                                        /> 
+                                    </label>
+                                    {imgPreview  && 
+                                        <button onClick={imageClear} type="button" className="flex items-center justify-center text-lg border p-2 bg-slate-300 text-slate-600 rounded-full">
+                                            <MdOutlineClear />
+                                            <span className="block text-xs">クリア</span>
+                                        </button>
+                                    }
+                                    <div className="flex items-center justify-center text-lg border border-rose-600 p-2 /bg-rose-600 rounded-full">
 
-                            <label className="block mt-3" htmlFor="link">関連リンク</label>
-                            <input type="text" 
-                                id="link"
-                                name="link" 
-                                className="w-full h-10 border border-gray-300 pl-2 rounded-lg outline-amber-400" 
-                                placeholder="ex.)Gazotan.com" 
-                                value={data.link == null ? "": data.link}
-                                onChange={(e) => setData('link',e.target.value)} 
-                            />
+                                        <input 
+                                            type="checkbox" 
+                                            id="huey" 
+                                            name="drone" 
+                                            className="block w-3 h-3 border border-gray-300 rounded-sm text-rose-600 ring-white"
+                                            value={1} 
+                                            onChange={(e:any)=>setData('img_delete',e.target.value)}
+                                        />
+                                        <label className="flex items-center space-x-1 /block ml-1 /text-xs text-rose-600">
+                                            {/* <FaDeleteLeft /> */}
+                                            <span className="block text-xs">削除</span>
+                                        </label>   
+                                    </div>
+                                        
+                                    {/* <UpdateImageForm current={data.img_path} id={data.id} /> */}
+                                </div> 
 
-                            <div className="mt-5">
-                                {/* <ButtonWithOnClick text="更新" color="yellow" onclick={UpdateSubmit} /> */}
-                                {/* <button onClick={Submit}>更新</button> */}
-                                <DesignedPrimaryButton>更新</DesignedPrimaryButton>
-                            </div>
+                                <label htmlFor="sentence" className="text-xs">例文</label>
+                                <textarea 
+                                    id="sentence"
+                                    name="sentence" 
+                                    rows={3} 
+                                    className="w-full p-2 border border-gray-300 rounded-lg outline-amber-400" 
+                                    value={data.sentence ==null ? "": data.sentence}
+                                    onChange={(e) => setData('sentence',e.target.value)} 
+                                    placeholder="例文:Apple is red and delicious fruits."
+                                    >
+                                </textarea>
 
-                        </form>
-                    </CategoryContext.Provider>   
+                                <label className="block mt-3 text-xs" htmlFor="sentence_mean">例文の訳</label>
+                                <textarea 
+                                    id="sentence_mean"
+                                    name="sentence_mean" 
+                                    rows={3} 
+                                    className="w-full p-2 border border-gray-300 rounded-lg outline-amber-400" 
+                                    value={data.sentence_mean ==null ? "": data.sentence_mean}
+                                    onChange={(e) => setData('sentence_mean',e.target.value)} 
+                                    placeholder="例文(訳):りんごは赤くて美味しい果物です。"
+                                    >
+                                </textarea>
+
+                                <label className="block mt-3 text-xs" htmlFor="link">関連リンク</label>
+                                <input type="text" 
+                                    id="link"
+                                    name="link" 
+                                    className="w-full h-10 border border-gray-300 pl-2 rounded-lg outline-amber-400" 
+                                    placeholder="ex.)Gazotan.com" 
+                                    value={data.link == null ? "": data.link}
+                                    onChange={(e) => setData('link',e.target.value)} 
+                                />
+
+                                <div className="py-10">
+                                    <DesignedPrimaryButton>更新</DesignedPrimaryButton>
+                                </div>
+
+                            </form>
+                        </CategoryContext.Provider>   
+                    </div>
                 </div>
             </div>
-            
-        </AuthenticatedLayout>
+        </CommonLayout>
+        // </AuthenticatedLayout>
     );
 }

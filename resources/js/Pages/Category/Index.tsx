@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import CommonLayout from '@/Layouts/CommonLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import DeleteCategoryForm from './Partials/DeleteCategoryForm';
@@ -35,29 +35,31 @@ export default function Index({ auth, categories }: PageProps<{ categories:Categ
 
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">カテゴリ</h2>}
-        >
+        <CommonLayout >
             <Head title="単語帳" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                    <div className="/p-4 /sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
+                            {/* <MdEdit size={26} /> */}
+                            <h5 className="font-bold">カテゴリ管理</h5>
+                        </div> 
 
-                    <ul>
-                    {categories.map( (category:any) => (
-                        <li  key={category.id} className="flex w-full py-3 px-2 border-b border-b-slate-400 /rounded-lg">
-                            <div>{category.item}</div>
-                            <div className="flex ml-auto">
-                                <DeleteCategoryForm id={category.id} item={category.item} />
-                                <UpdateCategoryForm id={category.id} item={category.item} />
-                            </div>
-                        </li>
-                    ))}                        
-                    </ul>
-
+                        <ul className="px-3 space-y-1 py-3">
+                        {categories.map( (category:any) => (
+                            <li  key={category.id} className="flex w-full py-1 px-2 border border-gray-300 rounded-lg">
+                                <div>{category.item}</div>
+                                <div className="flex ml-auto">
+                                    <DeleteCategoryForm id={category.id} item={category.item} />
+                                    <UpdateCategoryForm id={category.id} item={category.item} />
+                                </div>
+                            </li>
+                        ))}                        
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </CommonLayout>
     );
 }
