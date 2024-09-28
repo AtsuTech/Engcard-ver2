@@ -277,9 +277,9 @@ class CardController extends Controller
         //クイズ結果のDB反映は単語帳のオーナーだけが可能
         if($request->flashcard_user_id == Auth::id()){
             // 配列として適切にアクセスできることを確認した後に、ループを実行
-            foreach ($memory_array as $memory) {
+            foreach ($memory_array as $index => $memory) {
                 //空の配列が来た時のエラー防止
-                if($memory['id']){
+                if(!empty($memory['id'])){
                     $card = Card::find((int)$memory['id']);
                     $card->memory = $memory['memory'];
                     if($memory['memory']){

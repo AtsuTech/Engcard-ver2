@@ -43,6 +43,11 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
         _method: "post",
     });
 
+    //memory変数の変更を検知してDBに送る配列データを更新
+    useEffect(() => {
+        setData('memorys', memory);
+    }, [memory]);
+
     //正解数をカウントする関数
     const countCollect =()=>{setCountCollect(count_correct + 1);}
         
@@ -121,7 +126,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
             id: target.id,
             memory: true
         }, ...memory]);
-        setData('memorys', memory);
+        //setData('memorys', memory);
     }
 
     //不正解のデータを記録する関数
@@ -133,23 +138,20 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
             id: target.id,
             memory: false
         }, ...memory]);
-        setData('memorys', memory);
+        //setData('memorys', memory);
     }
 
     //クイズの結果のデータを配列でバックエンドに送りカードの暗記状態を更新
     const UpdateMemory = () =>{
+        memory.pop();//デフォルトの空配列の要素が最後に来るので削除
         setData('memorys', memory);
         //データ保存
-        // post(route('quiz.memory'));
-        // get(route('flashcard.show',flashcard_uuid));
-
-
         post(route('quiz.memory'), {
             onSuccess: () => {
                 get(route('flashcard.show', flashcard_uuid));
             },
             onError: (errors) => {
-                console.error('Error:', errors); // エラー確認
+                alert('クイズの結果の保存に失敗しました');
             },
         });
     }
@@ -172,7 +174,6 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
         }, 500);
     }
 
-    console.log(data.memorys);
 
     //正解選択肢コンポーネント
     const CorrectAnswer:FC<{choice:any,selected_answer:any,action:any}> =({choice,selected_answer,action})=>{
