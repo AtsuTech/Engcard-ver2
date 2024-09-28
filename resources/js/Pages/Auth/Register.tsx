@@ -5,6 +5,8 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
+import VerifyEmail from './VerifyEmail';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -95,7 +97,7 @@ export default function Register() {
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                {/* <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
                         className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
@@ -106,6 +108,21 @@ export default function Register() {
                     <PrimaryButton className="ms-4" disabled={processing}>
                         Register
                     </PrimaryButton>
+                </div> */}
+
+                <div className="mt-10">
+                    <DesignedPrimaryButton disabled={processing}>
+                        アカウント作成
+                    </DesignedPrimaryButton>
+                </div>
+
+                <div className="mt-10 text-right">
+                    <Link
+                        href={route('login')}
+                        className="underline text-sm text-amber-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    >
+                        ログインはこちらから
+                    </Link>
                 </div>
             </form>
         </GuestLayout>
