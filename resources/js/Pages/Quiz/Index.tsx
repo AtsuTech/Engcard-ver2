@@ -140,8 +140,18 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     const UpdateMemory = () =>{
         setData('memorys', memory);
         //データ保存
-        post(route('quiz.memory'));
-        get(route('flashcard.show',flashcard_uuid));
+        // post(route('quiz.memory'));
+        // get(route('flashcard.show',flashcard_uuid));
+
+
+        post(route('quiz.memory'), {
+            onSuccess: () => {
+                get(route('flashcard.show', flashcard_uuid));
+            },
+            onError: (errors) => {
+                console.error('Error:', errors); // エラー確認
+            },
+        });
     }
 
 
@@ -162,7 +172,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
         }, 500);
     }
 
-    // console.log(data.memorys);
+    console.log(data.memorys);
 
     //正解選択肢コンポーネント
     const CorrectAnswer:FC<{choice:any,selected_answer:any,action:any}> =({choice,selected_answer,action})=>{
@@ -228,7 +238,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
             <div className="absolute w-full z-10">
                 <Header cards_length={cards.length} turn={turn} setMode={setMode} flashcard_uuid={flashcard_uuid} />
                 <div className="ml-3">
-                    単語帳:{title}
+                    単語帳:{title} turn:{turn} view_card:{view_card} /{flashcard_user_id}
                 </div>
             </div>
 
