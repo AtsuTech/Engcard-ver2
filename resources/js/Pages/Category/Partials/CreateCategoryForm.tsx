@@ -21,6 +21,9 @@ export default function CreateCategoryForm({}: {}) {
         e.preventDefault();
         post(route("category.store"), {
             preserveScroll: true,  // このオプションでスクロールを防ぐ
+            onSuccess: () => {
+                setIsOpen(false);
+            },
         });
     };
 
@@ -38,13 +41,27 @@ export default function CreateCategoryForm({}: {}) {
                     <DialogTitle className="font-bold">カテゴリを追加</DialogTitle>
                     {/* <Description>This will permanently deactivate your account</Description> */}
                     <form onSubmit={Submit}>
-                        <input type="text" value={data.item} onChange={(e)=>setData('item',e.target.value)}  />
-                        <div className="flex justify-end w-full py-2">
+                        <input 
+                            type="text" 
+                            className="border border-gray-300 rounded-md"
+                            value={data.item} 
+                            onChange={(e)=>setData('item',e.target.value)}  
+                        />
+                        <div className="flex justify-end w-full py-2 space-x-2">
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="text-gray-400 text-sm"
+                                type="button"
+                            >
+                                キャンセル
+                            </button>
                             <button 
                                 className={`block w-20 h-10 text-white rounded-full font-bold text-sm 
                                     ${data.item === "" ? 'bg-gray-400 cursor-not-allowed' : 'bg-amber-400'}`}
                                 disabled={data.item === ""}
-                                >
+                                onClick={Submit}
+                                type="button"
+                            >
                                 追加
                             </button>
                         </div>
