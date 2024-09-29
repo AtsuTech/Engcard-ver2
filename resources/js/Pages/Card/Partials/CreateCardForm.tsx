@@ -5,6 +5,7 @@ import { FormEventHandler } from 'react';
 import { devNull } from "os";
 import CategorySelect from "./CategorySelect";
 import CreateSubMeanForm from "./CreateSubMeanForm";
+import { GiSmallFire } from "react-icons/gi";
 
 export default function CreateCardForm({id}: { id: number }) {
 
@@ -88,9 +89,16 @@ export default function CreateCardForm({id}: { id: number }) {
                             className="w-full pl-2 mr-1 border-none rounded-md focus:border-transparent" 
                             placeholder="単語 ex.)Apple" 
                             value={data.word}
-                            onChange={(e) => setData('word',e.target.value)} 
+                            //onChange={(e) => setData('word',e.target.value)} 
+                            onChange={(e) => {
+                                // Allow input only if the length is less than or equal to 3 or if characters are being removed
+                                if (e.target.value.length <= 50 || e.target.value.length < data.word.length) {
+                                    setData('word', e.target.value);
+                                }
+                            }}
                             required
                         />
+
 
                         <div className="flex w-8 h-full border border-gray-300 rounded-lg bg-cover bg-center"  style={{ backgroundImage: `url(${imgThumbnail})` }}>
 
@@ -123,7 +131,7 @@ export default function CreateCardForm({id}: { id: number }) {
                             </div>
                         } 
 
-                    </div>
+                    </div>            
 
                     {/* 英単語の意味＋カテゴリ */}
                     <div className="flex w-full h-10 p-1 border border-gray-300 rounded-lg focus-within:border-amber-400">
@@ -133,12 +141,23 @@ export default function CreateCardForm({id}: { id: number }) {
                             className="block w-full h-full pl-2 ml-1 border-none rounded-md /outline-transparent" 
                             placeholder="訳 ex.)りんご" 
                             value={data.word_mean}
-                            onChange={(e) => setData('word_mean',e.target.value)} 
+                            //onChange={(e) => setData('word_mean',e.target.value)} 
+                            onChange={(e) => {
+                                // Allow input only if the length is less than or equal to 3 or if characters are being removed
+                                if (e.target.value.length <= 30 || e.target.value.length < data.word_mean.length) {
+                                    setData('word_mean', e.target.value);
+                                }
+                            }}
                             required
                         />
                     </div>
 
                 </div> 
+
+                <div className="px-1 text-rose-600">
+                    <p>{data.word.length >= 50 && <small>英単語は50字以下で入力ください</small>}</p>
+                    <p>{data.word_mean.length >= 30 && <small>意味は30字以下で入力ください</small>}</p>
+                </div>
 
                 {/* サブの意味 */}
                 <CreateSubMeanForm setData={setData} />
@@ -176,7 +195,11 @@ export default function CreateCardForm({id}: { id: number }) {
                         <ButtonWithOnClick color={'gray'} text={'キャンセル'} onclick={closeModal} />
                     </div> */}
                     <div className="w-full ml-1">
-                        <button className="items-center w-full px-4 py-2 bg-amber-400 dark:bg-gray-200 border border-transparent rounded-full font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-amber-500 dark:hover:bg-white focus:bg-amber-500 dark:focus:bg-white active:bg-amber-600 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150" onClick={submit}>
+                        <button 
+                            className="items-center w-full px-4 py-2 bg-amber-400 dark:bg-gray-200 border border-transparent rounded-full font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-amber-500 dark:hover:bg-white focus:bg-amber-500 dark:focus:bg-white active:bg-amber-600 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150" 
+                            onClick={submit}
+                            disabled={data.word =="" || data.word_mean =="" ? true : false }
+                        >
                             追加
                         </button>
                     </div>

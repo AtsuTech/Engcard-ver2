@@ -48,8 +48,8 @@ export default function UpdateSubMeanForm({ wordmean }: { wordmean:any }) {
                 <div className="flex items-center border border-gray-300 rounded-md /p-0.5">
                     {/* <div className="block w-full rounded-md ml-1">{isOpen ? wordmean.word_mean : data.word_mean}</div> */}
                     <div className="flex items-center /block w-full rounded-md ml-1 space-x-2">
-                        <span className="text-xs bg-amber-300 px-2 py-0.5 rounded-md">{ data.category}</span>
-                        <span>{data.word_mean}</span>
+                        <span className="text-xs bg-amber-300 px-2 py-0.5 rounded-md">{wordmean.category}</span>
+                        <span>{wordmean.word_mean}</span>
                     </div>
                     
                     <div className="flex w-fit space-x-1 text-lg">
