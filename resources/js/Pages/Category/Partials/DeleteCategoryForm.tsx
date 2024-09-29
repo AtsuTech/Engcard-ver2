@@ -18,15 +18,6 @@ export default function DeleteCategoryForm({ id, item }: { id:number, item:strin
     const DialogClose =()=>{setIsOpen(false)};
 
 
-    //データ送信
-    // const Submit = (e :any) =>{
-    //     e.preventDefault();
-    //     patch(route("category.update",data.id), {
-    //         preserveScroll: true,  // このオプションでスクロールを防ぐ
-    //     });
-    //     DialogClose();
-    // }
-
     const Submit = (e: any) =>{
         e.preventDefault();
 
@@ -47,8 +38,13 @@ export default function DeleteCategoryForm({ id, item }: { id:number, item:strin
                     <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
                     <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
                         <DialogTitle className="font-bold text-rose-600">カテゴリを削除</DialogTitle>
-                        <Description className="text-sm">
-                            "{item}"を削除します。本当によろしいですか？
+                        <Description className="text-xs">
+                            <p className="py-2">
+                                <span className="bg-slate-200 p-1 text-xs font-bold rounded-sm">{item}</span>を削除します。
+                            </p>
+                            このカテゴリを削除すると、このカテゴリが適応されている<br/>
+                            全てのカードやサブの意味から削除されます。<br/>
+                            本当によろしいですか？<br/>
                         </Description>
                         <div className="">
                             

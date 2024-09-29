@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('word_means', function (Blueprint $table) {
             $table->id();
             $table->foreignId('card_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            #$table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->integer('category_id')->default(1)->nullable();
             $table->string('word_mean');
             $table->timestamps();
         });

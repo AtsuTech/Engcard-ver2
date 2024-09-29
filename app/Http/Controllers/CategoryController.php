@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth; // Authファサードを読み込む
+use App\Models\Card;//単語帳モデル
+use App\Models\WordMean;//サブの意味モデル
 
 class CategoryController extends Controller
 {
@@ -62,6 +64,25 @@ class CategoryController extends Controller
     //削除処理
     public function destroy(Request $request, Category $category)
     {
+        //削除するカテゴリが紐づくカードを取得
+        $cards = Card::where("category_id","=",$category->id)->get();
+
+        //削除するカテゴリが紐づくサブの意味を取得
+        $wordmeans = WordMean::where("category_id","=",$category->id)->get();
+
+        //カテゴリを初期値(1)に変更
+        foreach($cards as $card){
+            $card->category_id = 1;
+            $card->save();
+        }
+
+        //カテゴリを初期値(1)に変更
+        foreach($wordmeans as $wordmean){
+            $wordmean->category_id = 1;
+            $wordmean->save();
+        }
+
+        //カテゴリ削除処理
         $category->delete();
     }
 }
