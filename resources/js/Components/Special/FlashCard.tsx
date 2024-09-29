@@ -9,6 +9,7 @@ import React, { useEffect, useRef, FC, useState } from "react";
 // import { DiVim } from 'react-icons/di';
 // import { spawn } from 'child_process';
 import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
+import { MdFavorite } from "react-icons/md";
 
 export default function FlashCard
     ({
@@ -17,11 +18,13 @@ export default function FlashCard
         title,
         description,
         cards_length,
+        favorite,
         access,
         access_name,
         access_view,
         user_name,
         user_img,
+        operation_allow,
     }
     : 
     {
@@ -30,18 +33,20 @@ export default function FlashCard
         title:string,
         description:string,
         cards_length:number,
+        favorite:number,
         access:number,
         access_name:string,
         access_view:boolean,
         user_name:string,
         user_img:string,
+        operation_allow:boolean,
     })
 {
     return(
         <div>
             <div  key={id} className="block w-full h-fit mb-4 /border-2 /border-yellow-200 rounded-lg shadow-md overflow-hidden">
 
-                <div className="flex w-full items-center h-8 bg-yellow-200 p-0.5">
+                <div className="flex w-full items-center h-8 bg-yellow-200 px-1 py-0.5">
                     {access_view &&
                         <div className="w-fit">
                             {access == 0 && <span className="block bg-slate-300 py-0.5 px-2 text-xs rounded-full">{access_name}</span>}
@@ -49,12 +54,15 @@ export default function FlashCard
                         </div>                     
                     }
     
-                    {/* <OperateFlashCardMenu uuid={flashcard.uuid} id={flashcard.id} Update={Update} /> */}
-                    {/* <CreateFlashcardFavoriteForm id={flashcard.id} /> */}
-                    <h5 className="text-1.5xl break-all pl-2 text-slate-600 text-bold">{title}</h5>
-                    <div className="flex w-fit items-center ml-auto">
-                        <FlashCardOperationDropDown id={id} uuid={uuid} />
-                    </div>
+                    <h5 className="text-1.5xl break-all pl-2 text-slate-600 text-bold">
+                        {title}
+                    </h5>
+
+                    {operation_allow && 
+                        <div className="flex w-fit items-center ml-auto">
+                            <FlashCardOperationDropDown id={id} uuid={uuid} />
+                        </div>                    
+                    }
                 </div>
 
 
@@ -75,10 +83,14 @@ export default function FlashCard
                         
                     <div className="flex w-full">
                         {/* <small className="mr-2">{flashcard.updated_at}</small> */}
-                        <div className="flex items-center w-fit p-1 ml-auto">
-                            <small className="block w-fit py-0.5 px-2 bg-slate-300 rounded-full text-xs">{cards_length}枚</small>
+                        <div className="flex items-center w-fit p-1 space-x-1 ml-auto">
+                            <small className="flex items-center w-fit py-0.5 px-2 bg-slate-200 rounded-full text-xs text-amber-500">
+                                <MdFavorite />
+                                <span className="text-slate-700">{favorite}</span>  
+                            </small>
+                            <small className="block w-fit py-0.5 px-2 bg-slate-200 rounded-full text-xs">{cards_length}枚</small>
                             { user_img != null ?
-                                <img src={'/storage/images/profile/' +  user_img} alt="s" className='w-5 h-5 ml-1 rounded-full' />
+                                <img src={'/storage/images/profile/' +  user_img} alt="s" className='w-5 h-5 /ml-1 rounded-full' />
                             :
                                 <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200">
                                     {user_name.substr(0,1)}

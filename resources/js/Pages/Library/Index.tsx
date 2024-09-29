@@ -10,6 +10,8 @@ type Flashcard = {
     title: string;
     description: string;
     access: any;
+    favorite: number;
+    cardlength: number;
     user:any;
 }
 
@@ -39,9 +41,11 @@ export default function Index({ flashcards }: {flashcards:Flashcard[]}) {
                                     access={flashcard.access.type}
                                     access_name={flashcard.access.name}
                                     access_view={false}
-                                    cards_length={123}
+                                    cards_length={flashcard.cardlength}
+                                    favorite={flashcard.favorite}
                                     user_name={flashcard.user.name}
                                     user_img={flashcard.user.profile_photo_path}
+                                    operation_allow={false}
                                 />
                             ))}                            
                         </div>

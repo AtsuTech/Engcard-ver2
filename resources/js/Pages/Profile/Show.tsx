@@ -2,13 +2,14 @@ import CommonLayout from '@/Layouts/CommonLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import FlashCard from '@/Components/Special/FlashCard';
 
 // type User{
 //     name:string
 // }
 
 export default function Show({ auth, user, flashcards }: PageProps<{user:any,flashcards:[]}>) {
-    console.log(user);
+    console.log(flashcards);
     return (
         <CommonLayout>
             <Head title="プロフィール" />
@@ -33,12 +34,12 @@ export default function Show({ auth, user, flashcards }: PageProps<{user:any,fla
                             <div>
                                 <div className="flex relative">
 
-                                    <div className="w-fit border border-slate-300 rounded-full">
+                                    <div className="w-fit">
 
                                         {user.profile_photo_path != null ?
-                                            <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-12 h-12 rounded-full' />
+                                            <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-12 h-12 border border-slate-300 rounded-full' />
                                         :
-                                            <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
+                                            <div className="flex items-center justify-center w-12 h-12 ml-1 bg-cyan-200  border border-slate-300 rounded-full">
                                                 {auth.user.name.substr(0,1)}
                                             </div>
                                         } 
@@ -76,13 +77,31 @@ export default function Show({ auth, user, flashcards }: PageProps<{user:any,fla
                             
                                 <div className="py-1">{user.comment}</div>
                             </div>
-                            <div className="py-2 text-center">単語帳</div>
+                            <div className="py-2 text-center">公開している単語帳</div>
 
                             <div className="/flex flex-wrap /py-2">
                                 {flashcards.map( (flashcard:any) => (
-                                    <Link href={route('flashcard.show',flashcard.uuid)} className="block w-full">
-                                        {flashcard.title}
-                                    </Link>
+                                    // <Link href={route('flashcard.show',flashcard.uuid)} className="block w-full p-3 border border-slate-300 rounded-lg">
+                                    //     {flashcard.title}
+                                    // </Link>
+                                    <div key={flashcard.uuid}>
+                                        <FlashCard
+                                            id={flashcard.id}
+                                            uuid={flashcard.uuid}
+                                            title={flashcard.title}
+                                            description={flashcard.description}
+                                            access={1}
+                                            access_name={''}
+                                            access_view={false}
+                                            cards_length={flashcard.cardlength}
+                                            favorite={flashcard.favorite}
+                                            user_name={auth.user.name}
+                                            user_img={auth.user.profile_photo_path}
+                                            operation_allow={false}
+                                        />                                    
+                                    </div>
+
+
                                 ))}                             
                             </div>                                
                         </div>
