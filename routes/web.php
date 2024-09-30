@@ -6,6 +6,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\WordMeanController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FlashcardFavoriteController;
+use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Admin\AdvertisementController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -36,9 +37,13 @@ Route::post('/quiz/memory',[CardController::class, 'memory'])->name('quiz.memory
 //カード閲覧回数記録
 Route::post('/view_count',[CardController::class, 'view_count'])->name('view_count');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+//ダッシュボード
+Route::get('/dashboard',[DashBoardController::class, 'dashboard_data'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //ライブラリ
 Route::get('/library',[FlashCardController::class, 'library_index'])->name('library');
