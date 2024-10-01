@@ -24,7 +24,7 @@ class UserIdPrecognitionFormRequest extends FormRequest
     {
         return [
             //個人のバリデーション
-            'personal_id' => ['required', 'min:10', 'max:15', 'unique:users,personal_id'],
+            'personal_id' => ['required', 'min:10', 'max:15', 'unique:users,personal_id', 'alpha_num'],
         ];
     }
 
@@ -34,6 +34,7 @@ class UserIdPrecognitionFormRequest extends FormRequest
             'personal_id.required' => '入力必須です。',
             'personal_id.max' => '15文字以内で入力をしてください。',
             'personal_id.unique' => 'この個人IDは既に使用されています。',
+            'personal_id.alpha_num' => '半角英数字のみ使用可能です',
         ];
     }
 }

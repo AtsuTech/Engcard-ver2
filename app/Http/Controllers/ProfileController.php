@@ -48,7 +48,7 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
-
+        $request->user()->comment = $request->comment;
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
@@ -105,7 +105,8 @@ class ProfileController extends Controller
         $me = User::find(Auth::id());
         $me->personal_id = $request->personal_id;
         $me->save();
-        return Redirect::route('profile.edit');
+        return redirect()->route('update.personal_id');
+        //return Redirect::route('profile.edit');
     }
 
     /**

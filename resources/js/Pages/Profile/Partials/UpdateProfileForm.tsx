@@ -86,9 +86,10 @@ export default function UpdateProfileForm({ mustVerifyEmail, status, className =
                         className="mt-1 block w-full border border-gray-300 rounded-md"
                         name="comment" 
                         id="comment"
+                        value={data.comment}
                         onChange={(e) => setData('comment', e.target.value)}
                         autoComplete="ご自由にコメントをどうぞ"
-                    >{data.comment}
+                    >
                     </textarea>
                 </div>
 
