@@ -54,16 +54,17 @@ export default function Guest({ children }: PropsWithChildren) {
                                                 className="inline-flex items-center /px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
                                             >
-                                                
-                                                <div>
-                                                {auth.user.profile_photo_path != null ?
-                                                    <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
-                                                :
-                                                    <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
-                                                        {auth.user.name.substr(0,1)}
+                                                {auth.user &&
+                                                    <div>
+                                                    {auth.user.profile_photo_path != null ?
+                                                        <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
+                                                    :
+                                                        <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
+                                                            {auth.user.name.substr(0,1)}
+                                                        </div>
+                                                    } 
                                                     </div>
-                                                } 
-                                                </div>
+                                                }
                                             </button>
                                         </span>
                                     </Dropdown.Trigger>
@@ -84,18 +85,16 @@ export default function Guest({ children }: PropsWithChildren) {
                                 </Dropdown>
                             :
                                 <div>
-                                    <div className="flex items-center space-x-1 /bg-slate-500">
+                                    <div className="flex items-center space-x-3 text-xs">
                                         <Link
                                             href={route('login')}
-                                            //className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 /me-2 /mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                                            className="text-slate-600"
                                         >
                                             ログイン
                                         </Link>
                                         <Link
                                             href={route('register')}
-                                            //className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 /me-2 /mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                                            className="text-white bg-amber-600 hover:bg-amber-900 focus:outline-none focus:ring-0 focus:ring-amber-300 font-medium rounded-full px-2 py-1 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
                                         >
                                             新規登録
                                         </Link>
@@ -106,15 +105,17 @@ export default function Guest({ children }: PropsWithChildren) {
                         </div>
 
                         {/* スマホ時ユーザーアイコン */}
-                        <div className="absolute left-0 sm:hidden">
-                            {auth.user.profile_photo_path != null ?
-                                <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
-                            :
-                                <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
-                                    {auth.user.name.substr(0,1)}
-                                </div>
-                            } 
-                        </div>
+                        {auth.user &&
+                            <div className="absolute left-0 sm:hidden">
+                                {auth.user.profile_photo_path != null ?
+                                    <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
+                                :
+                                    <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
+                                        {auth.user.name.substr(0,1)}
+                                    </div>
+                                } 
+                            </div>
+                        }
 
                         {/* スマホ時メニューボタン */}
                         <div className="/-me-2 /flex absolute right-0 items-center sm:hidden">
