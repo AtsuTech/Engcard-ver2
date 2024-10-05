@@ -59,7 +59,7 @@ export default function Guest({ children }: PropsWithChildren) {
                                                     {auth.user.profile_photo_path != null ?
                                                         <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
                                                     :
-                                                        <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
+                                                        <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full text-white bg-slate-900">
                                                             {auth.user.name.substr(0,1)}
                                                         </div>
                                                     } 
@@ -110,7 +110,7 @@ export default function Guest({ children }: PropsWithChildren) {
                                 {auth.user.profile_photo_path != null ?
                                     <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
                                 :
-                                    <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200 te">
+                                    <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full text-white bg-slate-900">
                                         {auth.user.name.substr(0,1)}
                                     </div>
                                 } 

@@ -33,13 +33,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                             href={route('dashboard')}
                                             className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
-                                            Dashboard
+                                            ダッシュボード
                                         </Link>
                                     ) : (
                                         <>
                                             <Link
                                                 href={route('login')}
-                                                className="text-white bg-amber-400 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                                                className="text-white bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-0 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
                                             >
                                                 ログイン
                                             </Link>
@@ -60,7 +60,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                     <Link
                                         href={route('register')}
                                         //className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        className="text-white bg-amber-400 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                                        className="text-white bg-amber-400 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-2xl px-6 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
                                     >
                                         アカウント作成
                                     </Link>

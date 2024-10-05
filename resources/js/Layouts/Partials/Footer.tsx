@@ -10,8 +10,8 @@ import { usePage } from '@inertiajs/react';
 export default function Footer({ }: {}) {
     const { advertisements } :any= usePage().props;  
     return (
-        <footer className="w-full bg-slate-800 text-white">
-            <div className="text-center p-10">
+        <footer className="flex items-center w-full h-96 bg-slate-800 text-white">
+            <div className="w-full text-center p-10">
                 Engcard@2024-08-31
             </div>
             {advertisements.map((advertisement:any) => (

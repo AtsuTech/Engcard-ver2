@@ -46,9 +46,9 @@ export default function Index({ auth, categories }: PageProps<{ categories:Categ
                             <h5 className="font-bold">カテゴリ管理</h5>
                         </div> 
 
-                        <ul className="px-3 space-y-1 py-3">
+                        <ul className="px-3 space-y-1 py-10">
                         {categories.map( (category:any) => (
-                            <li  key={category.id} className="flex w-full py-1 px-2 border border-gray-300 rounded-lg">
+                            <li  key={category.id} className="flex items-center w-full py-2 px-2 border border-gray-300 rounded-lg">
                                 <div>{category.item}</div>
                                 <div className="flex ml-auto">
                                     <DeleteCategoryForm id={category.id} item={category.item} />
@@ -57,6 +57,12 @@ export default function Index({ auth, categories }: PageProps<{ categories:Categ
                             </li>
                         ))}                        
                         </ul>
+
+                        {categories.length == 0 &&
+                            <div className="py-64 flex items-center justify-center">
+                                <div>まだカテゴリはありません</div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -2,12 +2,7 @@ import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import React, { useEffect, useRef, FC, useState } from "react";
-// import { title } from 'process';
-// import { FaArrowLeft } from "react-icons/fa";
-// import { FaArrowRight } from "react-icons/fa";
-// import { RxCross2 } from "react-icons/rx";
-// import { DiVim } from 'react-icons/di';
-// import { spawn } from 'child_process';
+import NameAvotor from './NameAvator';
 import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
 import { MdFavorite } from "react-icons/md";
 
@@ -92,7 +87,7 @@ export default function FlashCard
                             { user_img != null ?
                                 <img src={'/storage/images/profile/' +  user_img} alt="s" className='w-5 h-5 /ml-1 rounded-full' />
                             :
-                                <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full bg-cyan-200">
+                                <div className="flex items-center justify-center w-5 h-5 ml-1 text-white text-xs rounded-full bg-slate-900">
                                     {user_name.substr(0,1)}
                                 </div>
                             } 

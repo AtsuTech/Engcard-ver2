@@ -68,7 +68,7 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
                                         access={flashcard.access.type}
                                         access_name={flashcard.access.name}
                                         access_view={true}
-                                        cards_length={123}
+                                        cards_length={flashcard.cardlength}
                                         favorite={flashcard.favorite}
                                         user_name={flashcard.user.name}
                                         user_img={flashcard.user.profile_photo_path}

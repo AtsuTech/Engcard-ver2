@@ -39,7 +39,7 @@ export default function Show({ auth, user, flashcards }: PageProps<{user:any,fla
                                         {user.profile_photo_path != null ?
                                             <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="s" className='w-12 h-12 border border-slate-300 rounded-full' />
                                         :
-                                            <div className="flex items-center justify-center w-12 h-12 ml-1 bg-cyan-200  border border-slate-300 rounded-full">
+                                            <div className="flex items-center justify-center w-12 h-12 ml-1 text-white bg-slate-900  border border-slate-300 rounded-full">
                                                 {auth.user.name.substr(0,1)}
                                             </div>
                                         } 
