@@ -4,6 +4,12 @@ import { useState, useEffect} from "react";
 // import { Bage } from "./parts_component/Bage";
 //import { Card } from "./Card";
 //import { CloseButton } from "./parts_component/CloseButton";
+import { Link, useForm, usePage } from '@inertiajs/react';
+import { Description, Dialog, DialogPanel, DialogTitle, Transition,  TransitionChild} from '@headlessui/react';
+import Card from "@/Components/Special/Card";
+import { fail } from "assert";
+import { IoMdClose } from "react-icons/io";
+import { IoOpenOutline } from "react-icons/io5";
 
 
 interface CardProps {
@@ -40,25 +46,15 @@ export const CardList:FC<CardProps> = ({
     flashcard_id,
     img_path}) =>{
 
-
     //モーダル開閉
-    const dialogRef = useRef<HTMLDialogElement>(null);
-    const openModal = () => dialogRef.current?.showModal();
-    const closeModal = () => dialogRef.current?.close();
-
-    const [imgFlag,setImgFlag] = useState<boolean>();
-    useEffect(() => {
-        if (img_path) {
-            setImgFlag(true);
-        }
-    }, [img_path]);
+    const [cardModal,setCardModal] = useState(false);
 
 
     return(
         <>
         <div className="w-full"  key={id}>
             {/* <Link to={`/card/${uuid}`} key={id} className="w-full"> */}
-                <div className="flex h-12 border bg-white border-gray-300 mb-3 /px-2 rounded-lg" onClick={openModal}>
+                <div className="flex h-12 border bg-white border-gray-300 mb-3 /px-2 rounded-lg" onClick={() => setCardModal(true)}>
 
                     {/* left */}
                     <div className="relative flex items-center w-1/2 border-r border-gray-300">
@@ -99,27 +95,87 @@ export const CardList:FC<CardProps> = ({
                 </div>
             {/* </Link> */}
 
-            <dialog id={ "#" + uuid } ref={dialogRef} className="w-full md:w-fit p-1 rounded-md">
-                {/* <button onClick={closeModal}>close</button> */}
-                <div className="flex items-center h-10">
-                    {/* <CloseButton onClick={closeModal} />
-                    <Link to={`/card/${uuid}`} key={id} className="w-fit ml-auto text-center bg-amber-400 text-white px-2 rounded-full">別ページで見る</Link>    */}
-                </div>
+            <Dialog
+                as="div"
+                id="modal"
+                className="fixed inset-0 flex overflow-y-auto px-4 py-6 sm:px-0 items-center z-50 transform transition-all"
+                open={cardModal} onClose={() => setCardModal(false)}
+            >
+                <TransitionChild
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <div className="absolute inset-0 bg-gray-300/75 dark:bg-gray-900/75" />
+                </TransitionChild>
 
-                {/* <Card
-                    date=""
-                    memory={memory}
-                    imgflag={imgFlag}
-                    img_path={location.protocol + '//' + window.location.host + '/storage/images/card/'+ user_id + '/' + flashcard_id + '/' + img_path}
-                    word={word}
-                    word_mean={word_mean}
-                    category={category}
-                    sub_word_mean={sub_word_mean}
-                    sentence={sentence}
-                    sentence_mean={sentence_mean}
-                    link={link}
-                />   */}
-            </dialog>
+                <TransitionChild
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    enterTo="opacity-100 translate-y-0 sm:scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                    leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                >
+                    <DialogPanel
+                        className={`mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full mx-auto max-w-96 sm:mx-auto`}
+                    >
+                        <div className="flex p-1">
+                            <button className="text-slate-600" onClick={() => setCardModal(false)}>
+                                <IoMdClose size={22} />
+                            </button>
+                            {/* <Link href={route('card.show',uuid)} className="ml-auto flex items-center justify-center text-amber-500 /bg-amber-400 /text-white w-6 h-6 rounded-full">
+                                <IoOpenOutline size={22} />
+                            </Link> */}
+                            <a 
+                                href={location.protocol + '//' + window.location.host +'/card/'+uuid} target="_blank" rel="noopener noreferrer"
+                                className="ml-auto flex items-center justify-center text-amber-500"
+                            >
+                                <IoOpenOutline size={22} />
+                            </a>
+                        </div>
+
+                        <Card
+                            memory="Apple"
+                            //imgflag={true}
+                            img_path={img_path}
+                            word={word}
+                            word_mean={word_mean}
+                            category={category}
+                            sub_word_mean={sub_word_mean}
+                            sentence={sentence}
+                            sentence_mean={sentence_mean}
+                            link={link}
+                        />      
+                    </DialogPanel>
+                </TransitionChild>
+            </Dialog>
+
+
+            {/* <Dialog open={cardModal} onClose={() => setCardModal(false)} className="relative z-50">
+                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-gray-300/50">
+                <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
+                    <DialogTitle className="font-bold">サブの意味を編集</DialogTitle>
+                    <Description>This will permanently deactivate your account</Description>
+
+                    <Card
+                        memory="Apple"
+                        //imgflag={true}
+                        img_path={img_path}
+                        word={word}
+                        word_mean={word_mean}
+                        category={category}
+                        sub_word_mean={sub_word_mean}
+                        sentence={sentence}
+                        sentence_mean={sentence_mean}
+                        link={link}
+                    />      
+                </DialogPanel>
+                </div>
+            </Dialog>  */}
             
         </div>
         </>

@@ -27,6 +27,27 @@ class CardController extends Controller
     //詳細画面
     public function show(Request $request) 
     {
+        //ハッシュ化されたuuidをデコード
+        $hashids = new Hashids('', 10); 
+        $id = $hashids->decode($request->card)[0];//※配列で帰ってくる
+
+        //Reactのコンテキストで単語帳編集コンポーネントから孫コンポーネントにカテゴリのデータ渡す
+        $categories = Category::where('user_id', -1)->orWhere('user_id', Auth::id())->get();
+
+        $card = Card::find($id);
+
+        //単語帳のuuid
+        $hashids = new Hashids('', 10); 
+        $flashcard_uuid = $hashids->encode($card->flashcard_id); 
+
+        $wordmeans = WordMean::where('card_id', $id)->get();
+
+        return Inertia::render('Card/Show', [
+            'flashcard_uuid' => $flashcard_uuid,
+            'categories' => $categories,
+            'card' => $card,
+            'wordmeans' => $wordmeans,
+        ]);
     }
 
 

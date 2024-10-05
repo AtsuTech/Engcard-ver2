@@ -11,6 +11,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
         document.getElementById('background')?.classList.add('!hidden');
     };
 
+
+
     return (
         <>
             <Head title="ようこそ" />
@@ -68,16 +70,16 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
 
                                 <section>
                                     <Card
-                                        memory="Apple"
-                                        imgflag={true}
-                                        img_path={""}
-                                        word="Apple"
-                                        word_mean=""
-                                        category=""
+                                        memory="true"
+                                        //imgflag={true}
+                                        img_path={"https://cdn.pixabay.com/photo/2022/01/22/16/54/book-6957870_1280.jpg"}
+                                        word="learn"
+                                        word_mean="学ぶ"
+                                        category="動詞"
                                         sub_word_mean={[]}
-                                        sentence=""
-                                        sentence_mean=""
-                                        link=""
+                                        sentence="Some people learn by studying alone."
+                                        sentence_mean="独学で学ぶ人たちもいる"
+                                        link="engcard.com"
                                     />
                                
                                 </section>
