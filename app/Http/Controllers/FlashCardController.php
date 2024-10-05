@@ -46,7 +46,7 @@ class FlashCardController extends Controller
         $id = $hashids->decode($request->flashcard)[0];//※配列で帰ってくる
 
         //$flashcard = Flashcard::find($id)->with(['cards']);
-        $flashcard = Flashcard::with(['cards.wordmeans'])->findOrFail($id);
+        $flashcard = Flashcard::with(['cards.wordmeans'])->with(['user'])->findOrFail($id);
         $favorites = FlashcardFavorite::where('flashcard_id',$id)->get();
         $has_favorite = FlashcardFavorite::where('flashcard_id',$id)->where('user_id', Auth::id())->get();
         

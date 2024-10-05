@@ -14,6 +14,9 @@ type Flashcard = {
     title: string;
     access_id: number;
     description: string | null;
+    favorite: number;
+    updated_at: string;
+    user:any;
     cards:[];
 };
 
@@ -26,115 +29,114 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
         title: flashcard.title,
         access_id: flashcard.access_id,
         description: flashcard.description,
+        favorite: flashcard.favorite,
+        updated_at: flashcard.updated_at,
     });
 
-
+    //console.log(flashcard)
     return (
         <CommonLayout>
-            <Head title="show" />
+            <Head title={flashcard.title} />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     
-                    <div className="bg-white w-full p-2 rounded-lg">
-                        <div className="flex">
-                            <div className="mr-3">
-                                <PageBack />
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+
+                        <div className="relative flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-700">
+                            <PageBack />
+                            <h5 className="text-1.5xl ml-1 font-bold">
+                                単語帳 : <span className="/block /p-2 /bg-amber-400">{flashcard.title}</span>
+                            </h5>
+                            <div className="flex absolute right-2">
+                                {auth.user.id == flashcard.user.id &&
+                                    <Link href={route('flashcard.edit',flashcard.uuid)} className="block text-sm text-amber-500 px-2 rounded-lg">
+                                        編集
+                                    </Link>
+                                }
+                            </div>                            
+                        </div> 
+
+                        <div className="px-3 py-4">
+                            <div className="relative h-10 my-2 text-xs">
+                                <div className="absolute flex right-0 mt-1">
+                                    
+                                        <div className="flex items-center w-fit space-x-2 /bg-rose-500">
+                                            <small>最終編集:{data.updated_at}</small>
+
+                                            <div className="py-2">
+                                                <Link href={`/user/profile/${flashcard.user.personal_id}`}>
+                                                {flashcard.user.profile_photo_path ?
+                                                    <img src={location.protocol + '//' + window.location.host +'/storage/images/profile/' + flashcard.user.profile_photo_path} className="w-5 block rounded-full" />
+                                                :
+                                                    <div className="flex items-center justify-center w-5 h-5 rounded-full text-white bg-slate-900">
+                                                        {flashcard.user.name.substr(0,1)}
+                                                    </div>
+                                                }  
+                                                </Link>                                     
+                                            </div>
+                                            
+                                            <div className="border border-slate-300 rounded-md">
+                                                <OperateFlashcardFavorite id={flashcard.id} count={favorites.length} has={has_favorite.length} />
+                                            </div>
+                                            
+                                        </div>    
+                                                     
+                                </div>
                             </div>
-                            {/* <FlashcardBreadcrumbs current={flashcard.title} user={flashcard.user_id} /> */}
-                            {auth.user &&
-                                <Link href={route('flashcard.edit',flashcard.uuid)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
-                                    編集
+
+                            <div className="bg-slate-200 p-3 text-slate-500 rounded-md">
+                                <span className="block text-sm font-semibold">概要</span>
+                                {data.description == null ?
+                                    <div className="text-xs">
+                                        <i>概要はありません</i>
+                                    </div>
+                                :
+                                    <p>{data.description}</p>
+                                }
+                            </div>
+
+
+                            <section className="flex items-center w-full space-x-2 my-5">
+                                <Link href={route('read',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                    読む
                                 </Link>
+                                <Link href={route('memory',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                    暗記
+                                </Link>
+                                <Link href={route('quiz',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                    クイズ
+                                </Link>
+                            </section>
+
+                            {flashcard.cards.length == 0 && 
+                                <div className="flex items-center justify-center w-full h-64 text-slate-600">単語カードが登録されていません</div>
                             }
+                            <section className="space-y-2">
+                                <div className="w-fit px-2 text-sm bg-slate-200 rounded-full ml-auto mr-auto my-10">
+                                    カード:{flashcard.cards.length}枚
+                                </div>
+                                {flashcard.cards.map( (card:any) => (
+                                    <div key={card.id}>
+                                        <CardList 
+                                            id ={card.id}
+                                            uuid ={card.uuid}
+                                            memory ={card.memory}
+                                            word ={card.word}
+                                            word_mean ={card.word_mean}
+                                            category ={card.category}
+                                            sub_word_mean={card.wordmeans}
+                                            sentence={card.sentence}
+                                            sentence_mean={card.sentence_mean}
+                                            link={card.link}
+                                            user_id ={card.user_id}
+                                            flashcard_id ={card.flashcard_id}
+                                            img_path ={card.img_path}
+                                        /> 
+                                    </div>
+                                ))}
+                            </section>                               
                         </div>
-                        <div className="relative h-10 px-2 text-xs">
-                            <div className="absolute flex right-2 mt-1">
-
-                                <div className="w-32 py-2 text-center /bg-blue-500 text-xs">
-                                    編集:{flashcard.id}
-                                </div>
-                                <Link href={`/profile/${flashcard.id}`}>
-                                    <div className="flex w-fit /bg-rose-500">
-                                        
-                                        <div className="py-2">
-                                            {flashcard.id ?
-                                                <img src={location.protocol + '//' + window.location.host +'/storage/images/profile/' + flashcard.id} className="w-4 block rounded-full" />
-                                            :
-                                                <img src={location.protocol + '//' + window.location.host + "/material/images/icon-no-img.png" } className="w-4 block rounded-full" />
-                                            }                                    
-                                        </div>
-                                        
-                                        <div className="pl-0.5 py-2 truncate">{flashcard.id}</div>
-                                        
-                                    </div>    
-                                </Link>                    
-                            </div>
-                        </div>
-
-                        <div className="w-full h-fit border-2 border-yellow-400 mb-5 rounded-lg">
-
-                            <div className="relative flex w-full h-10 pl-2 pt-1 bg-yellow-400 text-sm">
-
-                                <div className="flex w-20 h-6 mt-1 text-xs items-center justify-center rounded-full bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                                    </svg>
-                                    単語帳
-                                </div>
-
-                                <div className="absolute top-1.5 right-2">
-                                    <OperateFlashcardFavorite id={flashcard.id} count={favorites.length} has={has_favorite.length} />
-                                </div>
-
-                            </div>
-
-                            <div className="p-2">
-                                {/* <h5 className="text-2xl h-fit /mb-2 text-wrap bg-purple-600">{flashcard.title}</h5> */}
-                                <h5 className="text-2xl h-fit text-wrap break-all">
-                                    {flashcard.title}
-                                </h5>                            
-                            </div>
-
-
-                        </div>  
-
-                        {flashcard.description &&
-                            <div className="w-full  p-2 text-xs border bg-gray-200 rounded-lg">
-                                <div className="text-sm font-bold">概要</div>
-                                {flashcard.description}
-                            </div>
-                        }                        
-                        <section className="flex items-center w-full space-x-2 my-5">
-                            <Link href={route('read',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
-                                読む
-                            </Link>
-                            <Link href={route('memory',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
-                                暗記
-                            </Link>
-                            <Link href={route('quiz',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
-                                クイズ
-                            </Link>
-                        </section>
-                        <section className="space-y-2">
-                            {flashcard.cards.map( (card:any) => (
-                                <CardList 
-                                    id ={card.id}
-                                    uuid ={card.uuid}
-                                    memory ={card.memory}
-                                    word ={card.word}
-                                    word_mean ={card.word_mean}
-                                    category ={card.category}
-                                    sub_word_mean={card.wordmeans}
-                                    sentence={card.sentence}
-                                    sentence_mean={card.sentence_mean}
-                                    link={card.link}
-                                    user_id ={card.user_id}
-                                    flashcard_id ={card.flashcard_id}
-                                    img_path ={card.img_path}
-                                /> 
-                            ))}
-                        </section>                        
                     </div>
                 </div>
             </div>

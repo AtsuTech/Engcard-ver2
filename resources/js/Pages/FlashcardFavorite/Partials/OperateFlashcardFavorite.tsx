@@ -23,7 +23,7 @@ export default function OperateFlashcardFavorite({id,count,has}: { id: number, c
     // };
 
     return (
-        <div className="flex items-center space-x-2 bg-white p-1 rounded-md">
+        <div className="flex items-center space-x-1 bg-white p-1 rounded-md">
             {has == 0 ? 
                 <div>
                     <CreateFlashcardFavoriteForm id={id} />
