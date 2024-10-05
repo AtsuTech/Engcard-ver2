@@ -36,7 +36,7 @@ export default function UpdateProfileForm({ mustVerifyEmail, status, className =
                     <img src={'/storage/images/profile/' + user.profile_photo_path} alt="s" className='w-12 h-12 ml-1 rounded-full' />
                 :
                     <div className="flex items-center justify-center w-12 h-12 ml-1 rounded-full text-white bg-slate-900">
-                        {data.name.substr(0,1)}
+                        {user.name.substr(0,1)}
                     </div>
                 } 
                 </div>
