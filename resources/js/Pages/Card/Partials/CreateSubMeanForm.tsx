@@ -42,13 +42,13 @@ export default function CreateSubMeanForm({setData}: { setData:any}) {
     return(
         <section>
              {subWordMeans.map((dummy:any,index:any) => (
-                <div className="flex w-full h-10 p-1 border border-gray-300 rounded-lg my-1" key={'#' + index}>
+                <div className="flex w-full h-8 p-1 border border-gray-300 rounded-lg my-1" key={'#' + index}>
                     
                     <SubMeanCategorySelect index={index} selected={1} setCategory={handleCategory} />
                     <input type="text"
                         name={`word_mean[${index}][word_mean]`}
                         value={subWordMeans[index].word_mean}
-                        className="w-full ml-1 border-none rounded-md"
+                        className="w-full ml-1 border-none rounded-md text-sm"
                         placeholder="サブの意味"
                         onChange={(e) => handleInputSub(index, 'word_mean', e.target.value)}
                         required

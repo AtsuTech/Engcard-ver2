@@ -38,11 +38,13 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     const Next = () =>{
         setTurn(turn + 1);
         Viewed();
+        setChange(false);
     }
 
     const Prev = () =>{
         setTurn(turn - 1);
         Viewed();
+        setChange(false);
     }
 
     //正解したデータを記録する関数
@@ -77,7 +79,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
             <div className="fixed /absolute w-full z-20 /bg-blue-300 flex items-center h-12 justify-center">
 
                 <div className="w-full ml-3">
-                    単語帳:{title}{turn+1}/{cards.length}
+                    {turn+1}/{cards.length}
                 </div>                
                 <div className="w-fit flex justify-end px-2 h-12 /bg-red-400">
                     <button onClick={Finish}>
@@ -126,7 +128,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                         <div className="relative flex w-full h-48 md:h-96 text-3xl md:text-6xl items-center justify-center border border-slate-200 shadow-lg" id="card_id" data-id={card.id}>
                                             <div className="absolute top-2 left-2 bg-slate-500 w-3 h-3 rounded-full"></div>
                                             {card.word.length > 20 ?
-                                                <span className="text-[14px] md:text-[20px]">{card.word}</span>
+                                                <span className="text-[12px] md:text-[20px]">{card.word}</span>
                                             :
                                                 <span>{card.word}</span>
                                             }

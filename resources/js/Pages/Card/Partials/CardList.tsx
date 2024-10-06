@@ -114,15 +114,12 @@ export const CardList:FC<CardProps> = ({
                     leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
                     <DialogPanel
-                        className={`mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full mx-auto max-w-96 sm:mx-auto`}
+                        className={`mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all mx-auto w-[90%] sm:w-96 /max-w-96 sm:mx-auto`}
                     >
                         <div className="flex p-1">
                             <button className="text-slate-600" onClick={() => setCardModal(false)}>
                                 <IoMdClose size={22} />
                             </button>
-                            {/* <Link href={route('card.show',uuid)} className="ml-auto flex items-center justify-center text-amber-500 /bg-amber-400 /text-white w-6 h-6 rounded-full">
-                                <IoOpenOutline size={22} />
-                            </Link> */}
                             <a 
                                 href={location.protocol + '//' + window.location.host +'/card/'+uuid} target="_blank" rel="noopener noreferrer"
                                 className="ml-auto flex items-center justify-center text-amber-500"
