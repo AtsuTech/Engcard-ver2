@@ -6,7 +6,8 @@ import { title } from 'process';
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
-import Card from '../Card/Partials/Card';
+//import Card from '../Card/Partials/Card';
+import Card from '@/Components/Special/Card';
 
 //データ型宣言
 type Cards = {
@@ -72,28 +73,32 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     }
 
     return(
-        <main className="relative h-screen text-gray-500">
-            <Head title="暗記" />
+        <main className="/relative h-screen text-gray-500">
+            <Head title="読む" />
 
-            <div className="absolute w-full z-20 /bg-blue-300 flex items-center h-12 justify-center">
+            <header className="fixed w-full z-20 /bg-blue-300 h-12">
+                {/* <div className="w-full text-center text-xs">{title}</div> */}
 
-                <div className="w-full ml-3">
-                    単語帳:{title}{turn+1}/{cards.length}
-                </div>                
-                <div className="w-fit flex justify-end px-2 h-12 /bg-red-400">
-                    <button onClick={Finish}>
-                        <RxCross2 size={25} />
-                    </button>
+                <div className="flex items-center">
+                    
+                    <div className="w-full ml-3">
+                        {turn+1}/{cards.length}
+                    </div>   
+                    <div className="w-fit flex justify-end px-2 h-12 /bg-red-400">
+                        <button onClick={Finish}>
+                            <RxCross2 size={25} />
+                        </button>
+                    </div>
                 </div>
+                
+            </header>
 
-            </div>
-
-            <div className="absolute top-0 w-full flex items-center justify-center h-full">
+            <div className="/absolute top-0 w-full /flex /items-center justify-center h-full">
                 <div className="w-full">
                     {selected_card.map((card:any) => (
                         <div key={card.word} className="flex w-full">
 
-                            <div className="flex w-16 h-screen">
+                            <div className="flex w-[40px] h-screen">
                                 {turn > 0 &&
                                     <button 
                                         className="flex items-center justify-center /bg-slate-100 w-full h-screen"
@@ -102,11 +107,10 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     </button>
                                 }                                
                             </div>
-                            <div className="flex items-center justify-center w-full /bg-slate-200 h-screen">
+                            <div className="flex items-center justify-center w-[calc(100%-80px)] /bg-slate-200 h-screen">
                                 <Card
                                     memory={card.memory}
-                                    imgflag={card.img_path ? true : false }
-                                    img_path={location.protocol + '//' + window.location.host + '/storage/images/card/'+ card.user_id + '/' + card.flashcard_id + '/' + card.img_path}
+                                    img_path={card.img_path}
                                     word={card.word}
                                     word_mean={card.word_mean}
                                     category={card.category}
@@ -115,9 +119,12 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     sentence_mean={card.sentence_mean}
                                     link={card.link}
                                 />
+                                {/* <div className='bg-red-700 w-full'>
+                                    sss
+                                </div> */}
                             </div>
 
-                            <div className="flex w-16 h-screen">
+                            <div className="flex w-[40px] h-screen">
                                 {turn < cards.length - 1 &&
                                     <button 
                                         className="flex items-center justify-center /bg-slate-100 w-full h-screen"

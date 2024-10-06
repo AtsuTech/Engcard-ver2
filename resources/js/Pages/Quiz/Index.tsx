@@ -238,9 +238,9 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
 
             <div className="absolute w-full z-10">
                 <Header cards_length={cards.length} turn={turn} setMode={setMode} flashcard_uuid={flashcard_uuid} />
-                <div className="ml-3">
+                {/* <div className="ml-3">
                     単語帳:{title} turn:{turn} view_card:{view_card} /{flashcard_user_id}
-                </div>
+                </div> */}
             </div>
 
             <div className="absolute w-full flex items-center justify-center h-full">
@@ -292,7 +292,13 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     <div className="flex w-full h-48 md:h-96 items-center justify-center">
                                         <div>
                                             <button className="block w-fit ml-auto mr-auto my-3 px-3 bg-slate-400 rounded-full text-white" onClick={Change}>もどる</button>
-                                            <div className="text-6xl">{card.word_mean}</div>
+                                            <div className="/text-6xl text-center">
+                                                {card.word_mean.length > 20 ?
+                                                    <span className="text-[14px] md:text-[20px]">{card.word_mean}</span>
+                                                :
+                                                    <span className="text-[22px] md:text-[34px]">{card.word_mean}</span>
+                                                }                                                
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -301,7 +307,11 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                 <div>
                                     <button className="block w-fit ml-auto mr-auto px-3 bg-amber-200 rounded-full" onClick={Change}>答えをみる</button>
                                     <div className="flex w-full h-48 md:h-96 /border /border-gray-300 /rounded text-6xl items-center justify-center" id="card_id" data-id={card.id}>
-                                        {card.word}
+                                        {card.word.length > 20 ?
+                                            <span className="text-[14px] md:text-[20px]">{card.word}</span>
+                                        :
+                                            <span>{card.word}</span>
+                                        }
                                     </div>
                                     <div>
                                         {choice.map( (choice:any,index:number) => (

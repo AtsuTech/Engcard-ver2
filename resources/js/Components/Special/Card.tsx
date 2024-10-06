@@ -1,12 +1,3 @@
-// import { Head } from '@inertiajs/react';
-// import { PageProps } from '@/types';
-// import { Link, useForm, usePage } from '@inertiajs/react';
-// import React, { useEffect, useRef, FC, useState } from "react";
-// import { title } from 'process';
-// import { FaArrowLeft } from "react-icons/fa";
-// import { FaArrowRight } from "react-icons/fa";
-// import { RxCross2 } from "react-icons/rx";
-// import { DiVim } from 'react-icons/di';
 import { MdPushPin } from "react-icons/md";
 import { MdTextSnippet } from "react-icons/md";
 import { FaLink } from "react-icons/fa";
@@ -29,8 +20,8 @@ export default function Card(
 {
     console.log(sub_word_mean)
     return(
-        <div>
-            <div className="w-full md:w-96 ml-auto mr-auto border /border-gray-300 rounded-lg bg-white /shadow-2xl overflow-hidden">
+        <div className="w-full">
+            <div className="w-full md:w-96 mx-auto border rounded-lg bg-white overflow-hidden /overflow-y-scroll /h-[540px]">
 
                 <div className="relative">
 
@@ -57,7 +48,7 @@ export default function Card(
                     {img_path ?
 
                         <div>
-                            <div style={{ backgroundImage: `url(${img_path})` }} className="bg-cover bg-center w-full h-[180px] md:h-64">
+                            <div style={{ backgroundImage: `url(${img_path})` }} className="bg-cover bg-center w-full h-[130px] md:h-[160px]">
                             </div>     
                             <h2 className="flex p-1 /text-2xl md:text-3xl items-center justify-center">
                                 <div className="flex items-center"> 
@@ -79,11 +70,7 @@ export default function Card(
                     :
                         <h2 className="flex p-1 h-36 md:h-64 text-2xl md:text-3xl items-center justify-center">
                             <div className="flex"> 
-                                <div className="flex items-center justify-center pr-1">
-                                    {/* <SoundAction value={word} /> */}
-                                </div>
                                 <div className="w-full text-center font-semibold /ml-2 /bg-green-400">
-                                    {/* <span>{word}</span> */}
                                     {word.length > 40 ?
                                         <span className="text-[16px]">{word}</span>
                                     :
@@ -103,7 +90,7 @@ export default function Card(
 
                     <div className="text-sm px-2 py-1">
 
-                        <div className="flex items-center py-1">
+                        <div className="flex items-center py-1 text-xs">
                             <div>
                                 {category != null && <Bage text={category} /> }
                                 {word_mean}                                
@@ -116,13 +103,7 @@ export default function Card(
                         {sub_word_mean && sub_word_mean.length > 0 && 
                             sub_word_mean.map((sub_mean: any, index: number) => (
                                 <div key={index}>
-                                    {/* <div className="flex items-center py-1 /border-b /border-b-gray-300">
-                                        <div className="">
-                                            {sub_mean.category != null && <Bage text={sub_mean.category} /> }
-                                        </div>
-                                        <div className="ml-1 /text-2xl">{sub_mean.word_mean}</div>
-                                    </div> */}
-                                    <div className="flex items-center py-1">
+                                    <div className="flex items-center py-1 text-xs">
                                         <div>
                                             {sub_mean.category != null && sub_mean.category_id != 1 && <Bage text={sub_mean.category} /> }
                                             {sub_mean.word_mean}                                
@@ -144,14 +125,14 @@ export default function Card(
                     </div>
                     <div className="px-2 py-1 divide-y divide-dashed divide-yellow-400">
                         
-                        <div className="text-sm">
+                        <div className="text-xs">
                             <div className="">[ 英文 ]</div>
-                            <p className="py-2">{sentence ? <>{sentence}</> : "英文はありません"}</p>
+                            <p className="py-1">{sentence ? <>{sentence}</> : "英文はありません"}</p>
                         </div>
                         
-                        <div className="text-sm">
+                        <div className="text-xs">
                             <div className="">[ 和訳 ]</div>
-                            <p className="py-2">{sentence_mean ? <>{sentence_mean}</> : "和訳はありません"}</p>
+                            <p className="py-1">{sentence_mean ? <>{sentence_mean}</> : "和訳はありません"}</p>
                         </div>
                     </div>
                 </div>

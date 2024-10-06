@@ -6,6 +6,9 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import { PageBack } from '@/Components/PageBack';
 import { CardList } from '../Card/Partials/CardList';
 import OperateFlashcardFavorite from '../FlashcardFavorite/Partials/OperateFlashcardFavorite';
+import { SiReadme } from "react-icons/si";
+import { PiHeadCircuitFill } from "react-icons/pi";
+import { MdQuiz } from "react-icons/md";
 
 //データ型宣言
 type Flashcard = {
@@ -38,7 +41,7 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
         <CommonLayout>
             <Head title={flashcard.title} />
 
-            <div className="py-12">
+            <div className="py-0 md:py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -96,18 +99,23 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
                                 }
                             </div>
 
+                            {flashcard.cards.length != 0 && 
+                                <section className="flex items-center w-full space-x-2 my-5">
+                                    <Link href={route('read',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                        <SiReadme size={22} />
+                                        <span>読む</span>
+                                    </Link>
+                                    <Link href={route('memory',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                        <PiHeadCircuitFill size={22} />
+                                        <span>暗記</span>
+                                    </Link>
+                                    <Link href={route('quiz',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                        <MdQuiz size={22} />
+                                        <span>クイズ</span>
+                                    </Link>
+                                </section>
+                            }
 
-                            <section className="flex items-center w-full space-x-2 my-5">
-                                <Link href={route('read',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
-                                    読む
-                                </Link>
-                                <Link href={route('memory',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
-                                    暗記
-                                </Link>
-                                <Link href={route('quiz',flashcard.uuid)} className="block w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
-                                    クイズ
-                                </Link>
-                            </section>
 
                             {flashcard.cards.length == 0 && 
                                 <div className="flex items-center justify-center w-full h-64 text-slate-600">単語カードが登録されていません</div>
