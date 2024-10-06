@@ -61,7 +61,7 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
                             {flashcards.map( (flashcard:any) => (
                                 <div key={flashcard.uuid}>
                                     <FlashCard
-                                        id={0}
+                                        id={flashcard.id}
                                         uuid={flashcard.uuid}
                                         title={flashcard.title}
                                         description={flashcard.description}

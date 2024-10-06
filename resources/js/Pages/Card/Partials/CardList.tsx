@@ -1,15 +1,12 @@
 import { FC,useRef, } from "react";
 import { useState, useEffect} from "react";
-// import { Link } from 'react-router-dom';
-// import { Bage } from "./parts_component/Bage";
-//import { Card } from "./Card";
-//import { CloseButton } from "./parts_component/CloseButton";
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Description, Dialog, DialogPanel, DialogTitle, Transition,  TransitionChild} from '@headlessui/react';
 import Card from "@/Components/Special/Card";
 import { fail } from "assert";
 import { IoMdClose } from "react-icons/io";
 import { IoOpenOutline } from "react-icons/io5";
+import Bage from "@/Components/Bage";
 
 
 interface CardProps {
@@ -54,41 +51,37 @@ export const CardList:FC<CardProps> = ({
         <>
         <div className="w-full"  key={id}>
             {/* <Link to={`/card/${uuid}`} key={id} className="w-full"> */}
-                <div className="flex h-12 border bg-white border-gray-300 mb-3 /px-2 rounded-lg" onClick={() => setCardModal(true)}>
+                <div className="flex h-12 border w-full /bg-white border-gray-300 overflow-hidden rounded-lg" onClick={() => setCardModal(true)}>
 
                     {/* left */}
-                    <div className="relative flex items-center w-1/2 border-r border-gray-300">
+                    <div className="flex items-center w-[calc(50%-0px)] border-r border-gray-300 pr-1">
 
                         <div className="w-4 h-full">
-                        <div className="flex w-4 h-full items-center justify-center border-r border-gray-300">
-                            <div className={`w-2 h-2  rounded-full ${memory ? 'bg-amber-400' : 'bg-gray-400'}`}>
-                            </div>
-                        </div>                            
+                            <div className="flex w-4 h-full items-center justify-center border-r border-gray-300">
+                                <div className={`w-2 h-2  rounded-full ${memory ? 'bg-amber-400' : 'bg-gray-400'}`}>
+                                </div>
+                            </div>                            
                         </div>
 
 
                         <p className="w-full pl-2 truncate">
-                            {word}
+                            <span className="text-sm">{word}</span>
                         </p>
 
                         {img_path &&
-                            <div className="w-16 md:w-12 mr-1">
-                                {/* <img src={location.protocol + '//' + window.location.host + '/storage/images/card/'+ user_id + '/' + flashcard_id + '/' + img_path} alt="" className="block w-full h-10 rounded-lg" />  */}
-                                <img src={location.protocol + '//' + window.location.host + img_path} alt="" className="block w-full h-10 rounded-lg" />  
+                            <div className="w-[50px]">
+                                <img src={location.protocol + '//' + window.location.host + img_path} alt="" className="block w-[40px] ml-auto h-10 rounded-lg" />  
                             </div>
                         }   
-
-
                     </div>
 
                     {/* right */}
-                    <div className="/bg-green-400 w-1/2 h-12 flex items-center">
-                        <p className="ml-2 line-clamp-1 /truncate">
+                    <div className="w-1/2 h-12 flex items-center">
+                        <p className="ml-[3px] line-clamp-1 /truncate">
                             {category != null &&
-                                // <Bage value={category} />
-                                <></>
+                                <Bage text={category} />
                             }
-                            {word_mean}
+                            <span className="text-sm">{word_mean}</span>
                         </p>
                     </div>
 

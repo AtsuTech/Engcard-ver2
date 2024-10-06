@@ -13,6 +13,8 @@ import { CardOperation } from '../Card/Partials/CardOperation';
 import { CategoryContext } from '../Category/Partials/CategoryContext';
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { MdEdit } from "react-icons/md";
+import { FaPlus } from "react-icons/fa6";
+import { RxCross1 } from "react-icons/rx";
 
 //データ型宣言
 type Access = {
@@ -61,7 +63,8 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
 
     //console.log(data);
 
-    let [flashcardDialog, setFlashCardDialog] = useState(false)
+    let [flashcardDialog, setFlashCardDialog] = useState(false);
+    const [createCardDialog,setCreateCardDialog] = useState(false);
 
     //データ送信
     const Submit = (e :any) =>{
@@ -166,11 +169,22 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                             <span className="bg-slate-200 ml-2 px-2 rounded-full">
                                 {cards.length}
                             </span>
+
+                            <button 
+                                onClick={() => setCreateCardDialog(true)}
+                                className="flex items-center ml-auto py-2 px-5 bg-amber-200 text-slate-700 rounded-full /shadow-lg"
+                            >
+                                <FaPlus size={22} />
+                                <span>単語カード作成</span>
+                            </button>
                         </div>
 
-                        <div className="px-5">
+                        <div className="px-5 space-y-2 py-4">
                             {cards.map( (card:any) =>(
                                 <div className="flex" key={card.id}>
+                                    <div className="w-[calc(100%-30px)]">
+
+                                    
                                     <CardList 
                                         id ={card.id}
                                         uuid ={card.uuid}
@@ -186,7 +200,8 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                         flashcard_id ={card.flashcard_id}
                                         img_path ={card.img_path}
                                     />  
-                                    <div className="ml-1">
+                                    </div>
+                                    <div className="pl-1 h-12 w-[30px]">
                                         <CardOperation id={card.id} uuid={card.uuid} reload={""} />
                                     </div>                           
                                 </div>
@@ -194,11 +209,37 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                             )) }                            
                         </div>
 
+                        {/* 削除確認ダイアログ */}
+                        <Dialog open={createCardDialog} onClose={() => setCreateCardDialog(false)} className="relative z-50">
+                            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-slate-200/70">
+                                <DialogPanel className="/max-w-lg /space-y-4 border bg-white p-2 rounded-lg shadow-md overflow-hidden">
+                                    <div className="flex w-full">
+                                        <button 
+                                            onClick={() => setCreateCardDialog(false)}
+                                            className="ml-auto"
+                                        >
+                                            <RxCross1 size={22} />
+                                        </button>                                        
+                                    </div>
+                                    <CategoryContext.Provider value={categories}>
+                                        <CreateCardForm id={data.id} action={() => setCreateCardDialog(false)} />
+                                    </CategoryContext.Provider>       
+                                </DialogPanel>
+                            </div>
+                        </Dialog> 
+
+                        <button 
+                            onClick={() => setCreateCardDialog(true)}
+                            className="fixed bottom-5 right-5 flex items-center py-2 px-5 bg-amber-200 text-slate-700 rounded-full shadow-lg"
+                        >
+                            <FaPlus size={22} />
+                            <span>単語カード作成</span>
+                        </button>
 
 
-                        <CategoryContext.Provider value={categories}>
+                        {/* <CategoryContext.Provider value={categories}>
                             <CreateCardForm id={data.id} />
-                        </CategoryContext.Provider>                    
+                        </CategoryContext.Provider>                     */}
                     </div>
                 </div>
             </div>

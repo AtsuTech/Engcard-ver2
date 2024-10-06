@@ -7,7 +7,7 @@ import CategorySelect from "./CategorySelect";
 import CreateSubMeanForm from "./CreateSubMeanForm";
 import { GiSmallFire } from "react-icons/gi";
 
-export default function CreateCardForm({id}: { id: number }) {
+export default function CreateCardForm({id,action}: { id: number,action:any }) {
 
     //サムネイル画像URL
     const [imgThumbnail,setImgThumbnail] = useState<string|null>();
@@ -44,7 +44,7 @@ export default function CreateCardForm({id}: { id: number }) {
         setData('img_path',null);
     };
 
-    const { data, setData, post, put, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, post, put, reset, errors, processing, recentlySuccessful } = useForm({
         flashcard_id: id,
         img_path: null,
         category_id: 1,
@@ -60,13 +60,17 @@ export default function CreateCardForm({id}: { id: number }) {
     //データ保存処理
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('card.store'));
+        post(route('card.store'),{
+            onFinish: () => reset(),
+            onSuccess: ()=> action(),
+        });
+        
     };
 
     return (
         <div>
 
-            <form className="md:w-3/5 w-full bg-white p-2 border border-gray-300 rounded-lg">
+            <form className="w-full bg-white p-2">
 
                 <div className="relative py-4">
                     <div className="text-center font-bold text-slate-700">単語カード作成</div>
@@ -194,9 +198,9 @@ export default function CreateCardForm({id}: { id: number }) {
                     {/* <div className="w-full mr-1">
                         <ButtonWithOnClick color={'gray'} text={'キャンセル'} onclick={closeModal} />
                     </div> */}
-                    <div className="w-full ml-1">
+                    <div className="w-full">
                         <button 
-                            className="items-center w-full px-4 py-2 bg-amber-400 dark:bg-gray-200 border border-transparent rounded-full font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-amber-500 dark:hover:bg-white focus:bg-amber-500 dark:focus:bg-white active:bg-amber-600 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150" 
+                            className="items-center w-full px-4 py-2 bg-amber-400 dark:bg-gray-200 border border-transparent rounded-full font-semibold text-sm text-white dark:text-gray-800 uppercase tracking-widest hover:bg-amber-500 dark:hover:bg-white focus:bg-amber-500 dark:focus:bg-white active:bg-amber-600 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150" 
                             onClick={submit}
                             disabled={data.word =="" || data.word_mean =="" ? true : false }
                         >

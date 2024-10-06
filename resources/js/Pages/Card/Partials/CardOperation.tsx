@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useState, useEffect} from "react";
 //import { Link } from 'react-router-dom';
 import { Link, useForm, usePage } from '@inertiajs/react';
-//import { UpdateCardLink } from "./UpdateCardLink";
+import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import axios,{AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
 
 export const CardOperation:FC<{id:any,uuid:any,reload:any}> = ({id,uuid,reload}) => {
@@ -11,8 +11,8 @@ export const CardOperation:FC<{id:any,uuid:any,reload:any}> = ({id,uuid,reload})
         id:id,
     });
 
+    const [deleteDialog,setDeleteDialog] = useState(false);
     const [toggle,setToggle] = useState(false);
-
     const display  = () => setToggle((prev) => !prev);
 
     //カード削除
@@ -33,13 +33,28 @@ export const CardOperation:FC<{id:any,uuid:any,reload:any}> = ({id,uuid,reload})
                 <path fillRule="evenodd" d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clipRule="evenodd" />
                 </svg>
             </button>
+                            
+            {/* 削除確認ダイアログ */}
+            <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} className="relative z-50">
+                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
+                <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
+                    <DialogTitle className="font-bold">カード削除</DialogTitle>
+                    <Description>本当によろしいですか？</Description>
+                    <div className="flex space-x-2">
+                        <button type="button" className="block px-3 h-8 bg-gray-400 text-white rounded-full font-bold" onClick={() => setDeleteDialog(false)}>
+                            キャンセル
+                        </button>
+                        <button type="button" className="block px-3 h-8 bg-rose-600 text-white rounded-full font-bold" onClick={Delete}>
+                            削除
+                        </button>
+                    </div>
+                </DialogPanel>
+                </div>
+            </Dialog> 
 
             {toggle &&
                 <ul className="flex absolute right-0 top-0 bg-slate-300 w-fit h-12 p-0 rounded-lg z-50">
                     <li>
-                        {/* <Link className="/flex" to={`/card/update/${uuid}`}>
-                            
-                        </Link> */}
                         <Link href={route('card.edit',uuid)} className="block w-full data-[focus]:bg-amber-200 px-2 rounded-lg">
                             <div className="w-fit px-4 ml-auto mr-auto h-4/5bg-green-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-12">
@@ -48,7 +63,7 @@ export const CardOperation:FC<{id:any,uuid:any,reload:any}> = ({id,uuid,reload})
                             </div>
                         </Link>
                     </li>
-                    <li onClick={Delete}>
+                    <li onClick={() => setDeleteDialog(true)}>
                         <div className="/flex">
                             <div className="w-fit px-4 ml-auto mr-auto /bg-red-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-12">

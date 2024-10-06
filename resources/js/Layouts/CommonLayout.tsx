@@ -15,7 +15,7 @@ export default function Guest({ children }: PropsWithChildren) {
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav className="bg-amber-400 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 /bg-teal-800">
-                    <div className="flex /justify-between justify-center h-12 relative items-center">
+                    <div className="flex /justify-between justify-center h-[40px] relative items-center">
 
                         <div className="absolute sm:left-0 flex">
                             <div className="shrink-0 flex items-center w-20">
@@ -79,7 +79,7 @@ export default function Guest({ children }: PropsWithChildren) {
                                             設定
                                         </Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            ログアウト
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -147,7 +147,7 @@ export default function Guest({ children }: PropsWithChildren) {
 
                 {/* スマホ時メニュー */}
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="absolute top-18 right-0 z-50 w-1/2 h-screen bg-slate-700/95 transition duration-150 ease-in-out">
+                    <div className="absolute top-18 right-0 z-50 w-1/2 h-[calc(100%-40px)] bg-slate-700/95 transition duration-150 ease-in-out">
                         <ul className="space-y-8 pl-4 py-3 text-white">
                             {auth.user &&
                             <li>
@@ -184,7 +184,7 @@ export default function Guest({ children }: PropsWithChildren) {
                                         </Link>    
                                     </li>
                                     <li>
-                                        <Link href={route('logout')}>
+                                        <Link href={route('logout')} method="post">
                                             ログアウト
                                         </Link>                                    
                                     </li>
