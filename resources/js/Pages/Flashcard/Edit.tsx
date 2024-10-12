@@ -79,7 +79,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
             <Head title="単語帳を編集" />
 
             <div className="py-0 sm:py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
                             <MdEdit size={26} />
@@ -106,10 +106,19 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
 
                         <Dialog open={flashcardDialog} onClose={() => setFlashCardDialog(false)} className="relative z-50">
                             <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
-                            <DialogPanel className="max-w-lg space-y-4 border bg-white px-1 py-10 sm:px-10 rounded-lg shadow-md">
+                            <DialogPanel className="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all mx-auto w-[90%] sm:w-96 p-5 sm:mx-auto">
+                                <div className="w-full">
+                                    <button 
+                                        onClick={()=>setFlashCardDialog(false)}
+                                        className='block ml-auto'
+                                    >
+                                        <RxCross1 size={26} />
+                                    </button>
+                                </div>
                                 <DialogTitle className="font-bold">単語帳編集</DialogTitle>
-                                <Description>This will permanently deactivate your account</Description>
-                                <form onSubmit={Submit} className="px-5">
+                                {/* <Description>This will permanently deactivate your account</Description> */}
+
+                                <form onSubmit={Submit} className="/px-5">
                                     <div className="flex py-2">
 
                                         <div className="w-fit">
@@ -135,7 +144,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
 
                                     </div>
                                         
-                                    <label htmlFor="" className="block mt-3 text-sm">タイトル</label>
+                                    <label htmlFor="" className="block mt-3 text-xs">タイトル</label>
                                     <input type="text" 
                                         className="w-full h-10 border border-gray-300 rounded-lg pl-2" 
                                         placeholder="タイトル" 
@@ -145,7 +154,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                         required
                                     /> 
 
-                                    <label htmlFor="" className="block mt-3 text-sm">概要</label>
+                                    <label htmlFor="" className="block mt-3 text-xs">概要</label>
                                     <textarea 
                                         name="description" 
                                         id="" 
@@ -208,6 +217,11 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
 
                             )) }                            
                         </div>
+                        {cards.length == 0 &&
+                            <div className='flex items-center justify-center h-[500px] text-sm'>
+                                <p>単語カードを追加するには<span className='underline text-amber-500 cursor-pointer' onClick={() => setCreateCardDialog(true)}>単語カード作成ボタン</span>を押してください</p>
+                            </div>
+                        }
 
                         {/* 削除確認ダイアログ */}
                         <Dialog open={createCardDialog} onClose={() => setCreateCardDialog(false)} className="relative z-50">

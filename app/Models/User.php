@@ -45,4 +45,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    //単語帳お気に入りのリレーション
+    public function flashcard_favorites()
+    {
+        return $this->HasMany('App\Models\FlashcardFavorite');
+    }
 }

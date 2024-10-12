@@ -3,36 +3,48 @@ import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import FlashCard from '@/Components/Special/FlashCard';
+import { useState } from 'react';
+import { FaUserAlt } from "react-icons/fa";
 
 // type User{
 //     name:string
 // }
 
-export default function Show({ auth, user, flashcards }: PageProps<{user:any,flashcards:[]}>) {
-    console.log(flashcards);
+export default function Show({ auth, flashcard_favorites, user, flashcards }: PageProps<{flashcard_favorites:any,user:any,flashcards:[]}>) {
+    //console.log(flashcards);
+    console.log(flashcard_favorites);
+
+    const [tabSelects,setTabSelects] = useState(0);
     return (
         <CommonLayout>
             <Head title="プロフィール" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div className="py-0 md:py-12">
+                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="/p-4 /sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-700">
-                            {/* <GiBookCover size={26} /> */}
+                            <FaUserAlt size={26} />
                             <h5 className="text-1.5xl ml-1 font-bold">プロフィール</h5>
+                            {auth.user.id === user.id &&
+                                <div className="w-fit ml-auto">
+                                    <Link href={route('profile.edit')} className="text-amber-500">
+                                        編集
+                                    </Link>
+                                </div>
+                            } 
                         </div> 
                         <div className="p-5">
 
-                            {auth.user.id === user.id &&
+                            {/* {auth.user.id === user.id &&
                                 <div className="w-full flex flex-row-reverse">
                                     <Link href={route('profile.edit')} className="text-amber-500">
                                         編集
                                     </Link>
                                 </div>
-                            }    
+                            }     */}
 
                             <div>
-                                <div className="flex relative">
+                                <div className="flex relative py-4">
 
                                     <div className="w-fit">
 
@@ -77,35 +89,101 @@ export default function Show({ auth, user, flashcards }: PageProps<{user:any,fla
                             
                                 <div className="py-1">{user.comment}</div>
                             </div>
-                            <div className="py-2 text-center">公開している単語帳</div>
+                            <div className="flex py-3 text-center text-slate-700 text-sm my-2">
+                                <button 
+                                    onClick={()=>setTabSelects(0)}
+                                    className={
+                                        'w-full text-center py-3 border-b border-slate-300 ' + 
+                                        (tabSelects === 0 
+                                            ? 'font-bold text-black border-b-2 border-amber-400' 
+                                            : '')
+                                    }
+                                >
+                                    公開している単語帳
+                                </button>
 
-                            <div className="/flex flex-wrap /py-2">
-                                {flashcards.map( (flashcard:any) => (
-                                    // <Link href={route('flashcard.show',flashcard.uuid)} className="block w-full p-3 border border-slate-300 rounded-lg">
-                                    //     {flashcard.title}
-                                    // </Link>
-                                    <div key={flashcard.uuid}>
-                                        <FlashCard
-                                            id={flashcard.id}
-                                            uuid={flashcard.uuid}
-                                            title={flashcard.title}
-                                            description={flashcard.description}
-                                            access={1}
-                                            access_name={''}
-                                            access_view={false}
-                                            cards_length={flashcard.cardlength}
-                                            favorite={flashcard.favorite}
-                                            user_name={auth.user.name}
-                                            user_img={auth.user.profile_photo_path}
-                                            operation_allow={false}
-                                        />                                    
-                                    </div>
+                                <button 
+                                    onClick={()=>setTabSelects(1)}
+                                    className={
+                                        'w-full text-center py-3 border-b border-slate-300 ' +  
+                                        (tabSelects === 1 
+                                            ? 'font-bold text-black border-b-2 border-amber-400' 
+                                            : '')
+                                    }
+                                >
+                                    お気に入りの単語帳
+                                </button>
+                            </div>
+                            
+                            {tabSelects === 0 &&
+                                <div className="/flex flex-wrap /py-2">
+                                    {flashcards.length == 0 ?
+                                        <div>
+                                            <p>単語帳はありません</p>
+                                        </div>
+                                    :
+                                        <div>
+                                            {flashcards.map( (flashcard:any) => (
+                                                <div key={flashcard.uuid}>
+                                                    <FlashCard
+                                                        id={flashcard.id}
+                                                        uuid={flashcard.uuid}
+                                                        title={flashcard.title}
+                                                        description={flashcard.description}
+                                                        access={1}
+                                                        access_name={''}
+                                                        access_view={false}
+                                                        cards_length={flashcard.cardlength}
+                                                        favorite={flashcard.favorite}
+                                                        user_name={auth.user.name}
+                                                        user_img={auth.user.profile_photo_path}
+                                                        operation_allow={false}
+                                                    />                                    
+                                                </div>
+                                            ))}                   
+                                        </div>
+                                    }
+                                              
+                                </div> 
+                            } 
 
+                            {tabSelects === 1 &&
 
-                                ))}                             
-                            </div>                                
+                                <div className="/flex flex-wrap /py-2">
+                            
+                                    {flashcard_favorites.length ==0  ?
+                                        <div>
+                                            <p>単語帳はありません</p>
+                                        </div>
+                                    :
+                                        <div>
+                                            {flashcard_favorites.map( (flashcard_favorite:any) => (
+                                                <div key={flashcard_favorite.flashcards.uuid}>
+                                                    <FlashCard
+                                                        id={flashcard_favorite.flashcards.id}
+                                                        uuid={flashcard_favorite.flashcards.uuid}
+                                                        title={flashcard_favorite.flashcards.title}
+                                                        description={flashcard_favorite.flashcards.description}
+                                                        access={1}
+                                                        access_name={''}
+                                                        access_view={false}
+                                                        cards_length={flashcard_favorite.flashcards.cardlength}
+                                                        favorite={flashcard_favorite.flashcards.favorite}
+                                                        user_name={flashcard_favorite.flashcards.user.name}
+                                                        user_img={flashcard_favorite.flashcards.user.profile_photo_path}
+                                                        operation_allow={false}
+                                                    />          
+                                                </div>
+                                            ))}                   
+                                        </div>
+                                    } 
+                                </div> 
+                            }                                                                  
                         </div>
-                                        
+
+
+
+                            
                     </div>
                 </div>
             </div>

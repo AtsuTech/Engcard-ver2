@@ -24,9 +24,12 @@ class ProfileController extends Controller
     public function show(Request $request): Response
     {
         $user = User::where('personal_id', '=' ,$request->personal_id)->first();
+        $me = User::with('flashcard_favorites.flashcards')->with('flashcard_favorites.flashcards.user')->where('id','=',Auth::id())->first();
+        $flashcard_favorites = $me->flashcard_favorites;
         $flashcards = Flashcard::where('user_id', '=' , Auth::id())->get();
         return Inertia::render('Profile/Show', [
             'user' => $user,
+            'flashcard_favorites' => $flashcard_favorites,
             'flashcards' => $flashcards,
         ]);
     }

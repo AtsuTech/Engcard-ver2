@@ -42,7 +42,7 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
             <Head title={flashcard.title} />
 
             <div className="py-0 md:py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
