@@ -55,9 +55,16 @@ class Flashcard extends Model
     //アクセサリを使いお気に入りの総数をカラムに追加する
     public function getFavoriteAttribute()
     {
-        $cards = FlashcardFavorite::where('flashcard_id','=',$this->id)->get();
-        return $cards->count();
+        $favorite = FlashcardFavorite::where('flashcard_id','=',$this->id)->get();
+        return $favorite->count();
     }
+
+    //アクセサリを使いカードの記憶数をカラムに追加する
+    // public function getCardMemoryAttribute()
+    // {
+    //     $cards = Card::where('flashcard_id','=',$this->id)->get();
+    //     return $cards->count();
+    // }
 
     //アクセサリを使いお気に入りの総数をカラムに追加する
     // public function getAccessAttribute()

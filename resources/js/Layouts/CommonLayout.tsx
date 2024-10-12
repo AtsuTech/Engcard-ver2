@@ -14,7 +14,7 @@ export default function Guest({ children }: PropsWithChildren) {
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav className="bg-amber-400 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 /bg-teal-800">
+                <div className="max-w-4xl /max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 /bg-teal-800">
                     <div className="flex /justify-between justify-center h-[40px] relative items-center">
 
                         <div className="absolute sm:left-0 flex">
