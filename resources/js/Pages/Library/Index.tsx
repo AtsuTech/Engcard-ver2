@@ -15,7 +15,7 @@ type Flashcard = {
     user:any;
 }
 
-export default function Index({ flashcards }: {flashcards:Flashcard[]}) {
+export default function Index({ flashcards, hi_watch_flashcards }: {flashcards:Flashcard[],hi_watch_flashcards:Flashcard[]}) {
     console.log(flashcards);
     return (
         <CommonLayout>
@@ -30,24 +30,65 @@ export default function Index({ flashcards }: {flashcards:Flashcard[]}) {
                             <h5 className="font-bold">ライブラリ</h5>
                         </div> 
 
+                        
                         <div className="px-3 py-10 space-y-2">
 
-                            {flashcards.map((flashcard)=>(
-                                <FlashCard
-                                    id={0}
-                                    uuid={flashcard.uuid}
-                                    title={flashcard.title}
-                                    description={flashcard.description}
-                                    access={flashcard.access.type}
-                                    access_name={flashcard.access.name}
-                                    access_view={false}
-                                    cards_length={flashcard.cardlength}
-                                    favorite={flashcard.favorite}
-                                    user_name={flashcard.user.name}
-                                    user_img={flashcard.user.profile_photo_path}
-                                    operation_allow={false}
-                                />
-                            ))}                            
+                            <h1 className='text-2xl dark:text-white'>最新の単語帳</h1>
+                            {flashcards.length != 0 ? 
+                                <>
+                                    {flashcards.map((flashcard)=>(
+                                        <FlashCard
+                                            id={0}
+                                            uuid={flashcard.uuid}
+                                            title={flashcard.title}
+                                            description={flashcard.description}
+                                            access={flashcard.access.type}
+                                            access_name={flashcard.access.name}
+                                            access_view={false}
+                                            cards_length={flashcard.cardlength}
+                                            favorite={flashcard.favorite}
+                                            user_name={flashcard.user.name}
+                                            user_img={flashcard.user.profile_photo_path}
+                                            operation_allow={false}
+                                        />
+                                    ))} 
+                                </>    
+                            : 
+                                <div className="flex items-center justify-center w-full h-[200px] text-slate-500">
+                                    <div className="text-xs">
+                                        表示できる単語帳が存在しません
+                                    </div>
+                                </div>
+                            }                       
+         
+                            <h1 className='text-2xl dark:text-white'>注目の単語帳</h1>
+                            {hi_watch_flashcards.length != 0 ? 
+                                <>
+                                    {hi_watch_flashcards.map((flashcard)=>(
+                                        <FlashCard
+                                            id={0}
+                                            uuid={flashcard.uuid}
+                                            title={flashcard.title}
+                                            description={flashcard.description}
+                                            access={flashcard.access.type}
+                                            access_name={flashcard.access.name}
+                                            access_view={false}
+                                            cards_length={flashcard.cardlength}
+                                            favorite={flashcard.favorite}
+                                            user_name={flashcard.user.name}
+                                            user_img={flashcard.user.profile_photo_path}
+                                            operation_allow={false}
+                                        />
+                                    ))} 
+                                </>    
+                            : 
+                                <div className="flex items-center justify-center w-full h-[200px] text-slate-500">
+                                    <div className="text-xs">
+                                        表示できる単語帳が存在しません
+                                    </div>
+                                </div>
+                            } 
+
                         </div>
 
                     </div>

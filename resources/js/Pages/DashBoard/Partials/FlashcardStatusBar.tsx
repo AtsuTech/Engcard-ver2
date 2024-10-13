@@ -32,6 +32,8 @@ export default function FlashcardStatusBar({
         Legend
     );
 
+    const all_flashcards:number = flashcards.length;
+
     //現在の選択
     const [current,setCurrent] = useState(1);
 
@@ -136,46 +138,62 @@ export default function FlashcardStatusBar({
                 <input type="number" onChange={(e:any)=> setInputPagenationMax(e.target.value)} />
                 <button onClick={()=>setPagenationMax(inputPagenationMax)}>disp</button>
             </div> */}
+
+
             <div className="px-2 py-5">
-                <div className="flex items-center w-fit /bg-slate-500 mx-auto">
-                    <div className="w-[40px] /bg-teal-300 flex items-center justify-center text-slate-400">
-                    {current != 1 &&
-                        <button onClick={()=>setCurrent(current - 1)}>
-                            <MdNavigateBefore size={26} />
-                        </button>
-                    }
-                    </div>
-                    <ul className="flex space-x-6">
-                        {pagenations.map((pagenation) =>(
-                            <li 
-                            className={
-                                'block font-bold ' +
-                                (current === pagenation
-                                    ? 'text-amber-400'
-                                    : 'text-slate-400') 
+
+                {flashcards.length != 0 ?
+                    <>
+                        <div className="flex items-center w-fit /bg-slate-500 mx-auto">
+                            <div className="w-[40px] /bg-teal-300 flex items-center justify-center text-slate-400">
+                            {current != 1 &&
+                                <button onClick={()=>setCurrent(current - 1)}>
+                                    <MdNavigateBefore size={26} />
+                                </button>
                             }
-                            onClick={()=>setCurrent(pagenation)}>{pagenation}</li>
-                        ))}                
-                    </ul>
-                    <div className="w-[40px] /bg-teal-300 flex items-center justify-center text-slate-400">
-                    {current != pagenations.length &&
-                        <button onClick={()=>setCurrent(current + 1)}>
-                            <MdNavigateNext size={26} />
-                        </button>
-                    }
-                    </div>
-                </div>
-
-                <div className="w-full h-64 ">
+                            </div>
+                            {pagenationMax < all_flashcards &&
+                                <ul className="flex space-x-6">
+                                    {pagenations.map((pagenation) =>(
+                                        <li 
+                                        className={
+                                            'block font-bold ' +
+                                            (current === pagenation
+                                                ? 'text-amber-400'
+                                                : 'text-slate-400') 
+                                        }
+                                        onClick={()=>setCurrent(pagenation)}>{pagenation}</li>
+                                    ))}                
+                                </ul>
+                            }
+                            <div className="w-[40px] /bg-teal-300 flex items-center justify-center text-slate-400">
+                            {current != pagenations.length &&
+                                <button onClick={()=>setCurrent(current + 1)}>
+                                    <MdNavigateNext size={26} />
+                                </button>
+                            }
+                            </div>
+                        </div>
                     
-                    <Bar
-                        data={chartData}
-                        height={30}
-                        options={options}
-                        redraw={true}
-                    />
+                        <div className="w-full h-64 ">
+                            
+                            <Bar
+                                data={chartData}
+                                height={30}
+                                options={options}
+                                redraw={true}
+                            />
 
-                </div>                      
+                        </div>  
+                    </> 
+                    :
+                    
+                    <div className="flex items-center justify-center w-full h-[200px] text-slate-500">
+                        <div className="text-xs">
+                            カードが0枚のため算出できません
+                        </div>
+                    </div>
+                }                   
             </div>
             
 

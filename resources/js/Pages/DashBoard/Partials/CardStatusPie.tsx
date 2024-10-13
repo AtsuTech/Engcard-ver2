@@ -40,14 +40,14 @@ export default function CardStatusPie({
     return (
         <div className="w-full /h-64 border /border-gray-300 rounded-md shadow-md overflow-hidden">
             <h5 className="bg-yellow-200 w-full p-2 text-slate-700">
-                単語修得率:<span className='font-extrabold'>{memory_rate}</span>%
+                単語修得率<span className='font-extrabold bg-slate-100 p-1 rounded-md mx-2'>{all_cards  == 0 ? 0 : memory_rate  }%</span>
             </h5>
             <div className="w-full">
                 <div className="p-2 w-[250px] mx-auto">
                     {all_cards != 0 ?
                         <Pie data={data} />
                     :
-                        <div className="flex items-center justify-center w-full h-[220px] bg-slate-300">
+                        <div className="flex items-center justify-center w-full h-[220px] text-slate-500">
                             <div className="text-xs">
                                 カードが0枚のため算出できません
                             </div>

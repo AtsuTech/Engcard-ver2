@@ -15,8 +15,10 @@ export default function NeedReviewCards({
             </h5>
             <div className="p-2">
                 {cards.length == 0 ?
-                    <div>
-                    <p>カードが0枚のため表示できません</p> 
+                    <div className="flex items-center justify-center w-full h-[40px] text-slate-500">
+                        <div className="text-xs">
+                            カードが0枚のため算出できません
+                        </div>
                     </div>
                 :
                     <div className="space-y-2 py-4">

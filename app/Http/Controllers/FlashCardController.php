@@ -20,10 +20,12 @@ class FlashCardController extends Controller
 
     public function library_index()
     {
-        $flashcards = Flashcard::orderBy('id','desc')->with(['user'])->with(['access'])->where('access_id',"=",2)->take(5)->get();
+        $flashcards = Flashcard::orderBy('created_at','desc')->with(['user'])->with(['access'])->where('access_id',"=",2)->take(5)->get();
+        $hi_watch_flashcards = Flashcard::orderBy('viewed_count','desc')->with(['user'])->with(['access'])->where('access_id',"=",2)->take(5)->get();
 
         return Inertia::render('Library/Index', [
             'flashcards' => $flashcards,
+            'hi_watch_flashcards' => $hi_watch_flashcards,
         ]);
     }
 
@@ -124,6 +126,22 @@ class FlashCardController extends Controller
 
         return Redirect::route('flashcard.edit', ['flashcard' => $flashcard->uuid]);
 
+    }
+
+    //閲覧されたカウント処理
+    public function viewed_count(Request $request)
+    {
+        $flashcard = Flashcard::find($request->id);
+        $flashcard->viewed_count = $flashcard->viewed_count +1;
+        $flashcard->save();
+    }
+
+    //自分が見たカウント処理
+    public function viewing_count(Request $request)
+    {
+        $flashcard = Flashcard::find($request->id);
+        $flashcard->viewing_count = $flashcard->viewing_count +1;
+        $flashcard->save();
     }
 
     //削除処理

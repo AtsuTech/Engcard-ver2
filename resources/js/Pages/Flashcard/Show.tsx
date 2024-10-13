@@ -1,6 +1,7 @@
 //import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import CommonLayout from '@/Layouts/CommonLayout';
 import { Head } from '@inertiajs/react';
+import React, { useEffect, useRef, FC, useState } from "react";
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { PageBack } from '@/Components/PageBack';
@@ -21,6 +22,7 @@ type Flashcard = {
     description: string | null;
     favorite: number;
     updated_at: string;
+    user_id: number;
     user:any;
     cards:[];
 };
@@ -36,9 +38,28 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
         description: flashcard.description,
         favorite: flashcard.favorite,
         updated_at: flashcard.updated_at,
+        user_id: flashcard.user_id,
     });
 
-    //console.log(flashcard)
+    const [viewCounted, setViewCounted] = useState(false);  // カウント済みかどうかを記録
+    useEffect(() => {
+        // カウントがまだ行われていない場合のみ実行
+        if (!viewCounted) {
+
+            if (auth.user.id == flashcard.user.id) {
+                post(route("flashcard.viewing", flashcard.id), {
+                    preserveScroll: true,  // スクロールを防ぐオプション
+                    onSuccess: () => setViewCounted(true),  // 成功したらカウント済みにする
+                });
+            } else {
+                post(route("flashcard.viewed", flashcard.id), {
+                    preserveScroll: true,  // スクロールを防ぐオプション
+                    onSuccess: () => setViewCounted(true),  // 成功したらカウント済みにする
+                });
+            }
+        }
+    }, [viewCounted]);
+
     return (
         <CommonLayout>
             <Head title={flashcard.title} />

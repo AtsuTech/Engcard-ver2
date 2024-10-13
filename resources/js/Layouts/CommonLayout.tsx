@@ -78,6 +78,11 @@ export default function Guest({ children }: PropsWithChildren) {
                                         <Dropdown.Link href={route('setting')}>
                                             設定
                                         </Dropdown.Link>
+                                        {auth.user.admin_id == 1 &&
+                                            <Dropdown.Link href={route('admin.dashboard')}>
+                                                管理者ページ
+                                            </Dropdown.Link>
+                                        }
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             ログアウト
                                         </Dropdown.Link>

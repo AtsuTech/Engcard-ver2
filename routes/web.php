@@ -48,6 +48,13 @@ Route::get('/dashboard',[DashBoardController::class, 'dashboard_data'])->middlew
 //ライブラリ
 Route::get('/library',[FlashCardController::class, 'library_index'])->name('library');
 
+//単語帳閲覧されたカウント
+Route::post('/flashcard/viewed',[FlashCardController::class, 'viewed_count'])->name('flashcard.viewed');
+
+//単語帳自分が見たカウント
+Route::post('/flashcard/viewing',[FlashCardController::class, 'viewing_count'])->name('flashcard.viewing');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/user/profile/{personal_id}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

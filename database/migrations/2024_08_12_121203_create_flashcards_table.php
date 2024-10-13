@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('access_id')->constrained()->onDelete('cascade');
             $table->string('title', length: 30); //30文字に制限
             $table->longText('description')->nullable();
+            $table->integer('viewing_count')->default(0)->nullable();
+            $table->integer('viewed_count')->default(0)->nullable();
             $table->timestamps();
         });
     }
