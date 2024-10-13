@@ -93,7 +93,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                         <div className="/p-5 border border-slate-300 m-5 overflow-hidden rounded-lg">
                             
                             <div className="relative flex items-center bg-amber-200 p-2 /py-2 /border-b-2 border-b-amber-400">
-                                <h5 className="font-bold">{data.title}</h5>
+                                <h5 className="font-bold">{flashcard.title}</h5>
                                 <button
                                     className="absolute right-1 px-2 text-slate-500"
                                     onClick={() => setFlashCardDialog(true)}>
@@ -104,7 +104,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                 {data.description != null ?
                                     <div className="w-full text-xs dark:text-white">
                                         <p>
-                                            {data.description}
+                                            {flashcard.description}
                                         </p>
                                     </div>
                                     :

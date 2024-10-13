@@ -2,6 +2,8 @@ import { Link, Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Card from '@/Components/Special/Card';
+import React, { useEffect, useRef, FC, useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
     const handleImageError = () => {
@@ -11,7 +13,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
         document.getElementById('background')?.classList.add('!hidden');
     };
 
-
+    const[toggleMenu,setToggleMenu] = useState(false)
 
     return (
         <>
@@ -22,14 +24,24 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                 <div className="w-full min-h-screen selection:bg-[#f7ea78] selection:text-white">
                     <div className="w-full relative lg:px-20">
 
-                        <header className="sticky top-3 w-full bg-amber-300/90 p-2 rounded-md">
+                        <header className="sticky top-3 w-full bg-amber-300/90 p-2 rounded-md z-40">
                             <div className="flex items-center w-full">
                                 <div className="flex justify-center">
                                     <div className="w-28">
                                         <ApplicationLogo />
                                     </div>
                                 </div>
-                                <nav className="absolute right-2 flex justify-end">
+
+                                <div className='text-sm space-x-3 mx-2 hidden sm:block'>
+                                    <Link href={route('privacy.policy')}>
+                                        プライバシーポリシー
+                                    </Link>
+                                    <Link href={route('terms.of.service')}>
+                                        利用規約
+                                    </Link>
+                                </div>
+
+                                <nav className="absolute right-2 flex items-center justify-end">
                                     {auth.user ? (
                                         <Link
                                             href={route('dashboard')}
@@ -58,7 +70,37 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                             </Link>
                                         </>
                                     )}
+
+                                    <div className='flex items-center text-sm space-x-3 mx-2 sm:hidden'>
+                                        <button onClick={()=>setToggleMenu(true)}>
+                                            <AiOutlineMenu size={26} />
+                                        </button>
+                                        {toggleMenu &&
+                                            <div className='fixed top-0 right-0 bg-black/90 w-full h-screen z-50'>
+                                                <div className='flex justify-end items-center h-20 pr-5 w-full'>
+                                                    <button 
+                                                        onClick={()=>setToggleMenu(false)}
+                                                        className='text-white'
+                                                    >
+                                                        <AiOutlineMenu size={26} />
+                                                    </button>
+                                                </div>
+
+
+                                                <ul className='text-white my-10 text-center'>
+                                                    <li>
+                                                        <Link href={route('privacy.policy')}>
+                                                            プライバシーポリシー
+                                                        </Link>
+                                                    </li>
+                                                </ul>
+                                            </div>                                            
+                                        }
+
+                                    </div>
                                 </nav>
+
+                                
                             </div>
                         </header>
 
@@ -67,7 +109,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                 <section className="flex flex-col items-center justify-center /items-start gap-6 overflow-hidden p-6 /shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 md:row-span-3 lg:p-10 lg:pb-10">
                                 
                                     <h1 className="text-4xl text-white /font-bold">
-                                        英単語の語彙を深めよう
+                                        英単語をどんどん覚えて語彙力をUPしよう
                                     </h1>
 
                                     <Link
@@ -102,33 +144,69 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                         
                     </div>
 
-                    <section className="/bg-emerald-400">
-                        <div className="lg:px-20 py-10">
-                            <h2 className="py-8 text-3xl text-center">Engcardとは？</h2>
-                            <div className="flex w-full space-x-5">
-                                <div className="w-1/2">
-                                   <p>Engcardはweb上でオリジナルの英単語帳を作れるサービスです</p> 
-                                </div>
-                                <div className="w-1/2">
-                                    <img src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 rounded-md" />
-                                </div>
-                            </div>
-                        </div>
-                    </section>
 
-                    <section className="/bg-emerald-400">
-                        <div className="lg:px-20 py-10">
-                            <h2 className="py-8 text-3xl text-center">Engcardの特徴</h2>
-                            <div className="flex w-full space-x-5">
-                                <div className="w-1/2">
-                                    <img src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 rounded-md" />
-                                </div>
-                                <div className="w-1/2">
-                                   <p>単語に関する情報を細かく設定できます</p> 
+                    
+                        <section className="bg-slate-200">
+                            <div className='max-w-5xl mx-auto sm:px-6 lg:px-8'>
+                            <div className="lg:px-20 py-10">
+                                <h2 className="py-8 text-3xl text-center text-slate-900">Engcardとは？</h2>
+                                <div className="flex flex-col-reverse lg:flex-row w-full lg:space-x-5 space-y-5 lg:space-y-0">
+                                    <div className="flex items-center lg:w-1/2 w-full">
+                                        <p>
+                                            Engcardはweb上でオリジナルの英単語帳を作れるサービスです。
+                                            PCはもちろん、スマートフォン・タブレットをはじめとするインターネットに接続できるデバイスから利用できます。
+                                            覚えたい単語カードを自由に作成してオリジナルの単語帳の作成・編集が可能です。
+                                        </p> 
+                                    </div>
+                                    <div className="lg:w-1/2 w-full">
+                                        <img src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                            </div>
+                        </section>
+
+                        <section className="/bg-emerald-200">
+                            <div className='max-w-5xl mx-auto sm:px-6 lg:px-8'>
+                            <div className="lg:px-20 py-10">
+                                <h2 className="py-8 text-3xl text-center text-slate-900">特徴</h2>
+                                <div className="flex flex-col lg:flex-row w-full lg:space-x-5 space-y-5 lg:space-y-0">
+                                    <div className="lg:w-1/2 w-full">
+                                        <img src="https://cdn.pixabay.com/photo/2022/03/21/10/17/digitization-7082815_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" />
+                                    </div>
+                                    <div className="flex items-center lg:w-1/2 w-full">
+                                        <p>
+                                            英単語の暗記に特化して作られたwebサービスです。
+                                            一般的な単語帳システムより英単語に関する情報を多く保存でき、語彙の定着をサポートします。
+                                        </p> 
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </section>
+
+                        <section className="bg-slate-200">
+                            <div className='max-w-5xl mx-auto sm:px-6 lg:px-8'>
+                            <div className="lg:px-20 py-10">
+                                <h2 className="py-8 text-3xl text-center text-slate-900">機能</h2>
+                                <div className="flex flex-col-reverse lg:flex-row w-full lg:space-x-5 space-y-5 lg:space-y-0">
+                                    <div className="flex items-center lg:w-1/2 w-full">
+                                        <p>
+                                            作成した単語帳を暗記する機能やクイズ機能を備えています。
+                                            また、ユーザーの学習状況が把握出来るダッシュボードも備えています。
+                                        </p> 
+                                    </div>
+                                    <div className="lg:w-1/2 w-full">
+                                        <img src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" />
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </section>
+                    
+
+
+
 
                     <footer className="py-16 text-center text-sm text-white bg-slate-800">
                         {/* Laravel v{laravelVersion} (PHP v{phpVersion}) */}

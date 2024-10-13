@@ -238,18 +238,15 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
 
             <div className="absolute w-full z-10">
                 <Header cards_length={cards.length} turn={turn} setMode={setMode} flashcard_uuid={flashcard_uuid} />
-                {/* <div className="ml-3">
-                    単語帳:{title} turn:{turn} view_card:{view_card} /{flashcard_user_id}
-                </div> */}
             </div>
 
-            <div className="absolute w-full flex items-center justify-center h-full">
-                <div className="w-full px-2 /bg-slate-600">
+            <div className="max-w-3xl mx-auto flex items-center justify-center h-full">
+                <div className="w-full px-2">
                     <div className="w-fit ml-auto mr-auto">
                         {card_view_turn.length == 0 &&
                             <>
                             {turn == 0 &&
-                                <div className="w-full py-5 /bg-slate-100">
+                                <div className="w-full py-5">
                                     <div className="flex items-center ml-auto mr-auto w-fit my-0.5 bg-white border border-gray-300 px-2 rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 w-5">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
@@ -292,7 +289,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     <div className="flex w-full h-48 md:h-96 items-center justify-center">
                                         <div>
                                             <button className="block w-fit ml-auto mr-auto my-3 px-3 bg-slate-400 rounded-full text-white" onClick={Change}>もどる</button>
-                                            <div className="/text-6xl text-center dark:text-white">
+                                            <div className="text-center dark:text-white">
                                                 {card.word_mean.length > 20 ?
                                                     <span className="text-[14px] md:text-[20px]">{card.word_mean}</span>
                                                 :
@@ -317,7 +314,8 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                         {choice.map( (choice:any,index:number) => (
                                             <ul key={index}>
                                             {choice.id == card.id?
-                                                <CorrectAnswer choice={choice.word_mean + '⭕️'} selected_answer={selected_answer} action={Correct} />
+                                                //正解
+                                                <CorrectAnswer choice={choice.word_mean} selected_answer={selected_answer} action={Correct} />
                                                 :
                                                 <InCorrectAnswer choice={choice.word_mean} selected_answer={selected_answer} action={Incorrect} />
                                             }

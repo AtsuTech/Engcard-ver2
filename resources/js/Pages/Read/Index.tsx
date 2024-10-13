@@ -73,18 +73,17 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     }
 
     return(
-        <main className="/relative h-screen text-gray-500">
+        <main className="h-screen text-gray-500 bg-slate-300 dark:bg-gray-800">
             <Head title="読む" />
 
-            <header className="fixed w-full z-20 /bg-blue-300 h-12">
-                {/* <div className="w-full text-center text-xs">{title}</div> */}
+            <header className="fixed w-full z-20 h-12">
 
                 <div className="flex items-center">
                     
                     <div className="w-full ml-3">
                         {turn+1}/{cards.length}
                     </div>   
-                    <div className="w-fit flex justify-end px-2 h-12 /bg-red-400">
+                    <div className="w-fit flex justify-end px-2 h-12">
                         <button onClick={Finish}>
                             <RxCross2 size={25} />
                         </button>
@@ -93,15 +92,15 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                 
             </header>
 
-            <div className="/absolute top-0 w-full /flex /items-center justify-center h-full">
+            <div className="max-w-3xl mx-auto top-0 w-full justify-center h-full">
                 <div className="w-full">
                     {selected_card.map((card:any) => (
                         <div key={card.word} className="flex w-full">
 
-                            <div className="flex w-[40px] h-screen">
+                            <div className="flex items-center w-[40px] mx-1 h-screen">
                                 {turn > 0 &&
                                     <button 
-                                        className="flex items-center justify-center /bg-slate-100 w-full h-screen"
+                                        className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
                                         onClick={Prev}>
                                         <FaArrowLeft />
                                     </button>
@@ -124,10 +123,10 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                 </div> */}
                             </div>
 
-                            <div className="flex w-[40px] h-screen">
+                            <div className="flex items-center w-[40px] mx-1 h-screen">
                                 {turn < cards.length - 1 &&
                                     <button 
-                                        className="flex items-center justify-center /bg-slate-100 w-full h-screen"
+                                        className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
                                         onClick={Next}>
                                         <FaArrowRight />
                                     </button>

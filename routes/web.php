@@ -42,6 +42,14 @@ Route::post('/view_count',[CardController::class, 'view_count'])->name('view_cou
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/privacy-policy', function () {
+    return Inertia::render('PrivacyPolicy');
+})->name('privacy.policy');
+
+Route::get('/terms-of-service', function () {
+    return Inertia::render('TermsOfService');
+})->name('terms.of.service');
+
 //ダッシュボード
 Route::get('/dashboard',[DashBoardController::class, 'dashboard_data'])->middleware(['auth', 'verified'])->name('dashboard');
 

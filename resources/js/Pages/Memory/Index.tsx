@@ -73,10 +73,10 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     }
 
     return(
-        <main className="/relative h-screen text-gray-500">
+        <main className="h-screen text-gray-500 bg-slate-300 dark:bg-gray-800">
             <Head title="暗記" />
 
-            <div className="fixed /absolute w-full z-20 /bg-blue-300 flex items-center h-12 justify-center">
+            <div className="fixed w-full z-20 flex items-center h-12 justify-center">
 
                 <div className="w-full ml-3">
                     {turn+1}/{cards.length}
@@ -89,48 +89,58 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
 
             </div>
 
-            <div className="/absolute /top-0 w-full flex items-center justify-center h-full">
+            <div className="max-w-3xl mx-auto w-full flex items-center justify-center h-full">
                 <div className="w-full">
                     {selected_card.map((card:any) => (
                         <div key={card.word} className="flex w-full">
 
-                            <div className="fixed bottom-5 w-full px-10">
+                            <div className="max-w-3xl w-full mx-auto fixed bottom-5 px-10">
                                 {change ?
                                     <button className="block w-full ml-auto mr-auto px-3 py-2 bg-amber-200 rounded-full my-2" onClick={Change}>単語に戻る</button>
                                 :
-                                    <button className="block w-full ml-auto mr-auto px-3 py-2 bg-slate-300 rounded-full my-2" onClick={Change}>意味を見る</button>
+                                    <button className="block w-full ml-auto mr-auto px-3 py-2 bg-slate-100 rounded-full my-2" onClick={Change}>意味を見る</button>
                                 }                                
                             </div>
 
-                            <div className="flex w-[40px] h-screen">
+                            <div className="flex items-center w-[40px] mx-1 h-screen">
                                 {turn > 0 &&
                                     <button 
-                                        className="flex items-center justify-center /bg-slate-100 w-full h-screen"
+                                        className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
                                         onClick={Prev}>
                                         <FaArrowLeft />
                                     </button>
                                 }                                
                             </div>
-                            <div className="flex items-center justify-center w-[calc(100%-80px)] /bg-slate-200 h-screen">
+                            <div className="flex items-center justify-center w-[calc(100%-80px)] h-screen">
                                 
                                 {change ?
                                     <div className="w-full px-2">
-                                        <button className="block w-fit ml-auto mr-auto px-3 bg-amber-200 rounded-full my-2" onClick={Change}>単語に戻る</button>
-                                        <div className="relative flex w-full h-48 md:h-96 text-[20px] md:text-[32px] items-center justify-center border border-slate-200 shadow-lg bg-amber-100" id="card_id" data-id={card.id}>
-                                            <div className="absolute top-2 left-2 bg-slate-500 w-3 h-3 rounded-full"></div>
+                                        {/* <button className="block w-fit ml-auto mr-auto px-3 bg-amber-200 rounded-full my-2" onClick={Change}>単語に戻る</button> */}
+                                        <div 
+                                            className="relative flex w-full h-48 md:h-96 text-[20px] md:text-[32px] items-center justify-center border border-slate-200 shadow-lg bg-amber-100" 
+                                            id="card_id" 
+                                            data-id={card.id}
+                                            onClick={Change}
+                                        >
+                                            <div className="absolute top-2 left-2 bg-slate-500 w-3 h-3 rounded-full dark:text-white"></div>
                                             {card.word_mean}
                                         </div>
                                     </div>
 
                                 :
                                     <div className="w-full px-2">
-                                        <button className="block w-fit ml-auto mr-auto px-3 bg-slate-300 rounded-full my-2" onClick={Change}>意味を見る</button>
-                                        <div className="relative flex w-full h-48 md:h-96 text-3xl md:text-6xl items-center justify-center border border-slate-200 shadow-lg" id="card_id" data-id={card.id}>
+                                        {/* <button className="block w-fit ml-auto mr-auto px-3 bg-slate-300 rounded-full my-2" onClick={Change}>意味を見る</button> */}
+                                        <div 
+                                            className="relative flex w-full h-48 md:h-96 text-3xl md:text-6xl items-center justify-center border border-slate-200 dark:border-slate-500 shadow-lg bg-white dark:bg-gray-800" 
+                                            id="card_id" 
+                                            data-id={card.id}
+                                            onClick={Change}
+                                        >
                                             <div className="absolute top-2 left-2 bg-slate-500 w-3 h-3 rounded-full"></div>
                                             {card.word.length > 20 ?
-                                                <span className="text-[12px] md:text-[20px]">{card.word}</span>
+                                                <span className="text-[12px] md:text-[20px] dark:text-white">{card.word}</span>
                                             :
-                                                <span>{card.word}</span>
+                                                <span className='dark:text-white'>{card.word}</span>
                                             }
                                             
                                         </div>
@@ -138,10 +148,10 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                 }
                             </div>
 
-                            <div className="flex w-[40px] h-screen">
+                            <div className="flex items-center w-[40px] mx-1 h-screen">
                                 {turn < cards.length - 1 &&
                                     <button 
-                                        className="flex items-center justify-center /bg-slate-100 w-full h-screen"
+                                        className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
                                         onClick={Next}>
                                         <FaArrowRight />
                                     </button>
