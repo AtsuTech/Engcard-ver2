@@ -33,9 +33,20 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                     {auth.user ? (
                                         <Link
                                             href={route('dashboard')}
-                                            className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                            className="flex items-center rounded-full p-1 text-slate-600 ring-1 ring-transparent transition bg-white hover:bg-amber-200 dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
-                                            ダッシュボード
+                                            {auth.user &&
+                                                <div>
+                                                {auth.user.profile_photo_path != null ?
+                                                    <img src={'/storage/images/profile/' + auth.user.profile_photo_path} alt="" className='w-8 h-8 rounded-full' />
+                                                :
+                                                    <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full text-white bg-slate-900">
+                                                        {auth.user.name.substr(0,1)}
+                                                    </div>
+                                                } 
+                                                </div>
+                                            }
+                                            <span className='text-xs px-2'>ダッシュボード</span>
                                         </Link>
                                     ) : (
                                         <>

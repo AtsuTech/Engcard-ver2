@@ -7,7 +7,7 @@ export default function LessViewCards({
         cards:any
     }) 
     {
-
+    console.log(cards)
     return (
         <section className="w-full border border-gray-300 rounded-md shadow-md overflow-hidden">
             <h5 className="bg-yellow-200 w-full p-2 text-slate-700">

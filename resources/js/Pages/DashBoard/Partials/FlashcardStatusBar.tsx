@@ -83,12 +83,15 @@ export default function FlashcardStatusBar({
                             label += ': ';
                         }
                         // パーセンテージ表示に'%'を追加
-                        label += context.raw + '%' ;
+                        //label += context.raw + '%' ;
+                        const value = context.raw;
+                        label += isNaN(value) || value === 0 ? '0%' : value + '%';
                         return label;
                     },
                 },
             },
         },
+
         scales: {
             y: {
                 ticks: {

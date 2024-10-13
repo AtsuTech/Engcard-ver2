@@ -32,9 +32,9 @@ class DashBoardController extends Controller
         // }])->get();
         // dd($need_review_flashcards);
 
-        $need_review_cards = Card::where("user_id" , Auth::id())->where('memory', '=', false)->orderBy('incorrect_count','desc')->get()->take(6);
+        $need_review_cards = Card::where("user_id" , Auth::id())->where('memory', '=', false)->orderBy('incorrect_count','desc')->with(['wordmeans'])->get()->take(6);
 
-        $less_review_cards = Card::where("user_id" , Auth::id())->orderBy('view_count','asc')->get()->take(6);
+        $less_review_cards = Card::where("user_id" , Auth::id())->orderBy('view_count','asc')->with(['wordmeans'])->get()->take(6);
         
         return Inertia::render('DashBoard/Index', [
             'all_cards' => $all_cards->count(),

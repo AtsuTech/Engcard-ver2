@@ -43,18 +43,18 @@ export default function FlashCard
 
                 <div className="flex w-full items-center h-8 bg-yellow-200 px-1 py-0.5">
                     {access_view &&
-                        <div className="w-fit">
-                            {access == 0 && <span className="block bg-slate-300 py-0.5 px-2 text-xs rounded-full">{access_name}</span>}
-                            {access == 1 && <span className="block bg-slate-300 py-0.5 px-2 text-xs rounded-full">{access_name}</span>}
+                        <div className="w-[50px]">
+                            {access == 0 && <span className="block bg-slate-300 py-0.5 px-2 text-[9px] text-center rounded-full">{access_name}</span>}
+                            {access == 1 && <span className="block bg-slate-300 py-0.5 px-2 text-[9px] text-center rounded-full">{access_name}</span>}
                         </div>                     
                     }
     
-                    <h5 className="text-1.5xl break-all pl-2 text-slate-600 text-bold">
+                    <h5 className="w-[calc(100%-80px)] md:text-1.5xl truncate break-all pl-2 text-slate-600 text-bold">
                         {title}
                     </h5>
 
                     {operation_allow && 
-                        <div className="flex w-fit items-center ml-auto">
+                        <div className="flex w-[30px] items-center ml-auto">
                             <FlashCardOperationDropDown id={id} uuid={uuid} />
                         </div>                    
                     }

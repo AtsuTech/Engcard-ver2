@@ -18,6 +18,9 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
         _method: "post",
     });
 
+    const [disabled ,setDisabled] = useState(false);
+    const [maxTitleLength,setMaxTitleLength] = useState(20);
+
     //データ送信
     const Submit = (e :any) =>{
         e.preventDefault();
@@ -29,7 +32,7 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
         <CommonLayout>
             <Head title="単語帳を作成" />
 
-            <div className="py-12">
+            <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
@@ -44,9 +47,23 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
                                 <input type="text" className="w-full h-10 border border-gray-300 rounded-lg pl-2 /text-2xl" 
                                     placeholder="タイトル" 
                                     name="title"
-                                    onChange={(e) => setData('title', e.target.value)}
+                                    //onChange={(e) => setData('title', e.target.value)}
+                                    onChange={(e) => {
+                                        // 入力文字数制限
+                                        if (e.target.value.length <= maxTitleLength || e.target.value.length < data.title.length) {
+                                            setData('title', e.target.value);
+                                        }
+                                        if(e.target.value.length >= maxTitleLength){
+                                            setDisabled(true);
+                                        }else{
+                                            setDisabled(false);
+                                        }
+                                    }}
                                     required
-                                />                                
+                                />   
+                                <div className="px-1 text-rose-600">
+                                    <p>{data.title.length >= maxTitleLength && <small>{maxTitleLength}字以下で入力ください</small>}</p>
+                                </div>                             
                             </div>
 
                             <div>
@@ -86,7 +103,7 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
                                 </textarea>                                
                             </div>
 
-                            <DesignedPrimaryButton>
+                            <DesignedPrimaryButton disabled={disabled}>
                                 <div className='relative flex items-center justify-center'>
                                     <span>作成</span>
                                     <div className='absolute right-0'>

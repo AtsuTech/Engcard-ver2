@@ -66,6 +66,10 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
     let [flashcardDialog, setFlashCardDialog] = useState(false);
     const [createCardDialog,setCreateCardDialog] = useState(false);
 
+    //単語帳バリデーション
+    const [disabled ,setDisabled] = useState(false);
+    const [maxTitleLength,setMaxTitleLength] = useState(20);
+
     //データ送信
     const Submit = (e :any) =>{
         e.preventDefault();
@@ -150,9 +154,23 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                         placeholder="タイトル" 
                                         value={data.title}
                                         name="title"
-                                        onChange={(e) => setData('title', e.target.value)}
+                                        //onChange={(e) => setData('title', e.target.value)}
+                                        onChange={(e) => {
+                                            // 入力文字数制限
+                                            if (e.target.value.length <= maxTitleLength || e.target.value.length < data.title.length) {
+                                                setData('title', e.target.value);
+                                            }
+                                            if(e.target.value.length >= maxTitleLength){
+                                                setDisabled(true);
+                                            }else{
+                                                setDisabled(false);
+                                            }
+                                        }}
                                         required
                                     /> 
+                                    <div className="px-1 text-rose-600">
+                                        <p>{data.title.length >= maxTitleLength && <small>{maxTitleLength}字以下で入力ください</small>}</p>
+                                    </div>  
 
                                     <label htmlFor="" className="block mt-3 text-xs">概要</label>
                                     <textarea 
@@ -165,7 +183,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                     </textarea>
 
                                     <div className="mt-2">
-                                        <DesignedPrimaryButton>保存</DesignedPrimaryButton>
+                                        <DesignedPrimaryButton disabled={disabled}>保存</DesignedPrimaryButton>
                                     </div>
                                                         
                                 </form> 
