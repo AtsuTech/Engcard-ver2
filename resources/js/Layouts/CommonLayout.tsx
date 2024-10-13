@@ -93,13 +93,13 @@ export default function Guest({ children }: PropsWithChildren) {
                                     <div className="flex items-center space-x-3 text-xs">
                                         <Link
                                             href={route('login')}
-                                            className="text-slate-600"
+                                            className="text-slate-600 dark:text-slate-300"
                                         >
                                             ログイン
                                         </Link>
                                         <Link
                                             href={route('register')}
-                                            className="text-white bg-amber-600 hover:bg-amber-900 focus:outline-none focus:ring-0 focus:ring-amber-300 font-medium rounded-full px-2 py-1 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                                            className="text-white bg-amber-600 hover:bg-amber-900 focus:outline-none focus:ring-0 focus:ring-amber-300 font-medium rounded-full px-2 py-1 dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-700 dark:border-gray-700"
                                         >
                                             新規登録
                                         </Link>

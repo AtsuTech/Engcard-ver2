@@ -21,7 +21,7 @@ class FlashCardController extends Controller
     public function library_index()
     {
         $flashcards = Flashcard::orderBy('created_at','desc')->with(['user'])->with(['access'])->where('access_id',"=",2)->take(5)->get();
-        $hi_watch_flashcards = Flashcard::orderBy('viewed_count','desc')->with(['user'])->with(['access'])->where('access_id',"=",2)->take(5)->get();
+        $hi_watch_flashcards = Flashcard::orderBy('viewed_count','desc')->with(['user'])->with(['access'])->where('access_id',"=",2)->where('viewed_count',"!=",0)->take(5)->get();
 
         return Inertia::render('Library/Index', [
             'flashcards' => $flashcards,

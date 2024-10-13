@@ -103,7 +103,7 @@ export default function FlashcardStatusBar({
                     display: false,
                 },
                 afterFit: (scaleInstance:any) => {
-                    scaleInstance.width = 110;
+                    scaleInstance.width = 210;
                 },
             },
 

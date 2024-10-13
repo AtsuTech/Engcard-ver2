@@ -15,12 +15,14 @@ export default function Footer({ }: {}) {
                 <p>© Engcard</p>
             </div>
             <div className="flex items-center w-full h-[700px] bg-slate-800 dark:bg-slate-700 text-white">
-                {advertisements.map((advertisement:any) => (
-                    // <div>{advertisement.name}</div>
-                    <div 
-                        className="w-fit p-3 ml-auto mr-auto"
-                        dangerouslySetInnerHTML={{ __html: advertisement.html_code }} />
-                ))}                
+                <div className='w-full'>
+                    {advertisements.map((advertisement:any) => (
+                        // <div>{advertisement.name}</div>
+                        <div 
+                            className="w-fit p-3 mx-auto"
+                            dangerouslySetInnerHTML={{ __html: advertisement.html_code }} />
+                    ))}                     
+                </div>
             </div>
         </footer>
     );

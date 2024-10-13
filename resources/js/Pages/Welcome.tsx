@@ -22,7 +22,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                 bg-no-repeat bg-cover /py-4 /lg:px-20 /md:p-20 h-screen">
                 {/* <img id="background" className="absolute -left-20 top-0 max-w-[877px]" src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" /> */}
                 <div className="w-full min-h-screen selection:bg-[#f7ea78] selection:text-white">
-                    <div className="w-full relative lg:px-20">
+                    <div className="w-full relative px-2 lg:px-20">
 
                         <header className="sticky top-3 w-full bg-amber-300/90 p-2 rounded-md z-40">
                             <div className="flex items-center w-full">
@@ -32,20 +32,20 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                     </div>
                                 </div>
 
-                                <div className='text-sm space-x-3 mx-2 hidden sm:block'>
+                                {/* <div className='text-sm space-x-3 mx-2 hidden sm:block'>
                                     <Link href={route('privacy.policy')}>
                                         プライバシーポリシー
                                     </Link>
                                     <Link href={route('terms.of.service')}>
                                         利用規約
                                     </Link>
-                                </div>
+                                </div> */}
 
                                 <nav className="absolute right-2 flex items-center justify-end">
                                     {auth.user ? (
                                         <Link
                                             href={route('dashboard')}
-                                            className="flex items-center rounded-full p-1 text-slate-600 ring-1 ring-transparent transition bg-white hover:bg-amber-200 dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                            className="flex items-center rounded-full p-1 text-slate-600 ring-1 ring-transparent transition bg-white hover:bg-amber-200"
                                         >
                                             {auth.user &&
                                                 <div>
@@ -71,7 +71,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                         </>
                                     )}
 
-                                    <div className='flex items-center text-sm space-x-3 mx-2 sm:hidden'>
+                                    {/* <div className='flex items-center text-sm space-x-3 mx-2 sm:hidden'>
                                         <button onClick={()=>setToggleMenu(true)}>
                                             <AiOutlineMenu size={26} />
                                         </button>
@@ -97,19 +97,19 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                             </div>                                            
                                         }
 
-                                    </div>
+                                    </div> */}
                                 </nav>
 
                                 
                             </div>
                         </header>
 
-                        <main className="">
-                            <div className="lg:flex p-10 sm:p-0 items-center justify-center h-[calc(100vh-58px)]">
+                        <main className="flex items-center justify-center h-[calc(100vh-58px)]">
+                            <div className="lg:flex p-10 sm:p-0 items-center justify-center /h-[calc(100vh-58px)]">
                                 <section className="flex flex-col items-center justify-center /items-start gap-6 overflow-hidden p-6 /shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 md:row-span-3 lg:p-10 lg:pb-10">
                                 
                                     <h1 className="text-4xl text-white /font-bold">
-                                        英単語をどんどん覚えて語彙力をUPしよう
+                                        英単語をどんどん覚えよう
                                     </h1>
 
                                     <Link
@@ -121,7 +121,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                     </Link>
                                 </section>
 
-                                <section>
+                                <section className='w-full sm:w-96 mx-auto'>
                                     <Card
                                         memory="true"
                                         //imgflag={true}
@@ -147,11 +147,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
 
                     
                         <section className="bg-slate-200">
-                            <div className='max-w-5xl mx-auto sm:px-6 lg:px-8'>
+                            <div className='max-w-5xl mx-auto px-5'>
                             <div className="lg:px-20 py-10">
                                 <h2 className="py-8 text-3xl text-center text-slate-900">Engcardとは？</h2>
                                 <div className="flex flex-col-reverse lg:flex-row w-full lg:space-x-5 space-y-5 lg:space-y-0">
-                                    <div className="flex items-center lg:w-1/2 w-full">
+                                    <div className="flex items-center lg:w-1/2 w-full py-10">
                                         <p>
                                             Engcardはweb上でオリジナルの英単語帳を作れるサービスです。
                                             PCはもちろん、スマートフォン・タブレットをはじめとするインターネットに接続できるデバイスから利用できます。
@@ -159,7 +159,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                         </p> 
                                     </div>
                                     <div className="lg:w-1/2 w-full">
-                                        <img src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" />
+                                        {/* <img src={'/images_materials/welcome-pic-1.png'} alt="" className="block w-full bg-cover bg-center h-60 bg-slate-600 sm:rounded-md" /> */}
+                                        <div style={{ backgroundImage: `url('/images_materials/welcome-pic-1.png')` }} className="/bg-cover bg-contain bg-center bg-no-repeat w-full h-[230px] md:h-[280px]"></div>
                                     </div>
                                 </div>
                             </div>
@@ -167,17 +168,19 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                         </section>
 
                         <section className="/bg-emerald-200">
-                            <div className='max-w-5xl mx-auto sm:px-6 lg:px-8'>
+                            <div className='max-w-5xl mx-auto px-5'>
                             <div className="lg:px-20 py-10">
                                 <h2 className="py-8 text-3xl text-center text-slate-900">特徴</h2>
                                 <div className="flex flex-col lg:flex-row w-full lg:space-x-5 space-y-5 lg:space-y-0">
                                     <div className="lg:w-1/2 w-full">
-                                        <img src="https://cdn.pixabay.com/photo/2022/03/21/10/17/digitization-7082815_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" />
+                                        {/* <img src="https://cdn.pixabay.com/photo/2022/03/21/10/17/digitization-7082815_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" /> */}
+                                        <div style={{ backgroundImage: `url('/images_materials/welcome-pic-2.png')` }} className="bg-cover /bg-contain bg-center bg-no-repeat w-full h-[230px] md:h-[280px]"></div>
                                     </div>
-                                    <div className="flex items-center lg:w-1/2 w-full">
+                                    <div className="flex items-center lg:w-1/2 w-full py-10">
                                         <p>
                                             英単語の暗記に特化して作られたwebサービスです。
-                                            一般的な単語帳システムより英単語に関する情報を多く保存でき、語彙の定着をサポートします。
+                                            意味を複数登録でき、さらに画像や品詞、例文、外部リンクなどの情報を保存できます。
+                                            様々な情報と関連させて暗記することで、語彙の定着をサポートします。
                                         </p> 
                                     </div>
                                 </div>
@@ -186,18 +189,19 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                         </section>
 
                         <section className="bg-slate-200">
-                            <div className='max-w-5xl mx-auto sm:px-6 lg:px-8'>
+                            <div className='max-w-5xl mx-auto px-5'>
                             <div className="lg:px-20 py-10">
                                 <h2 className="py-8 text-3xl text-center text-slate-900">機能</h2>
                                 <div className="flex flex-col-reverse lg:flex-row w-full lg:space-x-5 space-y-5 lg:space-y-0">
-                                    <div className="flex items-center lg:w-1/2 w-full">
+                                    <div className="flex items-center lg:w-1/2 w-full py-10">
                                         <p>
                                             作成した単語帳を暗記する機能やクイズ機能を備えています。
                                             また、ユーザーの学習状況が把握出来るダッシュボードも備えています。
                                         </p> 
                                     </div>
                                     <div className="lg:w-1/2 w-full">
-                                        <img src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" />
+                                        {/* <img src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" /> */}
+                                        <div style={{ backgroundImage: `url('/images_materials/welcome-pic-3.png')` }} className="bg-cover /bg-contain bg-center bg-no-repeat w-full h-[230px] md:h-[280px]"></div>
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +214,16 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
 
                     <footer className="py-16 text-center text-sm text-white bg-slate-800">
                         {/* Laravel v{laravelVersion} (PHP v{phpVersion}) */}
-                        Engcard
+                        <div className='py-10'>Engcard</div>
+                        <div className='flex justify-center text-sm space-x-3 mx-2 '>
+                            <Link href={route('privacy.policy')}>
+                                プライバシーポリシー
+                            </Link>
+                            <Link href={route('terms.of.service')}>
+                                利用規約
+                            </Link>
+                        </div>
+                        
                     </footer>
                 </div>
             </div>
