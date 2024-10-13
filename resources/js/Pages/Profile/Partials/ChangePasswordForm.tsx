@@ -39,9 +39,9 @@ export default function ChangePasswordForm({ className = '' }: { className?: str
     return (
         <section className={className}>
 
-            <form onSubmit={updatePassword} className="/mt-6 space-y-6">
+            <form onSubmit={updatePassword} className="space-y-6">
                 <div>
-                    <label htmlFor="" className="text-xs">現在のパスワード</label>
+                    <label htmlFor="" className="text-xs dark:text-white">現在のパスワード</label>
                     <input 
                         type="password"  
                         id="name"
@@ -56,7 +56,7 @@ export default function ChangePasswordForm({ className = '' }: { className?: str
                 </div>
 
                 <div>
-                    <label htmlFor="" className="text-xs">新しいパスワード</label>
+                    <label htmlFor="" className="text-xs dark:text-white">新しいパスワード</label>
                     <input 
                         type="password" 
                         id="name"
@@ -71,7 +71,7 @@ export default function ChangePasswordForm({ className = '' }: { className?: str
                 </div>
 
                 <div>
-                    <label htmlFor="" className="text-xs">新しいパスワード(確認)</label>
+                    <label htmlFor="" className="text-xs dark:text-white">新しいパスワード(確認)</label>
                     <input 
                         type="password" 
                         id="name"

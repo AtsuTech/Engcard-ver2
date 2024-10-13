@@ -64,7 +64,7 @@ export const CardList:FC<CardProps> = ({
                         </div>
 
 
-                        <p className="w-full pl-2 truncate">
+                        <p className="w-full pl-2 truncate dark:text-white">
                             <span className="text-sm">{word}</span>
                         </p>
 
@@ -81,7 +81,7 @@ export const CardList:FC<CardProps> = ({
                             {category != null &&
                                 <Bage text={category} />
                             }
-                            <span className="text-sm">{word_mean}</span>
+                            <span className="text-sm dark:text-white">{word_mean}</span>
                         </p>
                     </div>
 

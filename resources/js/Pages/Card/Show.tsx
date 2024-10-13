@@ -9,11 +9,6 @@ import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
 import { CategoryContext } from '../Category/Partials/CategoryContext';
 import CategorySelect from './Partials/CategorySelect';
 import { router } from '@inertiajs/react';
-// import { FaDeleteLeft } from "react-icons/fa6";
-// import { CiImageOn } from "react-icons/ci";
-// import { MdOutlineClear } from "react-icons/md";
-// import { MdEdit } from "react-icons/md";
-// import { IoArrowBack } from "react-icons/io5";
 import Card from '@/Components/Special/Card';
 
 //データ型宣言
@@ -75,20 +70,20 @@ export default function Show({ auth, flashcard_uuid, categories, card, wordmeans
         <CommonLayout>
             <Head title={data.word} />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 /space-y-6">
-                        <Card
-                            memory="Apple"
-                            //imgflag={true}
-                            img_path={data.img_path}
-                            word={data.word}
-                            word_mean={data.word_mean}
-                            category={data.category}
-                            sub_word_mean={wordmeans}
-                            sentence={data.sentence}
-                            sentence_mean={data.sentence_mean}
-                            link={data.link}
-                        />                    
+            <div className="py-12 px-4 sm:px-0">
+                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 ">
+                    <Card
+                        memory="Apple"
+                        //imgflag={true}
+                        img_path={data.img_path}
+                        word={data.word}
+                        word_mean={data.word_mean}
+                        category={data.category}
+                        sub_word_mean={wordmeans}
+                        sentence={data.sentence}
+                        sentence_mean={data.sentence_mean}
+                        link={data.link}
+                    />  
                 </div>
             </div>
         </CommonLayout>

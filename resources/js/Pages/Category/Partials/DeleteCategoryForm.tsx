@@ -35,12 +35,12 @@ export default function DeleteCategoryForm({ id, item }: { id:number, item:strin
                 <button className="block w-16 h-7 ml-1 bg-rose-600 text-white rounded" type="button" onClick={DialogOpen}>削除</button>
 
                 <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
-                    <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
+                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+                    <DialogPanel className="max-w-lg space-y-4 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md">
                         <DialogTitle className="font-bold text-rose-600">カテゴリを削除</DialogTitle>
-                        <Description className="text-xs">
+                        <Description className="text-xs dark:text-white">
                             <p className="py-2">
-                                <span className="bg-slate-200 p-1 text-xs font-bold rounded-sm">{item}</span>を削除します。
+                                <span className="bg-slate-200 p-1 text-xs font-bold rounded-sm text-slate-700">{item}</span>を削除します。
                             </p>
                             このカテゴリを削除すると、このカテゴリが適応されている<br/>
                             全てのカードやサブの意味から削除されます。<br/>

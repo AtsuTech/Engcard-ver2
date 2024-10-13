@@ -35,15 +35,14 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
-                            {/* <GiBookshelf size={26} /> */}
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <BiSolidEditAlt size={26} />
                             <h5 className="font-bold">単語帳作成</h5>
                         </div> 
                         <form onSubmit={Submit} className="block w-full px-5 py-7 space-y-6 text-slate-700">
 
                             <div>
-                                <label className="block w-full my-1 text-xs">単語帳の名前を入力(後からでも名前を変更できます)</label>
+                                <label className="block w-full my-1 text-xs dark:text-white">単語帳の名前を入力(後からでも名前を変更できます)</label>
                                 <input type="text" className="w-full h-10 border border-gray-300 rounded-lg pl-2 /text-2xl" 
                                     placeholder="タイトル" 
                                     name="title"
@@ -67,7 +66,7 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
                             </div>
 
                             <div>
-                                <label className="block w-full my-1 text-xs">公開ステータス</label>
+                                <label className="block w-full my-1 text-xs dark:text-white">公開ステータス</label>
                                 <div className="flex w-full h-fit">
                                     {accesses.map( (access:any) =>(
                                         <div key={access.id} className="relative flex w-full ">
@@ -95,7 +94,7 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
                             </div>
 
                             <div>
-                                <label htmlFor="" className="block w-full my-1 text-xs">概要(記載は省略できます)</label>
+                                <label htmlFor="" className="block w-full my-1 text-xs dark:text-white">概要(記載は省略できます)</label>
                                 <textarea id="" cols={30} rows={10} name="description"
                                     className="w-full h-32 border border-gray-300 rounded-lg p-2"
                                     onChange={(e) => setData('description', e.target.value)}

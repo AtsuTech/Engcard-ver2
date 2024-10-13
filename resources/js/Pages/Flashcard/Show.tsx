@@ -10,6 +10,8 @@ import { SiReadme } from "react-icons/si";
 import { PiHeadCircuitFill } from "react-icons/pi";
 import { MdQuiz } from "react-icons/md";
 
+
+
 //データ型宣言
 type Flashcard = {
     id: number;
@@ -48,9 +50,14 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
 
                         <div className="relative flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-700">
                             <PageBack />
-                            <h5 className="text-1.5xl ml-1 font-bold">
-                                単語帳 : <span className="/block /p-2 /bg-amber-400">{flashcard.title}</span>
+                            
+                            <h5 className="flex items-center text-1.5xl ml-1 ">
+                                <Link href={route('flashcard.index')} className="flex items-center underline text-slate-500 dark:text-slate-400">
+                                    単語帳:
+                                </Link>
+                                <span className="ml-1 font-bold dark:text-white">{flashcard.title}</span>
                             </h5>
+                            
                             <div className="flex absolute right-2">
                                 {auth.user.id == flashcard.user.id &&
                                     <Link href={route('flashcard.edit',flashcard.uuid)} className="block text-sm text-amber-500 px-2 rounded-lg">
@@ -65,7 +72,7 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
                                 <div className="absolute flex right-0 mt-1">
                                     
                                         <div className="flex items-center w-fit space-x-2 /bg-rose-500">
-                                            <small>最終編集:{data.updated_at}</small>
+                                            <small className="dark:text-white">最終編集:{data.updated_at}</small>
 
                                             <div className="py-2">
                                                 <Link href={`/user/profile/${flashcard.user.personal_id}`}>
@@ -101,15 +108,15 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
 
                             {flashcard.cards.length != 0 && 
                                 <section className="flex items-center w-full space-x-2 my-5">
-                                    <Link href={route('read',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                    <Link href={route('read',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-300 text-slate-700 text-center rounded-full">
                                         <SiReadme size={22} />
                                         <span>読む</span>
                                     </Link>
-                                    <Link href={route('memory',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                    <Link href={route('memory',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-300 text-slate-700 text-center rounded-full">
                                         <PiHeadCircuitFill size={22} />
                                         <span>暗記</span>
                                     </Link>
-                                    <Link href={route('quiz',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-400 text-slate-700 text-center rounded-full">
+                                    <Link href={route('quiz',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-300 text-slate-700 text-center rounded-full">
                                         <MdQuiz size={22} />
                                         <span>クイズ</span>
                                     </Link>

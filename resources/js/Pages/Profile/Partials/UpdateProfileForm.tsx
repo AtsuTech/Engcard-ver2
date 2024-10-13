@@ -29,7 +29,7 @@ export default function UpdateProfileForm({ mustVerifyEmail, status, className =
     return (
         <section className="">
 
-            <h6 className="py-1">プロフィール画像編集</h6>
+            <h6 className="py-1 dark:text-white">プロフィール画像編集</h6>
             <div className='flex items-center sm:w-1/2 space-x-3 border border-gray-300 rounded-md py-2'>
                 <div>
                 {user.profile_photo_path != null ?
@@ -46,11 +46,11 @@ export default function UpdateProfileForm({ mustVerifyEmail, status, className =
                 }
             </div>
 
-            <h6 className="py-1 mt-4">プロフィール情報編集</h6>
+            <h6 className="py-1 mt-4 dark:text-white">プロフィール情報編集</h6>
             <form onSubmit={submit} className="space-y-3 border border-gray-300 rounded-md p-2">
                 <div>
 
-                    <label htmlFor="" className="text-xs">お名前</label>
+                    <label htmlFor="" className="text-xs dark:text-white">お名前</label>
                     <input 
                         type="text" 
                         id="name"
@@ -66,7 +66,7 @@ export default function UpdateProfileForm({ mustVerifyEmail, status, className =
 
                 <div>
 
-                    <label htmlFor="" className="text-xs">メールアドレス</label>
+                    <label htmlFor="" className="text-xs dark:text-white">メールアドレス</label>
                     <input 
                         id="email"
                         type="email"
@@ -81,7 +81,7 @@ export default function UpdateProfileForm({ mustVerifyEmail, status, className =
                 </div>
 
                 <div>
-                    <label htmlFor="" className="text-xs">コメント</label>
+                    <label htmlFor="" className="text-xs dark:text-white">コメント</label>
                     <textarea 
                         className="mt-1 block w-full border border-gray-300 rounded-md"
                         name="comment" 

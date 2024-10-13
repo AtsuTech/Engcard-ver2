@@ -21,7 +21,7 @@ export default function Card(
     console.log(sub_word_mean)
     return(
         <div className="w-full">
-            <div className="w-full md:w-96 mx-auto border rounded-lg bg-white overflow-hidden">
+            <div className="w-full md:w-96 mx-auto /border rounded-lg bg-white overflow-hidden">
 
                 <div className="relative">
 

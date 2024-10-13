@@ -44,9 +44,9 @@ export default function UpdateCategoryForm({ id, item }: { id:number, item:strin
                 <button className="block w-16 h-7 ml-1 bg-amber-400 text-white rounded" type="button" onClick={DialogOpen}>編集</button>
 
                 <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
-                    <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
-                        <DialogTitle className="font-bold">カテゴリを編集</DialogTitle>
+                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+                    <DialogPanel className="max-w-lg space-y-4 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md">
+                        <DialogTitle className="font-bold dark:text-white">カテゴリを編集</DialogTitle>
                         <div className="">
                             <input className="block w-full h-10 border border-slate-300 rounded-md ml-1" type="text" name="word_mean" value={data.item} onChange={(e) => setData('item',e.target.value)} />
                             

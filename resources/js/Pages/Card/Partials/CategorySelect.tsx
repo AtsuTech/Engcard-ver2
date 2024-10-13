@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, FC, useState } from "react";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
-//import { CategoryContext } from "@/Pages/Flashcard/Edit"; //他ファイルで宣言されたコンテキストをインポート
 import { CategoryContext } from "@/Pages/Category/Partials/CategoryContext";
 import { useContext } from 'react';//コンテキストで渡されたデータを扱う
 import CreateCategoryForm from "@/Pages/Category/Partials/CreateCategoryForm";
 import { spawn } from "child_process";
+
 
 export default function CategorySelect({selected, setData}: { selected: number, setData: any }) {
 
@@ -33,9 +33,9 @@ export default function CategorySelect({selected, setData}: { selected: number, 
 
     return(
         <Listbox value={selectedCategory} onChange={handleChange}>
-            <ListboxButton className={"flex items-center justify-center bg-white text-xs w-32 border border-slate-300 rounded-md px-1"}>
-                <div className="mr-1">
-                    {selectedCategory && <span>{selectedCategory.item}</span>}
+            <ListboxButton className={"flex items-center justify-center bg-white text-slate-700  text-xs w-[90px] border border-slate-300 rounded-md px-1"}>
+                <div className="mr-1 w-[50px] truncate">
+                    {selectedCategory && <span className="">{selectedCategory.item}</span>}
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 w-3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -43,7 +43,7 @@ export default function CategorySelect({selected, setData}: { selected: number, 
             </ListboxButton>
             <ListboxOptions anchor="bottom" className={"bg-white text-xs w-32 border border-slate-300 rounded-md"} onKeyDown={PreventCloseOptionByEnterKey}>
             {categories.map((category:any) => (
-                <ListboxOption key={category.id} value={category} className="data-[focus]:bg-blue-100 px-5 py-3">
+                <ListboxOption key={category.id} value={category} className="data-[focus]:bg-amber-100 px-5 py-3 truncate">
                 {category.item}
                 </ListboxOption>
             ))}

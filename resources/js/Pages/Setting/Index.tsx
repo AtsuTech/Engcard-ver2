@@ -3,25 +3,21 @@ import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { FaUpLong } from 'react-icons/fa6';
-
-
-// type User{
-//     name:string
-// }
+import { RiSettings5Fill } from "react-icons/ri";
 
 export default function Index({auth}: PageProps<{}>) {
     return (
         <CommonLayout>
             <Head title="設定" />
 
-            <div className="py-12">
-                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div className="py-0 sm:py-12">
+                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6 ">
                     <div className="/p-4 /sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-700">
-                            {/* <GiBookCover size={26} /> */}
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-700 dark:text-white">
+                            <RiSettings5Fill size={26} />
                             <h5 className="text-1.5xl ml-1 font-bold">設定</h5>
                         </div> 
-                        <div className="p-5">
+                        <div className="p-5 dark:text-white">
                             <div className="my-2">アカウント</div>
                             <ul className="border border-slate-300 rounded-md /space-y-2">
                                 <li className="">

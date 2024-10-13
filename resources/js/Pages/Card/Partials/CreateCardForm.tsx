@@ -70,10 +70,10 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
     return (
         <div>
 
-            <form className="w-full bg-white px-2">
+            <form className="w-full px-2 pb-5">
 
                 <div className="relative py-2">
-                    <div className="text-center font-bold text-slate-700">単語カード作成</div>
+                    <div className="text-center font-bold text-slate-700 dark:text-white">単語カード作成</div>
                 </div>
 
                 <div className="md:flex mb-1">

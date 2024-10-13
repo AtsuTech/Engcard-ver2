@@ -233,7 +233,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
 
 
     return(
-        <main className="h-screen text-gray-500 relative">
+        <main className="h-screen text-gray-500 relative dark:bg-gray-800">
             <Head title="クイズ" />
 
             <div className="absolute w-full z-10">
@@ -292,7 +292,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     <div className="flex w-full h-48 md:h-96 items-center justify-center">
                                         <div>
                                             <button className="block w-fit ml-auto mr-auto my-3 px-3 bg-slate-400 rounded-full text-white" onClick={Change}>もどる</button>
-                                            <div className="/text-6xl text-center">
+                                            <div className="/text-6xl text-center dark:text-white">
                                                 {card.word_mean.length > 20 ?
                                                     <span className="text-[14px] md:text-[20px]">{card.word_mean}</span>
                                                 :
@@ -306,7 +306,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                             :
                                 <div>
                                     <button className="block w-fit ml-auto mr-auto px-3 bg-amber-200 rounded-full" onClick={Change}>答えをみる</button>
-                                    <div className="flex w-full h-48 md:h-96 /border /border-gray-300 /rounded text-6xl items-center justify-center" id="card_id" data-id={card.id}>
+                                    <div className="flex w-full h-48 md:h-96 dark:text-white text-6xl items-center justify-center" id="card_id" data-id={card.id}>
                                         {card.word.length > 20 ?
                                             <span className="text-[14px] md:text-[20px]">{card.word}</span>
                                         :

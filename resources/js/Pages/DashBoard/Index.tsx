@@ -33,7 +33,7 @@ export default function Index({
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <MdDashboard size={26} />
                             <h5 className="font-bold">ダッシュボード</h5>
                         </div> 

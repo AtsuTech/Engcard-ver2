@@ -68,7 +68,7 @@ export default function UpdateParsonalIdForm({ className = '' }: { className?: s
                         isFocused
                         autoComplete="name"
                     /> */}
-                    <div className="py-3 text-xs">
+                    <div className="py-3 text-xs dark:text-white">
                         <ul className="list-disc px-4">
                             <li>ユーザーIDを変更すると、プロフィールのリンクも変更されます</li>
                             <li>他ユーザーと重複するIDは使えません</li>

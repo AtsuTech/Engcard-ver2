@@ -33,10 +33,10 @@ export default function UpdateAddSubMeanForm({card_id}:{card_id:number}){
             </div>
           
             <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
-                <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
-                    <DialogTitle className="font-bold">サブの意味を追加</DialogTitle>
-                    <Description>サブの意味は5個まで登録可能です</Description>
+                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+                <DialogPanel className="max-w-lg space-y-4 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md">
+                    <DialogTitle className="font-bold dark:text-white">サブの意味を追加</DialogTitle>
+                    <Description className="dark:text-white text-xs">サブの意味は5個まで登録可能です</Description>
                     <div className="">
                         <div className="">
                             <div className="flex items-center w-full h-10 border border-gray-300 p-1 rounded focus-within:border-amber-400">

@@ -36,10 +36,9 @@ export default function CreateCategoryForm({}: {}) {
                 新規追加
             </button>
             <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
-                <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
-                    <DialogTitle className="font-bold">カテゴリを追加</DialogTitle>
-                    {/* <Description>This will permanently deactivate your account</Description> */}
+                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+                <DialogPanel className="max-w-lg space-y-4 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md">
+                    <DialogTitle className="font-bold dark:text-white">カテゴリを追加</DialogTitle>
                     <form onSubmit={Submit}>
                         <input 
                             type="text" 

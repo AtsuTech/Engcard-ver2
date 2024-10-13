@@ -85,7 +85,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <MdEdit size={26} />
                             <h5 className="font-bold">単語帳編集</h5>
                         </div> 
@@ -101,15 +101,23 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                 </button>
                             </div>
                             <div className="/bg-slate-200 /mt-2 p-3 /rounded-md text-sm">
-                                
-                                <div>概要</div>
-                                <p>{data.description}</p>
+                                {data.description != null ?
+                                    <div className="w-full text-xs dark:text-white">
+                                        <p>
+                                            {data.description}
+                                        </p>
+                                    </div>
+                                    :
+                                    <div className="text-xs text-slate-500 dark:text-white">
+                                        <i>概要はありません</i>
+                                    </div>
+                                }
                             </div>
                         </div>
 
 
-                        <Dialog open={flashcardDialog} onClose={() => setFlashCardDialog(false)} className="relative z-50">
-                            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
+                        <Dialog open={flashcardDialog} onClose={() => setFlashCardDialog(false)} className="relative z-50 dark:text-white">
+                            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
                             <DialogPanel className="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all mx-auto w-[90%] sm:w-96 p-5 sm:mx-auto">
                                 <div className="w-full">
                                     <button 
@@ -137,7 +145,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                                                             id={access.id}
                                                         />
 
-                                                        <label htmlFor={access.id} className="w-20 h-10 text-xs text-center focus:outline-none peer-checked:bg-amber-400 peer-checked:text-white flex items-center justify-center">
+                                                        <label htmlFor={access.id} className="w-20 h-10 text-xs text-center focus:outline-none peer-checked:bg-amber-400 peer-checked:text-slate-900 flex items-center justify-center">
                                                             {access.name}
                                                         </label>
 
@@ -191,9 +199,9 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                             </div>
                         </Dialog>     
 
-                        <div className="flex items-center justify-center px-5 py-2">
+                        <div className="flex items-center justify-center px-5 py-2 dark:text-white">
                             単語カード
-                            <span className="bg-slate-200 ml-2 px-2 rounded-full">
+                            <span className="bg-slate-200 ml-2 px-2 rounded-full dark:text-slate-600">
                                 {cards.length}
                             </span>
 
@@ -241,10 +249,10 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                             </div>
                         }
 
-                        {/* 削除確認ダイアログ */}
+                        {/* カード作成ダイアログ */}
                         <Dialog open={createCardDialog} onClose={() => setCreateCardDialog(false)} className="relative z-50">
-                            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-slate-200/70">
-                                <DialogPanel className="/max-w-lg /space-y-4 border bg-white p-2 rounded-lg shadow-md overflow-hidden">
+                            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-slate-200/70 dark:bg-black/60">
+                                <DialogPanel className="bg-white dark:bg-gray-800 dark:text-white p-2 rounded-lg shadow-md overflow-hidden">
                                     <div className="flex w-full">
                                         <button 
                                             onClick={() => setCreateCardDialog(false)}

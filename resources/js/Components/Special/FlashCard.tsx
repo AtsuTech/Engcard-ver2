@@ -61,16 +61,16 @@ export default function FlashCard
                 </div>
 
 
-                <Link href={route('flashcard.show',uuid)} className="block w-full">
+                <Link href={route('flashcard.show',uuid)} className="block w-full dark:bg-slate-700">
                     <div className="p-2">
                         {description != null ?
-                            <div className="w-full text-xs">
+                            <div className="w-full text-xs dark:text-white">
                                 <p>
                                     {description}
                                 </p>
                             </div>
                             :
-                            <div className="text-xs text-slate-500">
+                            <div className="text-xs text-slate-500 dark:text-white">
                                 <i>概要はありません</i>
                             </div>
                         }

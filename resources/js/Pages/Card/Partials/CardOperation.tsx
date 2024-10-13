@@ -36,8 +36,8 @@ export const CardOperation:FC<{id:any,uuid:any,reload:any}> = ({id,uuid,reload})
                             
             {/* 削除確認ダイアログ */}
             <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} className="relative z-50">
-                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
-                <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
+                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+                <DialogPanel className="max-w-lg space-y-4 p-12 rounded-lg shadow-md bg-white dark:bg-gray-800 dark:text-white">
                     <DialogTitle className="font-bold">カード削除</DialogTitle>
                     <Description>本当によろしいですか？</Description>
                     <div className="flex space-x-2">

@@ -64,10 +64,9 @@ export default function UpdateSubMeanForm({ wordmean }: { wordmean:any }) {
 
                 {/* 編集ダイアログ */}
                 <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
-                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black">
-                    <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
-                        <DialogTitle className="font-bold">サブの意味を編集</DialogTitle>
-                        <Description>This will permanently deactivate your account</Description>
+                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+                    <DialogPanel className="max-w-lg space-y-4 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md">
+                        <DialogTitle className="font-bold dark:text-white">サブの意味を編集</DialogTitle>
                         <div className="">
                             <div className="flex items-center w-full h-10 border border-gray-300 p-1 rounded focus-within:border-amber-400">
                                 <CategorySelect selected={data.category_id} setData={setData} />
@@ -85,8 +84,8 @@ export default function UpdateSubMeanForm({ wordmean }: { wordmean:any }) {
 
                 {/* 削除ダイアログ */}
                 <Dialog open={deleteConfirm} onClose={() => setDeleteConfirm(false)} className="relative z-50 bg-black/30">
-                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 /bg-black/30">
-                    <DialogPanel className="max-w-lg space-y-4 border bg-white p-12 rounded-lg shadow-md">
+                    <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60 dark:text-white">
+                    <DialogPanel className="max-w-lg space-y-4 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md">
                         <DialogTitle className="font-bold">サブの意味を削除</DialogTitle>
                         <Description>削除してもよろしいですか?</Description>
                         <p>"{data.word_mean}"</p>

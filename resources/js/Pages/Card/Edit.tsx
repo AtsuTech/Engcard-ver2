@@ -91,21 +91,16 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
 
 
     return (
-        // <AuthenticatedLayout
-        //     user={auth.user}
-        //     header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">カード編集{data.word}{recentlySuccessful}</h2>}
-        // >
         <CommonLayout>
-            <Head title="単語帳を編集" />
+            <Head title="単語カード編集" />
 
-            <div className="py-12">
+            <div className="py-0 sm:py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 /space-y-6">
-                    <div className="/p-4 /sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                        {/*  */}
-                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600">
-                        <Link href={route('flashcard.show',flashcard_uuid)} className="block w-fit text-lg p-1 mr-2 bg-slate-200 rounded-full">
-                            <IoArrowBack />
-                        </Link>
+                    <div className="bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                        <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
+                            <Link href={route('flashcard.show',flashcard_uuid)} className="block w-fit text-lg p-1 mr-2 bg-slate-200 rounded-full dark:text-slate-600">
+                                <IoArrowBack />
+                            </Link>
                             <MdEdit size={26} />
                             <h5 className="font-bold">単語カード編集</h5>
                         </div> 
@@ -113,7 +108,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                         <CategoryContext.Provider value={categories}>
                             <form onSubmit={Submit} encType="multipart/form-data" className="px-3">
 
-                                <label className="block mt-3 text-xs" htmlFor="word">単語</label>
+                                <label className="block mt-3 text-xs dark:text-white" htmlFor="word">単語</label>
                                 <input type="text" 
                                     id="word"
                                     name="word" 
@@ -124,7 +119,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                     required
                                 />
 
-                                <label className="block mt-3 text-xs" htmlFor="word_mean">意味</label>
+                                <label className="block mt-3 text-xs dark:text-white" htmlFor="word_mean">意味</label>
                                 <div className="flex w-full h-10 bg-white border border-gray-300 rounded-lg p-1 focus-within:border-amber-400">
 
                                     {/* カテゴリのデータ、更新関数をコンテキストで渡す */}
@@ -142,7 +137,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                 </div>
 
                                 {/* サブの意味 */}
-                                <label className="block mt-3 text-xs" htmlFor="">サブの意味</label>
+                                <label className="block mt-3 text-xs dark:text-white" htmlFor="">サブの意味</label>
                                 <div className="flex items-center w-full bg-white border border-gray-300 p-1 rounded-lg">
                                     {wordmeans.length == 0 &&
                                         <div className="w-full">
@@ -163,7 +158,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                 </div>
 
                                 {/* 画像 */}
-                                <label htmlFor="img" className="block mt-3 text-xs">画像</label>
+                                <label htmlFor="img" className="block mt-3 text-xs dark:text-white">画像</label>
                                 <div className="flex items-center w-full border border-gray-300 rounded-lg bg-white p-1 space-x-2">
                                     {imgPreview != null ?
                                         <img src={imgPreview} className="block w-8 h-8 border border-gray-300 rounded-md" />
@@ -226,7 +221,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                     {/* <UpdateImageForm current={data.img_path} id={data.id} /> */}
                                 </div> 
 
-                                <label htmlFor="sentence" className="text-xs">例文</label>
+                                <label htmlFor="sentence" className="text-xs dark:text-white">例文</label>
                                 <textarea 
                                     id="sentence"
                                     name="sentence" 
@@ -238,7 +233,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                     >
                                 </textarea>
 
-                                <label className="block mt-3 text-xs" htmlFor="sentence_mean">例文の訳</label>
+                                <label className="block mt-3 text-xs dark:text-white" htmlFor="sentence_mean">例文の訳</label>
                                 <textarea 
                                     id="sentence_mean"
                                     name="sentence_mean" 
@@ -250,7 +245,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                     >
                                 </textarea>
 
-                                <label className="block mt-3 text-xs" htmlFor="link">関連リンク</label>
+                                <label className="block mt-3 text-xs dark:text-white" htmlFor="link">関連リンク</label>
                                 <input type="text" 
                                     id="link"
                                     name="link" 
