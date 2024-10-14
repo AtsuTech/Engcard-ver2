@@ -18,13 +18,16 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
     return (
         <>
             <Head title="ようこそ" />
-            <div className="text-black/50 bg-[url('https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg')] 
-                bg-no-repeat bg-cover /py-4 /lg:px-20 /md:p-20 h-screen">
+            <div 
+                style={{ backgroundImage: `url('/images_materials/wallpaper.jpg')` }}
+                className="text-black/50 /bg-[url('https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg')] 
+                bg-no-repeat bg-cover h-screen"
+            >
                 {/* <img id="background" className="absolute -left-20 top-0 max-w-[877px]" src="https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_1280.jpg" /> */}
                 <div className="w-full min-h-screen selection:bg-[#f7ea78] selection:text-white">
                     <div className="w-full relative px-2 lg:px-20">
 
-                        <header className="sticky top-3 w-full bg-amber-300/90 p-2 rounded-md z-40">
+                        <header className="sticky top-3 w-full /bg-amber-300/90 p-2 rounded-md z-40">
                             <div className="flex items-center w-full">
                                 <div className="flex justify-center">
                                     <div className="w-28">
@@ -106,11 +109,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
 
                         <main className="flex items-center justify-center h-[calc(100vh-58px)]">
                             <div className="lg:flex p-10 sm:p-0 items-center justify-center /h-[calc(100vh-58px)]">
-                                <section className="flex flex-col items-center justify-center /items-start gap-6 overflow-hidden p-6 /shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 md:row-span-3 lg:p-10 lg:pb-10">
+                                <section className="flex flex-col items-center justify-center gap-6 overflow-hidden p-6 text-center duration-300 md:row-span-3 lg:p-10 lg:pb-10">
                                 
-                                    <h1 className="text-4xl text-white /font-bold">
+                                    <h1 className="text-2xl sm:text-4xl text-white">
                                         英単語をどんどん覚えよう
                                     </h1>
+                                    <p className="text-sm sm:text-2xl text-white">Engcardは英単語の暗記に特化した単語帳サービスです</p>
 
                                     <Link
                                         href={route('register')}
@@ -174,13 +178,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                 <div className="flex flex-col lg:flex-row w-full lg:space-x-5 space-y-5 lg:space-y-0">
                                     <div className="lg:w-1/2 w-full">
                                         {/* <img src="https://cdn.pixabay.com/photo/2022/03/21/10/17/digitization-7082815_1280.jpg" alt="" className="block w-full h-60 bg-slate-600 sm:rounded-md" /> */}
-                                        <div style={{ backgroundImage: `url('/images_materials/welcome-pic-2.png')` }} className="bg-cover /bg-contain bg-center bg-no-repeat w-full h-[230px] md:h-[280px]"></div>
+                                        <div style={{ backgroundImage: `url('/images_materials/welcome-pic-2.png')` }} className="/bg-cover bg-contain bg-center bg-no-repeat w-full h-[230px] md:h-[280px]"></div>
                                     </div>
                                     <div className="flex items-center lg:w-1/2 w-full py-10">
                                         <p>
-                                            英単語の暗記に特化して作られたwebサービスです。
-                                            意味を複数登録でき、さらに画像や品詞、例文、外部リンクなどの情報を保存できます。
-                                            様々な情報と関連させて暗記することで、語彙の定着をサポートします。
+                                            英単語の暗記に特化して作られています。
+                                            複数の意味、さらに画像や品詞、例文、外部リンクなどの情報を保存できます。
+                                            様々な情報と単語を関連させて暗記することで、語彙の定着をサポートします。
                                         </p> 
                                     </div>
                                 </div>
