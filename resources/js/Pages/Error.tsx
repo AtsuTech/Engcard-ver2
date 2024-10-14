@@ -1,5 +1,6 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import { Link, Head } from '@inertiajs/react';
+import { IoMdArrowBack } from "react-icons/io";
 
 export default function ErrorPage({ status }:{status:number}) {
     const title = {
@@ -22,19 +23,20 @@ export default function ErrorPage({ status }:{status:number}) {
   
     return (
         <main className="flex items-center justify-center h-screen dark:bg-gray-900">
-            <div className=''>
+            <div className='/bg-amber-700'>
                 <div className="w-[200px] mx-auto">
                     <ApplicationLogo />
                 </div>
                 
-                <div className="text-slate-500 my-10">
+                <div className="text-slate-500 my-10 text-center">
                     <h1 className="font-bold text-[25px] ">{title}</h1>
                     <div>{description}</div>
                 </div>
 
                 <div className="my-10">
-                    <Link href="/" className="block w-64 text-center rounded-full bg-amber-400 p-3 shadow-lg">
-                        トップページ
+                    <Link href="/" className="flex items-center justify-center space-x-1 w-full text-center rounded-full bg-amber-400 p-3 shadow-lg">
+                        <IoMdArrowBack />
+                        <span>トップページ</span>
                     </Link>                    
                 </div>
 
