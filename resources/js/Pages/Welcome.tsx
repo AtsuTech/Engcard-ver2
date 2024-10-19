@@ -4,6 +4,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Card from '@/Components/Special/Card';
 import React, { useEffect, useRef, FC, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
     const handleImageError = () => {
@@ -111,21 +112,22 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                             <div className="lg:flex p-10 sm:p-0 items-center justify-center /h-[calc(100vh-58px)]">
                                 <section className="flex flex-col items-center justify-center gap-6 overflow-hidden p-6 text-center duration-300 md:row-span-3 lg:p-10 lg:pb-10">
                                 
-                                    <h1 className="text-2xl sm:text-4xl text-white">
+                                    <h1 className="text-[23px] sm:text-4xl text-white /animate-bounce">
                                         英単語をどんどん覚えよう
                                     </h1>
-                                    <p className="text-sm sm:text-2xl text-white">Engcardは英単語の暗記に特化した単語帳サービスです</p>
+                                    <p className="text-[13px] sm:text-[20px] text-white">Engcardは英単語の暗記に特化した単語帳サービスです</p>
 
                                     <Link
                                         href={route('register')}
                                         //className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        className="text-white bg-amber-400 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-2xl px-6 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                                        className="flex items-center space-x-3 text-slate-800 bg-amber-400 hover:bg-amber-500 font-medium rounded-full text-xl px-6 py-2.5 me-2 mb-2"
                                     >
-                                        アカウント作成
+                                        <span>アカウント作成</span>
+                                        <FaLongArrowAltRight />
                                     </Link>
                                 </section>
 
-                                <section className='w-full sm:w-96 mx-auto'>
+                                <section className='w-[300px] sm:w-96 mx-auto'>
                                     <Card
                                         memory="true"
                                         //imgflag={true}
