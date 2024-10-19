@@ -259,8 +259,8 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                             )) }                            
                         </div>
                         {cards.length == 0 &&
-                            <div className='flex items-center justify-center h-[500px] text-sm'>
-                                <p>単語カードを追加するには<span className='underline text-amber-500 cursor-pointer' onClick={() => setCreateCardDialog(true)}>単語カード作成ボタン</span>を押してください</p>
+                            <div className='flex items-center justify-center  min-h-[600px] text-sm'>
+                                <p>単語カードはまだありません<span className='underline text-amber-500 cursor-pointer' onClick={() => setCreateCardDialog(true)}>つくる</span></p>
                             </div>
                         }
 

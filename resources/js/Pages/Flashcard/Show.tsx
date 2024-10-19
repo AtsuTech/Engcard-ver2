@@ -182,33 +182,35 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
                             }
 
 
-                            {flashcard.cards.length == 0 && 
-                                <div className="flex items-center justify-center w-full h-64 text-slate-600">単語カードが登録されていません</div>
-                            }
-                            <section className="space-y-2">
-                                <div className="w-fit px-2 text-sm bg-slate-200 rounded-full ml-auto mr-auto my-10">
-                                    カード:{flashcard.cards.length}枚
-                                </div>
-                                {flashcard.cards.map( (card:any) => (
-                                    <div key={card.id}>
-                                        <CardList 
-                                            id ={card.id}
-                                            uuid ={card.uuid}
-                                            memory ={card.memory}
-                                            word ={card.word}
-                                            word_mean ={card.word_mean}
-                                            category ={card.category}
-                                            sub_word_mean={card.wordmeans}
-                                            sentence={card.sentence}
-                                            sentence_mean={card.sentence_mean}
-                                            link={card.link}
-                                            user_id ={card.user_id}
-                                            flashcard_id ={card.flashcard_id}
-                                            img_path ={card.img_path}
-                                        /> 
+                            {flashcard.cards.length == 0 ?
+                                <div className="flex items-center justify-center w-full min-h-[600px] text-slate-600">単語カードが登録されていません</div>
+                                :
+                                <section className="space-y-2">
+                                    <div className="w-fit px-2 text-sm bg-slate-200 rounded-full ml-auto mr-auto my-10">
+                                        カード:{flashcard.cards.length}枚
                                     </div>
-                                ))}
-                            </section>                               
+                                    {flashcard.cards.map( (card:any) => (
+                                        <div key={card.id}>
+                                            <CardList 
+                                                id ={card.id}
+                                                uuid ={card.uuid}
+                                                memory ={card.memory}
+                                                word ={card.word}
+                                                word_mean ={card.word_mean}
+                                                category ={card.category}
+                                                sub_word_mean={card.wordmeans}
+                                                sentence={card.sentence}
+                                                sentence_mean={card.sentence_mean}
+                                                link={card.link}
+                                                user_id ={card.user_id}
+                                                flashcard_id ={card.flashcard_id}
+                                                img_path ={card.img_path}
+                                            /> 
+                                        </div>
+                                    ))}
+                                </section>   
+                            }
+                            
                         </div>
                     </div>
                 </div>

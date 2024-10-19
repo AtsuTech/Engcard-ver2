@@ -43,7 +43,7 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
                         </div> 
                         <div className="p-5">
                             {flashcards.length == 0 ? 
-                                <div className='flex items-center justify-center h-64'>
+                                <div className='flex items-center justify-center  min-h-[600px] /h-64'>
                                     <p className='text-gray-600 text-sm'>まだ単語帳はありません。</p>
                                     <Link href={route('flashcard.create')} className='text-amber-600 text-sm underline'>つくる</Link>
                                 </div>
