@@ -15,6 +15,7 @@ import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react
 import { MdEdit } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
+import ClosePageBack from '@/Components/ClosePageBack';
 
 //データ型宣言
 type Access = {
@@ -99,11 +100,14 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <MdEdit size={26} />
                             <h5 className="font-bold">単語帳編集</h5>
+                            <div className='ml-auto sm:hidden flex items-center justify-center'>
+                                <ClosePageBack />
+                            </div>
                         </div> 
 
                         <div className="/p-5 border border-slate-300 m-5 overflow-hidden rounded-lg">
                             
-                            <div className="relative flex items-center bg-amber-200 p-2 /py-2 /border-b-2 border-b-amber-400">
+                            <div className="relative flex items-center bg-yellow-300 p-2 /py-2 /border-b-2 border-b-amber-400">
                                 <h5 className="font-bold">{flashcard.title}</h5>
                                 <button
                                     className="absolute right-1 px-2 text-slate-500"

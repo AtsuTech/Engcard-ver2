@@ -17,6 +17,8 @@ import { CiImageOn } from "react-icons/ci";
 import { MdOutlineClear } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
+import ClosePageBack from '@/Components/ClosePageBack';
+
 
 //データ型宣言
 type Category = {
@@ -103,6 +105,9 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                             </Link>
                             <MdEdit size={26} />
                             <h5 className="font-bold">単語カード編集</h5>
+                            <div className='ml-auto sm:hidden flex items-center justify-center'>
+                                <ClosePageBack />
+                            </div>
                         </div> 
 
                         <CategoryContext.Provider value={categories}>

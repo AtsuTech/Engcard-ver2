@@ -46,8 +46,8 @@ export default function FlashCard
                 <div className="flex w-full items-center h-8 bg-yellow-200 px-1 py-0.5">
                     {access_view &&
                         <div className="w-[50px]">
-                            {access == 0 && <span className="block bg-slate-300 py-0.5 px-2 text-[9px] text-center rounded-full">{access_name}</span>}
-                            {access == 1 && <span className="block bg-slate-300 py-0.5 px-2 text-[9px] text-center rounded-full">{access_name}</span>}
+                            {access == 0 && <span className="block bg-slate-300 py-0.5 px-1 text-[9px] text-center rounded-full">{access_name}</span>}
+                            {access == 1 && <span className="block bg-amber-400 py-0.5 px-1 text-[9px] text-center rounded-full">{access_name}</span>}
                         </div>                     
                     }
     

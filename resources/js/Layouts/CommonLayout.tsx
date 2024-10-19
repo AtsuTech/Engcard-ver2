@@ -201,7 +201,7 @@ export default function Guest({ children }: PropsWithChildren) {
 
             </nav>
 
-            <div className="/flex /w-full">
+            <div className=" sm:min-h-screen">
                 {children}
             </div>
             <Footer />
