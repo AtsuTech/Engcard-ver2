@@ -2,8 +2,6 @@ import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import React, { useEffect, useRef, FC, useState } from "react";
-import NameAvotor from './NameAvator';
-//import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
 import FlashCardOperationDropDown from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
 import { MdFavorite } from "react-icons/md";
 
