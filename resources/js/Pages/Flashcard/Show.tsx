@@ -10,8 +10,7 @@ import OperateFlashcardFavorite from '../FlashcardFavorite/Partials/OperateFlash
 import { SiReadme } from "react-icons/si";
 import { PiHeadCircuitFill } from "react-icons/pi";
 import { MdQuiz } from "react-icons/md";
-
-
+import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 
 //データ型宣言
 type Flashcard = {
@@ -67,6 +66,8 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
             }
         }
     }, [flashcard.user.id]);
+
+    const [quizDialog,setQuizDialog] = useState(false);
 
 
     return (
@@ -146,11 +147,36 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
                                         <PiHeadCircuitFill size={22} />
                                         <span>暗記</span>
                                     </Link>
-                                    {flashcard.cards.length >= 10 && 
+                                    {flashcard.cards.length >= 10 ?
                                         <Link href={route('quiz',flashcard.uuid)} className="/block flex items-center justify-center space-x-1 w-full py-3 bg-amber-300 text-slate-700 text-center rounded-full">
                                             <MdQuiz size={22} />
                                             <span>クイズ</span>
                                         </Link>
+                                        :
+                                        <>
+                                            <button
+                                                className="flex items-center justify-center space-x-1 w-full py-3 bg-amber-300 text-slate-700 text-center rounded-full"
+                                                onClick={() => setQuizDialog(true)}
+                                            >
+                                                <MdQuiz size={22} />
+                                                <span>クイズ</span>
+                                            </button>
+                                            <Dialog open={quizDialog} onClose={() => setQuizDialog(false)} className="relative z-50">
+                                                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+                                                    <DialogPanel className="max-w-lg space-y-4 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md">
+                                                        <DialogTitle className="font-bold">クイズ</DialogTitle>
+                                                        <Description className="text-sm">
+                                                        単語カードを10枚以上作るとクイズ機能が使えます。
+                                                        </Description>
+                                                        <div className="">                                                        
+                                                            <button type="button" className="block w-full h-8 bg-amber-400 text-white rounded-full font-bold" onClick={()=>setQuizDialog(false)}>
+                                                                OK
+                                                            </button>
+                                                        </div>
+                                                    </DialogPanel>
+                                                </div>
+                                            </Dialog> 
+                                        </>
                                     }
                                 </section>
                             }
