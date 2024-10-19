@@ -1,8 +1,23 @@
 import { FC } from "react";
+import { useState} from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 
-export const FlashCardOperationDropDown:FC<{id:any;uuid:string}> = ({id,uuid})=> {
+export default function FlashCardOperationDropDown (
+    {
+        id, 
+        uuid,
+        item,
+    }
+    :
+    {
+        id:any,
+        uuid:string,
+        item:string,
+    }
+){ 
+
 
     const {
         data,
@@ -15,6 +30,9 @@ export const FlashCardOperationDropDown:FC<{id:any;uuid:string}> = ({id,uuid})=>
         password: '',
     });
 
+    //削除ダイアログ制御
+    const [deleteDialog,setDeleteDialog] = useState(false);
+
     //削除処理
     const Destroy = (e :any) =>{
         e.preventDefault();
@@ -26,6 +44,7 @@ export const FlashCardOperationDropDown:FC<{id:any;uuid:string}> = ({id,uuid})=>
     }
 
     return (
+        <>
         <Menu>
             <MenuButton>
                 <div className="/bg-slate-500">
@@ -42,13 +61,34 @@ export const FlashCardOperationDropDown:FC<{id:any;uuid:string}> = ({id,uuid})=>
                     </Link>
                 </MenuItem>
                 <MenuItem>
-                    <button onClick={Destroy} className="block w-full data-[focus]:bg-amber-100 p-2 rounded-lg text-rose-600 text-left">
+                    <button onClick={() => setDeleteDialog(true)} className="block w-full data-[focus]:bg-amber-100 p-2 rounded-lg text-rose-600 text-left">
                         削除
                     </button>
                 </MenuItem>
             </MenuItems>        
         
         </Menu>
+        {/* 削除確認ダイアログ */}
+        <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} className="relative z-50">
+            <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
+            <DialogPanel className="max-w-lg space-y-4 p-12 rounded-lg shadow-md bg-white dark:bg-gray-800 dark:text-white">
+                <DialogTitle className="font-bold">単語帳削除</DialogTitle>
+                <Description className="text-xs">
+                    "{item}"を削除します。<br/>
+                    本当によろしいですか？
+                </Description>
+                <div className="flex space-x-2">
+                    <button type="button" className="block px-3 h-8 bg-gray-400 text-white rounded-full font-bold" onClick={() => setDeleteDialog(false)}>
+                        キャンセル
+                    </button>
+                    <button type="button" className="block px-3 h-8 bg-rose-600 text-white rounded-full font-bold" onClick={Destroy}>
+                        削除
+                    </button>
+                </div>
+            </DialogPanel>
+            </div>
+        </Dialog> 
+        </>
     )
 }
 

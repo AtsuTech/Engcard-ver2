@@ -102,9 +102,9 @@ export default function FlashcardStatusBar({
                 grid: {
                     display: false,
                 },
-                afterFit: (scaleInstance:any) => {
-                    scaleInstance.width = 210;
-                },
+                // afterFit: (scaleInstance:any) => {
+                //     scaleInstance.width = 210;
+                // },
             },
 
             x:{

@@ -5,7 +5,8 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import React, { useEffect, useRef, FC, useState } from "react";
 import { title } from 'process';
 import DesignedPrimaryButton from '@/Components/DesignedPrimaryButton';
-import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
+import FlashCardOperationDropDown from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
+//import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
 import CreateFlashcardFavoriteForm from '../FlashcardFavorite/Partials/CreateFlashcardFavoriteForm';
 import { GiBookCover } from "react-icons/gi";
 import FlashCard from '@/Components/Special/FlashCard';
@@ -41,25 +42,33 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
                             </h5>
                         </div> 
                         <div className="p-5">
-
-                            {flashcards.map( (flashcard:any) => (
-                                <div key={flashcard.uuid}>
-                                    <FlashCard
-                                        id={flashcard.id}
-                                        uuid={flashcard.uuid}
-                                        title={flashcard.title}
-                                        description={flashcard.description}
-                                        access={flashcard.access.type}
-                                        access_name={flashcard.access.name}
-                                        access_view={true}
-                                        cards_length={flashcard.cardlength}
-                                        favorite={flashcard.favorite}
-                                        user_name={flashcard.user.name}
-                                        user_img={flashcard.user.profile_photo_path}
-                                        operation_allow={true}
-                                    />
+                            {flashcards.length == 0 ? 
+                                <div className='flex items-center justify-center h-64'>
+                                    <p className='text-gray-600 text-sm'>まだ単語帳はありません。</p>
+                                    <Link href={route('flashcard.create')} className='text-amber-600 text-sm underline'>つくる</Link>
                                 </div>
-                            ))}
+                            :
+                                <div>
+                                    {flashcards.map( (flashcard:any) => (
+                                        <div key={flashcard.uuid}>
+                                            <FlashCard
+                                                id={flashcard.id}
+                                                uuid={flashcard.uuid}
+                                                title={flashcard.title}
+                                                description={flashcard.description}
+                                                access={flashcard.access.type}
+                                                access_name={flashcard.access.name}
+                                                access_view={true}
+                                                cards_length={flashcard.cardlength}
+                                                favorite={flashcard.favorite}
+                                                user_name={flashcard.user.name}
+                                                user_img={flashcard.user.profile_photo_path}
+                                                operation_allow={true}
+                                            />
+                                        </div>
+                                    ))}                                    
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

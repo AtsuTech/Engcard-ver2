@@ -66,6 +66,15 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
     let [flashcardDialog, setFlashCardDialog] = useState(false);
     const [createCardDialog,setCreateCardDialog] = useState(false);
 
+    const EditFormClose = () =>{
+        
+        // setData('access_id', Number(flashcard.access_id));
+        // setData('title', flashcard.title);
+        // setData('description', flashcard.description);
+        //reset();
+        setFlashCardDialog(false)
+    }
+
     //単語帳バリデーション
     const [disabled ,setDisabled] = useState(false);
     const [maxTitleLength,setMaxTitleLength] = useState(20);
@@ -73,7 +82,9 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
     //データ送信
     const Submit = (e :any) =>{
         e.preventDefault();
-        patch(route("flashcard.update",data.id));
+        patch(route("flashcard.update",data.id),{
+            //onSuccess: () => reset(),
+        });
         setFlashCardDialog(false);
     }
 
@@ -116,12 +127,12 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                         </div>
 
 
-                        <Dialog open={flashcardDialog} onClose={() => setFlashCardDialog(false)} className="relative z-50 dark:text-white">
+                        <Dialog open={flashcardDialog} onClose={EditFormClose} className="relative z-50 dark:text-white">
                             <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
                             <DialogPanel className="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all mx-auto w-[90%] sm:w-96 p-5 sm:mx-auto">
                                 <div className="w-full">
                                     <button 
-                                        onClick={()=>setFlashCardDialog(false)}
+                                        onClick={EditFormClose}
                                         className='block ml-auto'
                                     >
                                         <RxCross1 size={26} />

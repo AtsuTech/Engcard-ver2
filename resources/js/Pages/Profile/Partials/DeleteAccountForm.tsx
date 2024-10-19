@@ -55,7 +55,7 @@ export default function DeleteAccountForm({ className = '' }: { className?: stri
             </header>
 
             <div className="flex items-center justify-center h-32">
-                <button onClick={confirmUserDeletion} className="flex items-center text-rose-600 w-fit ml-auto mr-auto space-x-1">
+                <button onClick={confirmUserDeletion} className="flex items-center bg-rose-600 text-white p-3 rounded-md /text-rose-600 w-fit ml-auto mr-auto space-x-1">
                     <span>アカウント削除に進む</span>
                     <GrLinkNext />
                 </button>                
@@ -67,7 +67,7 @@ export default function DeleteAccountForm({ className = '' }: { className?: stri
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    <h2 className="text-lg font-medium text-rose-600 dark:text-gray-100">
                         本当にアカウントを削除してもよろしいですか？
                     </h2>
 
@@ -78,17 +78,6 @@ export default function DeleteAccountForm({ className = '' }: { className?: stri
                     <div className="mt-6">
                         <InputLabel htmlFor="password" value="Password" className="sr-only" />
 
-                        {/* <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-3/4"
-                            isFocused
-                            placeholder="Password"
-                        /> */}
                         <input 
                             id="password"
                             type="password"
@@ -113,13 +102,9 @@ export default function DeleteAccountForm({ className = '' }: { className?: stri
                             キャンセル
                         </button>
 
-                        {/* <DangerButton className="ms-3" disabled={processing}>
-                            アカウント削除
-                        </DangerButton> */}
-
                         <button 
                             className="rounded-full border border-rose-700 text-white bg-rose-700 px-3 py-2 text-xs font-semibold"
-                            onClick={closeModal}
+                            onClick={deleteUser}
                         >
                             アカウント削除
                         </button>

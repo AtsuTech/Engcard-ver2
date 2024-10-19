@@ -3,7 +3,8 @@ import { PageProps } from '@/types';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import React, { useEffect, useRef, FC, useState } from "react";
 import NameAvotor from './NameAvator';
-import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
+//import { FlashCardOperationDropDown } from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
+import FlashCardOperationDropDown from '@/Pages/Flashcard/Partials/FlashCardOperationDropDown';
 import { MdFavorite } from "react-icons/md";
 
 export default function FlashCard
@@ -55,7 +56,7 @@ export default function FlashCard
 
                     {operation_allow && 
                         <div className="flex w-[30px] items-center ml-auto">
-                            <FlashCardOperationDropDown id={id} uuid={uuid} />
+                            <FlashCardOperationDropDown id={id} uuid={uuid} item={title} />
                         </div>                    
                     }
                 </div>
