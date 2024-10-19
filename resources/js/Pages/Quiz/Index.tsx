@@ -233,7 +233,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
 
 
     return(
-        <main className="h-screen text-gray-500 relative dark:bg-gray-800">
+        <main className="h-[100svh] text-gray-500 relative dark:bg-gray-800">
             <Head title="クイズ" />
 
             <div className="absolute w-full z-10">

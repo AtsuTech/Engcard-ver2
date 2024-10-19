@@ -73,36 +73,32 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     }
 
     return(
-        <main className="h-screen text-gray-500 bg-slate-300 dark:bg-gray-800">
+        <main className="h-[100svh] text-gray-500 bg-slate-300 dark:bg-gray-800">
             <Head title="暗記" />
 
             <div className="fixed w-full z-20 flex items-center h-12 justify-center">
 
-                <div className="w-full ml-3">
+                <div className="w-fit ml-3 bg-white rounded-md p-2">
                     {turn+1}/{cards.length}
-                </div>                
-                <div className="w-fit flex justify-end px-2 h-12 /bg-red-400">
-                    <button onClick={Finish}>
+                </div>   
+                <div className="w-full flex justify-end px-2 py-1">
+                    <button 
+                        className='flex items-center justify-center w-8 h-8 bg-slate-800 text-white rounded-full'
+                        onClick={Finish}
+                    >
                         <RxCross2 size={25} />
                     </button>
                 </div>
 
             </div>
 
-            <div className="max-w-3xl mx-auto w-full flex items-center justify-center h-full">
+            <div className="max-w-3xl mx-auto w-full flex items-center justify-center h-[100svh]">
                 <div className="w-full">
                     {selected_card.map((card:any) => (
                         <div key={card.word} className="flex w-full">
 
-                            <div className="max-w-3xl w-full mx-auto fixed bottom-5 px-10">
-                                {change ?
-                                    <button className="block w-full ml-auto mr-auto px-3 py-2 bg-amber-200 rounded-full my-2" onClick={Change}>単語に戻る</button>
-                                :
-                                    <button className="block w-full ml-auto mr-auto px-3 py-2 bg-slate-100 rounded-full my-2" onClick={Change}>意味を見る</button>
-                                }                                
-                            </div>
-
-                            <div className="flex items-center w-[40px] mx-1 h-screen">
+                            {/* 前に戻る */}
+                            <div className="flex items-center w-[40px] mx-1 h-[100svh]">
                                 {turn > 0 &&
                                     <button 
                                         className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
@@ -111,11 +107,12 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     </button>
                                 }                                
                             </div>
-                            <div className="flex items-center justify-center w-[calc(100%-80px)] h-screen">
+
+                            {/* 単語・意味表示部 */}
+                            <div className="flex items-center justify-center w-[calc(100%-80px)] h-[100svh]">
                                 
                                 {change ?
                                     <div className="w-full px-2">
-                                        {/* <button className="block w-fit ml-auto mr-auto px-3 bg-amber-200 rounded-full my-2" onClick={Change}>単語に戻る</button> */}
                                         <div 
                                             className="relative flex w-full h-48 md:h-96 text-[20px] md:text-[32px] items-center justify-center border border-slate-200 shadow-lg bg-amber-100" 
                                             id="card_id" 
@@ -129,7 +126,6 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
 
                                 :
                                     <div className="w-full px-2">
-                                        {/* <button className="block w-fit ml-auto mr-auto px-3 bg-slate-300 rounded-full my-2" onClick={Change}>意味を見る</button> */}
                                         <div 
                                             className="relative flex w-full h-48 md:h-96 text-3xl md:text-6xl items-center justify-center border border-slate-200 dark:border-slate-500 shadow-lg bg-white dark:bg-gray-800" 
                                             id="card_id" 
@@ -148,7 +144,8 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                 }
                             </div>
 
-                            <div className="flex items-center w-[40px] mx-1 h-screen">
+                            {/* 次に進む */}
+                            <div className="flex items-center w-[40px] mx-1 h-[100svh]">
                                 {turn < cards.length - 1 &&
                                     <button 
                                         className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
@@ -156,6 +153,15 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                         <FaArrowRight />
                                     </button>
                                 }
+                            </div>
+
+                            {/* 画面下固定切り替えボタン */}
+                            <div className="max-w-3xl w-full mx-auto fixed bottom-5 px-10">
+                                {change ?
+                                    <button className="block w-full ml-auto mr-auto px-3 py-2 bg-amber-200 rounded-full my-2" onClick={Change}>単語に戻る</button>
+                                :
+                                    <button className="block w-full ml-auto mr-auto px-3 py-2 bg-slate-100 rounded-full my-2" onClick={Change}>意味を見る</button>
+                                }                                
                             </div>
 
                         </div>

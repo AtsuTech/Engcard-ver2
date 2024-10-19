@@ -73,18 +73,21 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
     }
 
     return(
-        <main className="h-screen text-gray-500 bg-slate-300 dark:bg-gray-800">
+        <main className="h-[100svh] text-gray-500 bg-slate-300 dark:bg-gray-800">
             <Head title="読む" />
 
             <header className="fixed w-full z-20 h-12">
 
-                <div className="flex items-center">
+                <div className="flex items-center py-1">
                     
-                    <div className="w-full ml-3">
+                    <div className="w-fit ml-3 bg-white rounded-md p-2">
                         {turn+1}/{cards.length}
                     </div>   
-                    <div className="w-fit flex justify-end px-2 h-12">
-                        <button onClick={Finish}>
+                    <div className="w-full flex justify-end px-2 py-1">
+                        <button 
+                            className='flex items-center justify-center w-8 h-8 bg-slate-800 text-white rounded-full'
+                            onClick={Finish}
+                        >
                             <RxCross2 size={25} />
                         </button>
                     </div>
@@ -97,7 +100,7 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                     {selected_card.map((card:any) => (
                         <div key={card.word} className="flex w-full">
 
-                            <div className="flex items-center w-[40px] mx-1 h-screen">
+                            <div className="flex items-center w-[40px] mx-1 h-[100svh]">
                                 {turn > 0 &&
                                     <button 
                                         className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
@@ -106,7 +109,8 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     </button>
                                 }                                
                             </div>
-                            <div className="flex items-center justify-center w-[calc(100%-80px)] /bg-slate-200 h-screen">
+
+                            <div className="flex items-center justify-center w-[calc(100%-80px)] h-[100svh]">
                                 <Card
                                     memory={card.memory}
                                     img_path={card.img_path}
@@ -118,12 +122,9 @@ export default function Index({ auth, cards, flashcard_uuid, flashcard_user_id, 
                                     sentence_mean={card.sentence_mean}
                                     link={card.link}
                                 />
-                                {/* <div className='bg-red-700 w-full'>
-                                    sss
-                                </div> */}
                             </div>
 
-                            <div className="flex items-center w-[40px] mx-1 h-screen">
+                            <div className="flex items-center w-[40px] mx-1 h-[100svh]">
                                 {turn < cards.length - 1 &&
                                     <button 
                                         className="flex items-center justify-center bg-slate-100 w-full h-10 rounded-full"
