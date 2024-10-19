@@ -38,6 +38,7 @@ export default function FlashCard
         operation_allow:boolean,
     })
 {
+    sessionStorage.removeItem('viewCounted');//閲覧記録のリセット
     return(
         <div>
             <div  key={id} className="block w-full h-fit mb-4 /border-2 /border-yellow-200 rounded-lg shadow-md overflow-hidden">
