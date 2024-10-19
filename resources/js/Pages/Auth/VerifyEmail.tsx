@@ -31,7 +31,8 @@ export default function VerifyEmail({ status }: { status?: string }) {
 
             {status === 'verification-link-sent' && (
                 <div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                    A new verification link has been sent to the email address you provided during registration.
+                    {/* A new verification link has been sent to the email address you provided during registration. */}
+                    新しい認証リンクが登録時に入力したあなたのメールアドレスに送信完了しました。
                 </div>
             )}
 
