@@ -23,6 +23,7 @@ type Flashcard = {
     updated_at: string;
     user_id: number;
     user:any;
+    viewed_count: number;
     cards:[];
 };
 
@@ -38,6 +39,7 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
         favorite: flashcard.favorite,
         updated_at: flashcard.updated_at,
         user_id: flashcard.user_id,
+        viewed_count: flashcard.viewed_count,
     });
 
     const [viewCounted, setViewCounted] = useState(false);  // カウント済みかどうかを記録
@@ -102,9 +104,9 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
                             <div className="relative h-10 my-2 text-xs">
                                 <div className="absolute flex right-0 mt-1">
                                     
-                                        <div className="flex items-center w-fit space-x-2 /bg-rose-500">
+                                        <div className="flex items-center w-fit space-x-2">
+                                            <small className="dark:text-white bg-slate-200 px-1 rounded-full">{data.viewed_count} views</small>
                                             <small className="dark:text-white">最終編集:{data.updated_at}</small>
-
                                             <div className="py-2">
                                                 <Link href={`/user/profile/${flashcard.user.personal_id}`}>
                                                 {flashcard.user.profile_photo_path ?

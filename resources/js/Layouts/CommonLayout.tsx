@@ -7,6 +7,14 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 //import { PropsWithChildren } from 'react';
 import { usePage } from '@inertiajs/react';
 import Footer from './Partials/Footer';
+import { MdDashboard } from "react-icons/md";
+import { GiBookshelf } from "react-icons/gi";
+import { GiBookCover } from "react-icons/gi";
+import { FaUserAlt } from "react-icons/fa";
+import { RiSettings5Fill } from "react-icons/ri";
+import { LuLogOut } from "react-icons/lu";
+import { BiSolidEditAlt } from "react-icons/bi";
+
 
 export default function Guest({ children }: PropsWithChildren) {
     const { auth } :any= usePage().props;  
@@ -153,43 +161,72 @@ export default function Guest({ children }: PropsWithChildren) {
                 {/* スマホ時メニュー */}
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="absolute top-18 right-0 z-50 w-1/2 h-[calc(100%-40px)] bg-slate-700/95 transition duration-150 ease-in-out">
-                        <ul className="space-y-8 pl-4 py-3 text-white">
+                        <ul className=" space-y-10 px-4 py-10 text-white h-full">
+                            <li>
+                                <Link 
+                                    href={route('flashcard.create')}
+                                    className='flex items-center justify-center text-slate-800 bg-yellow-300 py-2 rounded-full'
+                                >
+                                    <BiSolidEditAlt size={20} />
+                                    つくる
+                                </Link>
+                            </li>
                             {auth.user &&
                             <li>
-                                <Link href={route('dashboard')}>
+                                <Link 
+                                    href={route('dashboard')}
+                                    className='flex items-center'
+                                >
+                                    <MdDashboard size={20} />
                                     ダッシュボード
                                 </Link>
                             </li>
                             }
                             <li>
-                                <Link href={route('library')}>
+                                <Link 
+                                    href={route('library')}
+                                    className='flex items-center'
+                                >
+                                    <GiBookshelf size={20} />
                                     ライブラリ
                                 </Link>                                    
                             </li>
+
                             <li>
-                                <Link href={route('flashcard.create')}>
-                                    つくる
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('flashcard.index')}>
+                                <Link 
+                                    href={route('flashcard.index')}
+                                    className='flex items-center'
+                                >
+                                    <GiBookCover size={20} />
                                     単語帳
                                 </Link>                                    
                             </li>
                             {auth.user &&
                                 <>
                                     <li>
-                                        <Link href={route('profile.show',{personal_id:auth.user.personal_id})}>
+                                        <Link 
+                                            href={route('profile.show',{personal_id:auth.user.personal_id})}
+                                            className='flex items-center'
+                                        >
+                                            <FaUserAlt size={20} />
                                             プロフィール
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href={route('setting')}>
+                                        <Link 
+                                            href={route('setting')}
+                                            className='flex items-center'
+                                        >
+                                            <RiSettings5Fill size={20} />
                                             設定
                                         </Link>    
                                     </li>
                                     <li>
-                                        <Link href={route('logout')} method="post">
+                                        <Link 
+                                            href={route('logout')} method="post"
+                                            className='flex items-center'
+                                        >
+                                            <LuLogOut size={20} />
                                             ログアウト
                                         </Link>                                    
                                     </li>

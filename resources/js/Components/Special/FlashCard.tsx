@@ -51,7 +51,7 @@ export default function FlashCard
                         </div>                     
                     }
     
-                    <h5 className="w-[calc(100%-80px)] md:text-1.5xl truncate break-all pl-2 text-slate-600 text-bold">
+                    <h5 className="w-[calc(100%-80px)] md:text-1.5xl truncate break-all pl-2 text-slate-600 font-bold">
                         {title}
                     </h5>
 
@@ -64,10 +64,10 @@ export default function FlashCard
 
 
                 <Link href={route('flashcard.show',uuid)} className="block w-full dark:bg-slate-700">
-                    <div className="p-2">
+                    <div className="px-3 py-2">
                         {description != null ?
                             <div className="w-full text-xs dark:text-white">
-                                <p>
+                                <p className='truncate'>
                                     {description}
                                 </p>
                             </div>
