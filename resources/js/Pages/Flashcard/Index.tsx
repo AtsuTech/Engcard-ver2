@@ -34,7 +34,7 @@ export default function Index({ auth, flashcards }: PageProps<{ flashcards:Flash
 
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden sm:shadow sm:rounded-lg">
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-700 dark:text-white">
                             <GiBookCover size={26} />
                             <h5 className="text-1.5xl ml-1 font-bold">

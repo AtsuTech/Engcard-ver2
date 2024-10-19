@@ -23,7 +23,7 @@ export default function Index({ flashcards, hi_watch_flashcards }: {flashcards:F
 
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden sm:shadow sm:rounded-lg">
 
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <GiBookshelf size={26} />

@@ -23,10 +23,16 @@ class ProfileController extends Controller
      */
     public function show(Request $request): Response
     {
+        //個人IDでユーザー検索
         $user = User::where('personal_id', '=' ,$request->personal_id)->first();
-        $me = User::with('flashcard_favorites.flashcards')->with('flashcard_favorites.flashcards.user')->where('id','=',Auth::id())->first();
+
+        //個人IDでユーザー検索し単語帳データも一緒に取得
+        $me = User::where('personal_id', '=' ,$request->personal_id)->with('flashcard_favorites.flashcards')->with('flashcard_favorites.flashcards.user')->first();
+
         $flashcard_favorites = $me->flashcard_favorites;
-        $flashcards = Flashcard::where('user_id', '=' , Auth::id())->get();
+
+        $flashcards = Flashcard::where('user_id', '=' , $user->id)->get();
+        
         return Inertia::render('Profile/Show', [
             'user' => $user,
             'flashcard_favorites' => $flashcard_favorites,

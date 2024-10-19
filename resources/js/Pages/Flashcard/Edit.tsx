@@ -96,7 +96,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
 
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden sm:shadow sm:rounded-lg">
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <MdEdit size={26} />
                             <h5 className="font-bold">単語帳編集</h5>
@@ -259,7 +259,7 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
                             )) }                            
                         </div>
                         {cards.length == 0 &&
-                            <div className='flex items-center justify-center  min-h-[600px] text-sm'>
+                            <div className='flex items-center justify-center  min-h-[300px] text-sm'>
                                 <p>単語カードはまだありません<span className='underline text-amber-500 cursor-pointer' onClick={() => setCreateCardDialog(true)}>つくる</span></p>
                             </div>
                         }

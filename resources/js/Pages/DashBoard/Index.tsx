@@ -32,7 +32,7 @@ export default function Index({
 
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden sm:shadow sm:rounded-lg">
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <MdDashboard size={26} />
                             <h5 className="font-bold">ダッシュボード</h5>
@@ -40,7 +40,7 @@ export default function Index({
 
                         <div className='p-5 '>
 
-                            <section className=" /bg-black md:flex md:space-x-4 md:space-y-0 space-y-4 mb-4">
+                            <section className="md:flex md:space-x-4 md:space-y-0 space-y-4 mb-4">
                                 <CardStatusPie all_cards={all_cards} meoryed_card={meoryed_card} />
                                 <DataCountSection data={flashcards.length} sectiontitle="単語帳総数" unit="冊" />
                                 <DataCountSection data={all_cards} sectiontitle="カード総数" unit="枚" />

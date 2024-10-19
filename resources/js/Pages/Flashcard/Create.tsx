@@ -34,7 +34,7 @@ export default function Create({ auth, accesses }: PageProps<{ accesses: any }>)
 
             <div className="py-0 sm:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden sm:shadow sm:rounded-lg">
                         <div className="flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-600 dark:text-white">
                             <BiSolidEditAlt size={26} />
                             <h5 className="font-bold">単語帳作成</h5>

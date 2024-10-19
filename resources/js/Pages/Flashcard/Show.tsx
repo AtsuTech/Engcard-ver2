@@ -79,7 +79,7 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
             <div className="py-0 md:py-12">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden sm:shadow sm:rounded-lg">
 
                         <div className="relative flex items-center w-full px-3 py-4 border-b border-b-slate-300 text-slate-700">
                             <PageBack />
@@ -185,7 +185,9 @@ export default function Show({ flashcard, favorites, has_favorite }: PageProps<{
 
 
                             {flashcard.cards.length == 0 ?
-                                <div className="flex items-center justify-center w-full min-h-[600px] text-slate-600">単語カードが登録されていません</div>
+                                <div className="flex items-center justify-center w-full min-h-[300px] text-slate-600">
+                                    単語カードが登録されていません
+                                </div>
                                 :
                                 <section className="space-y-2">
                                     <div className="w-fit px-2 text-sm bg-slate-200 rounded-full ml-auto mr-auto my-10">
