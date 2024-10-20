@@ -16,14 +16,19 @@ export default function Admin({ user, header, children }: PropsWithChildren<{ us
                 <aside className='w-64 h-screen bg-slate-600'>
                     <div className="h-16 flex items-center justify-center border-b border-b-white">
                         <div className="text-2xl text-white">
-                            Admin
+                            Encard-Admin
                         </div>
                     </div>
                     <div className=''>
-                        <ul className="p-2 text-center text-white">
+                        <ul className="p-2 space-y-4 text-center text-white">
                             <li>
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink href={route('user.index')} active={route().current('user.index')}>
+                                    ユーザー管理
                                 </NavLink>
                             </li>
                             <li>
@@ -48,7 +53,13 @@ export default function Admin({ user, header, children }: PropsWithChildren<{ us
                                                         className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                                     >
                                                         {user.name}
-                                                        <img src={'/storage/images/profile/' + user.profile_photo_path} alt="s" className='w-8 h-8 ml-1 rounded-full' />
+                                                        {user.profile_photo_path != null ?
+                                                            <img src={'/storage/images/profile/' + user.profile_photo_path} alt="" className='w-8 h-8 ml-1 rounded-full' />
+                                                        :
+                                                            <div className="flex items-center justify-center w-8 h-8 ml-1 rounded-full text-white bg-slate-900">
+                                                                {user.name.substr(0,1)}
+                                                            </div>
+                                                        } 
 
                                                         <svg
                                                             className="ms-2 -me-0.5 h-4 w-4"

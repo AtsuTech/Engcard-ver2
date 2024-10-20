@@ -7,6 +7,7 @@ use App\Http\Controllers\WordMeanController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FlashcardFavoriteController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdvertisementController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -159,12 +160,16 @@ Route::middleware('auth')->group(function () {
 
 });
 
-//管理権限ユーザーのみアクセス可能
+//---------------------------------管理権限ユーザーのみアクセス可能---------------------------------//
 Route::middleware('auth','can:admin','verified')->group(function () {
 //Route::group(['middleware' => ['auth', 'can:admin']], function () {
 	Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
     })->name('admin.dashboard');
+
+    //ユーザーCRUD処理
+    Route::get('/admin/user', [UserController::class, 'index'])->name('user.index');
+    Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
     //広告CRUD処理
     Route::get('/admin/advertise', [AdvertisementController::class, 'index'])->name('advertise.index');

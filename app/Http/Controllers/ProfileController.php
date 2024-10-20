@@ -129,6 +129,13 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        //プロフィール画像削除
+        Storage::disk('public')->delete('images/profile/' . $user->profile_photo_path);
+
+        //カード画像をフォルダごと削除
+        $directory = 'public/images/card/' . $user->id;
+        Storage::deleteDirectory($directory);
+
         Auth::logout();
 
         $user->delete();
