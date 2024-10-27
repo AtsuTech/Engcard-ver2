@@ -106,7 +106,7 @@ class FlashCardController extends Controller
 
         //$flashcard = Flashcard::find($id);
         $flashcard = Flashcard::with(['cards.wordmeans'])->findOrFail($id);
-        $cards = Card::where('flashcard_id','=',$id)->get();
+        $cards = Card::where('flashcard_id','=',$id)->with(['wordmeans'])->get();
 
         return Inertia::render('Flashcard/Edit', [
             'accesses' => $accesses,

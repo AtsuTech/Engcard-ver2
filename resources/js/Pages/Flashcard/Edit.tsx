@@ -62,7 +62,6 @@ export default function Edit({ auth, accesses, categories, flashcard, cards }: P
         _method: "patch",
     });
 
-    //console.log(data);
 
     let [flashcardDialog, setFlashCardDialog] = useState(false);
     const [createCardDialog,setCreateCardDialog] = useState(false);
