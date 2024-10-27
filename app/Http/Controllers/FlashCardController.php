@@ -104,7 +104,8 @@ class FlashCardController extends Controller
         $hashids = new Hashids('', 10); 
         $id = $hashids->decode($request->flashcard)[0];//※配列で帰ってくる
 
-        $flashcard = Flashcard::find($id);
+        //$flashcard = Flashcard::find($id);
+        $flashcard = Flashcard::with(['cards.wordmeans'])->findOrFail($id);
         $cards = Card::where('flashcard_id','=',$id)->get();
 
         return Inertia::render('Flashcard/Edit', [

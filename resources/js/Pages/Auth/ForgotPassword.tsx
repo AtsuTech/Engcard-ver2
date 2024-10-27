@@ -19,7 +19,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
     return (
         <GuestLayout>
-            <Head title="Forgot Password" />
+            <Head title="パスワードを忘れた" />
 
             <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
                 <h1 className="text-lg font-bold py-2">パスワードを忘れた</h1>

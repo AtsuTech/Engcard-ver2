@@ -15,7 +15,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
 
     return (
         <GuestLayout>
-            <Head title="Email Verification" />
+            <Head title="メール認証" />
 
             <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
                 <h1 className="text-lg my-3 font-bold">

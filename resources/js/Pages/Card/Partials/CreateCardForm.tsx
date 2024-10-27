@@ -5,7 +5,9 @@ import { FormEventHandler } from 'react';
 import { devNull } from "os";
 import CategorySelect from "./CategorySelect";
 import CreateSubMeanForm from "./CreateSubMeanForm";
-import { GiSmallFire } from "react-icons/gi";
+//import { GiSmallFire } from "react-icons/gi";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowUp } from "react-icons/md";
 
 export default function CreateCardForm({id,action}: { id: number,action:any }) {
 
@@ -67,6 +69,9 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
         
     };
 
+    //サブの意味追加メニュー開閉
+    const [addSubMeans,setAddSubMeans] = useState(false);
+
     return (
         <div>
 
@@ -76,7 +81,7 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                     <div className="text-center font-bold text-slate-700 dark:text-white">単語カード作成</div>
                 </div>
 
-                <div className="md:flex mb-1">
+                <div className="md:flex">
 
                     {/* 英単語+画像 */}
                     <div className="flex w-full p-1 h-10 border border-gray-300 rounded-lg mr-1 mb-1 md:mb-0 focus-within:border-amber-400">
@@ -84,9 +89,8 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                         <input type="text" 
                             name="word" 
                             className="w-full pl-2 mr-1 border-none rounded-md focus:border-transparent" 
-                            placeholder="単語 ex.)Apple" 
+                            placeholder="単語:Apple" 
                             value={data.word}
-                            //onChange={(e) => setData('word',e.target.value)} 
                             onChange={(e) => {
                                 // Allow input only if the length is less than or equal to 3 or if characters are being removed
                                 if (e.target.value.length <= 50 || e.target.value.length < data.word.length) {
@@ -136,9 +140,8 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                         <input type="text" 
                             name="word_mean" 
                             className="block w-full h-full pl-2 ml-1 border-none rounded-md /outline-transparent" 
-                            placeholder="訳 ex.)りんご" 
+                            placeholder="意味:りんご" 
                             value={data.word_mean}
-                            //onChange={(e) => setData('word_mean',e.target.value)} 
                             onChange={(e) => {
                                 // Allow input only if the length is less than or equal to 3 or if characters are being removed
                                 if (e.target.value.length <= 30 || e.target.value.length < data.word_mean.length) {
@@ -157,7 +160,27 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                 </div>
 
                 {/* サブの意味 */}
-                <CreateSubMeanForm setData={setData} />
+                <div className="my-1">
+                    <button 
+                        type="button" 
+                        onClick={()=>setAddSubMeans(!addSubMeans)}
+                        className="flex bg-slate-200 text-xs text-slate-600 border border-gray-300 p-1 rounded-md"
+                    >
+                        サブの意味を追加
+                        {addSubMeans ?
+                            <MdKeyboardArrowUp size={15} />
+                            :
+                            <MdKeyboardArrowDown size={15} />
+                        }  
+                        
+                    </button>
+                    <div className="my-1">
+                        {addSubMeans &&
+                            <CreateSubMeanForm setData={setData} />
+                        }                          
+                    </div>
+                </div>
+
 
                 <div className="md:flex md:mb-1">
                     <textarea 
@@ -175,22 +198,19 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                         className="w-full p-2 border border-gray-300 rounded-lg" 
                         onChange={(e) => setData('sentence_mean',e.target.value)} 
                         value={data.sentence_mean}
-                        placeholder="例文(訳):りんごは赤くて美味しい果物です。">
+                        placeholder="訳:りんごは赤くて美味しい果物です。">
                     </textarea>
                 </div> 
 
                 <input type="text" 
                     name="link" 
-                    className="w-full h-10 border border-gray-300 rounded-lg pl-2" 
-                    placeholder="サイトのULR ex.)eng-card.com" 
+                    className="w-full h-8 border border-gray-300 rounded-lg pl-2" 
+                    placeholder="https://eng-card.com/" 
                     value={data.link}
                     onChange={(e) => setData('link',e.target.value)} 
                 />
 
                 <div className="flex mt-2">
-                    {/* <div className="w-full mr-1">
-                        <ButtonWithOnClick color={'gray'} text={'キャンセル'} onclick={closeModal} />
-                    </div> */}
                     <div className="w-full">
                         <button 
                             className="items-center w-full px-4 py-2 bg-amber-400 dark:bg-gray-200 border border-transparent rounded-full font-semibold text-sm text-white dark:text-gray-800 uppercase tracking-widest hover:bg-amber-500 dark:hover:bg-white focus:bg-amber-500 dark:focus:bg-white active:bg-amber-600 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150" 

@@ -234,7 +234,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                     className="w-full p-2 border border-gray-300 rounded-lg outline-amber-400" 
                                     value={data.sentence ==null ? "": data.sentence}
                                     onChange={(e) => setData('sentence',e.target.value)} 
-                                    placeholder="例文:Apple is red and delicious fruits."
+                                    placeholder="Apple is red and delicious fruits."
                                     >
                                 </textarea>
 
@@ -246,7 +246,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                     className="w-full p-2 border border-gray-300 rounded-lg outline-amber-400" 
                                     value={data.sentence_mean ==null ? "": data.sentence_mean}
                                     onChange={(e) => setData('sentence_mean',e.target.value)} 
-                                    placeholder="例文(訳):りんごは赤くて美味しい果物です。"
+                                    placeholder="りんごは赤くて美味しい果物です。"
                                     >
                                 </textarea>
 
@@ -255,7 +255,7 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                                     id="link"
                                     name="link" 
                                     className="w-full h-10 border border-gray-300 pl-2 rounded-lg outline-amber-400" 
-                                    placeholder="ex.)Gazotan.com" 
+                                    placeholder="https://eng-card.com/" 
                                     value={data.link == null ? "": data.link}
                                     onChange={(e) => setData('link',e.target.value)} 
                                 />
@@ -270,6 +270,5 @@ export default function Edit({ auth, flashcard_uuid, categories, card, wordmeans
                 </div>
             </div>
         </CommonLayout>
-        // </AuthenticatedLayout>
     );
 }

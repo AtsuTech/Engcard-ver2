@@ -69,21 +69,22 @@ export default function Show({ auth, flashcard_uuid, categories, card, wordmeans
     return (
         <CommonLayout>
             <Head title={data.word} />
-
-            <div className="py-12 px-4 sm:px-0">
-                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 ">
-                    <Card
-                        memory="Apple"
-                        //imgflag={true}
-                        img_path={data.img_path}
-                        word={data.word}
-                        word_mean={data.word_mean}
-                        category={data.category}
-                        sub_word_mean={wordmeans}
-                        sentence={data.sentence}
-                        sentence_mean={data.sentence_mean}
-                        link={data.link}
-                    />  
+            <div className='bg-gray-200 h-[100vh]'>
+                <div className="py-12 px-4 sm:px-0">
+                    <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 ">
+                        <Card
+                            memory="Apple"
+                            //imgflag={true}
+                            img_path={data.img_path}
+                            word={data.word}
+                            word_mean={data.word_mean}
+                            category={data.category}
+                            sub_word_mean={wordmeans}
+                            sentence={data.sentence}
+                            sentence_mean={data.sentence_mean}
+                            link={data.link}
+                        />  
+                    </div>
                 </div>
             </div>
         </CommonLayout>

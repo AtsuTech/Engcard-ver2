@@ -26,7 +26,7 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title="アカウント作成" />
 
             <form onSubmit={submit}>
                 <div>
