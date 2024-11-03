@@ -84,11 +84,11 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                 <div className="md:flex">
 
                     {/* 英単語+画像 */}
-                    <div className="flex w-full p-1 h-10 border border-gray-300 rounded-lg mr-1 mb-1 md:mb-0 focus-within:border-amber-400">
+                    <div className="flex w-full p-1 h-10 border border-gray-300 rounded-lg mr-1 mb-1 md:mb-0 focus-within:border-2 focus-within:border-amber-400">
                     
                         <input type="text" 
                             name="word" 
-                            className="w-full pl-2 mr-1 border-none rounded-md focus:border-transparent" 
+                            className="w-full pl-2 mr-1 border-none rounded-md focus:ring-transparent focus:border-transparent" 
                             placeholder="単語:Apple" 
                             value={data.word}
                             onChange={(e) => {
@@ -135,11 +135,11 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                     </div>            
 
                     {/* 英単語の意味＋カテゴリ */}
-                    <div className="flex w-full h-10 p-1 border border-gray-300 rounded-lg focus-within:border-amber-400">
+                    <div className="flex w-full h-10 p-1 border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-amber-400">
                         <CategorySelect selected={data.category_id} setData={setData} />
                         <input type="text" 
                             name="word_mean" 
-                            className="block w-full h-full pl-2 ml-1 border-none rounded-md /outline-transparent" 
+                            className="block w-full h-full pl-2 ml-1 border-none rounded-md focus:ring-transparent" 
                             placeholder="意味:りんご" 
                             value={data.word_mean}
                             onChange={(e) => {
@@ -186,7 +186,7 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                     <textarea 
                         name="sentence" 
                         rows={3} 
-                        className="w-full p-2 border border-gray-300 rounded-lg md:mr-1" 
+                        className="w-full p-2 border border-gray-300 focus:ring-2 focus:ring-amber-400 focus:border-transparent rounded-lg md:mr-1" 
                         onChange={(e) => setData('sentence',e.target.value)} 
                         value={data.sentence}
                         placeholder="例文:Apple is red and delicious fruits.">
@@ -195,7 +195,7 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
                     <textarea 
                         name="sentence_mean" 
                         rows={3} 
-                        className="w-full p-2 border border-gray-300 rounded-lg" 
+                        className="w-full p-2 border border-gray-300 focus:ring-2 focus:ring-amber-400 focus:border-transparent rounded-lg" 
                         onChange={(e) => setData('sentence_mean',e.target.value)} 
                         value={data.sentence_mean}
                         placeholder="訳:りんごは赤くて美味しい果物です。">
@@ -204,7 +204,7 @@ export default function CreateCardForm({id,action}: { id: number,action:any }) {
 
                 <input type="text" 
                     name="link" 
-                    className="w-full h-8 border border-gray-300 rounded-lg pl-2" 
+                    className="w-full h-8 border border-gray-300 focus:ring-2 focus:ring-amber-400 focus:border-transparent rounded-lg pl-2" 
                     placeholder="https://eng-card.com/" 
                     value={data.link}
                     onChange={(e) => setData('link',e.target.value)} 
