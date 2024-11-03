@@ -31,11 +31,11 @@ export default function Index({ auth, categories }: PageProps<{ categories:Categ
                             <h5 className="font-bold">カテゴリ管理</h5>
                         </div> 
 
-                        <div className="px-3 space-y-1 py-10">
-                            <ul className="">
+                        <div className="px-3 py-10">
+                            <ul className="space-y-2">
                             {categories.map( (category:any) => (
                                 <li  key={category.id} className="flex items-center w-full py-2 px-2 border border-gray-300 rounded-lg">
-                                    <div className='dark:text-white'>{category.item}</div>
+                                    <div className='text-gray-600 dark:text-white'>{category.item}</div>
                                     <div className="flex ml-auto">
                                         <DeleteCategoryForm id={category.id} item={category.item} />
                                         <UpdateCategoryForm id={category.id} item={category.item} />

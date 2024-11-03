@@ -5,7 +5,7 @@ import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react
 
 export default function CreateCategoryForm({}: {}) {
 
-    const { data, setData, patch, put, post, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, patch, put, post, reset, errors, processing, recentlySuccessful } = useForm({
         user_id: '',
         item: '',
         _method: "post",
@@ -24,6 +24,7 @@ export default function CreateCategoryForm({}: {}) {
             onSuccess: () => {
                 setIsOpen(false);
             },
+            onFinish: () => reset(),
         });
     };
 

@@ -32,7 +32,7 @@ export default function DeleteCategoryForm({ id, item }: { id:number, item:strin
             
             <div>
             
-                <button className="block w-16 h-7 ml-1 bg-rose-600 text-white rounded" type="button" onClick={DialogOpen}>削除</button>
+                <button className="block w-16 h-7 ml-1 bg-slate-400 text-white rounded" type="button" onClick={DialogOpen}>削除</button>
 
                 <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
                     <div className="fixed inset-0 flex w-screen items-center justify-center p-4 dark:bg-black/60">
